@@ -7,7 +7,6 @@ Middleware functionality to enforce that users are logged in.
 NOTE: desigend for the synchronous HTTP lifecycle - does NOT support websockets. 
 '''
 
-# TODO - implement this and then add it to the middleware in settings.py 
 class LoginRequiredMiddleware:
 	def __init__(self,get_response):
 		self.get_response = get_response
