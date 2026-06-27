@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .models import CustomUser
+from main_app.models import CustomUser
 from django.contrib import messages
 
 
