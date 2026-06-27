@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 import os
 import string
 import secrets
-from main_app.models import CustomUser
+from backend.main_app.models import CustomUser
 
 
 '''
