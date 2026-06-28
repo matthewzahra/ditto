@@ -1,0 +1,4 @@
+login page includes title, logo, use colour palette, figure out the animations -> includes reset password which has form including: password, confirm password, code
+registration page including way to authenticate email
+
+change filler logo to real logo

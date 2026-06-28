@@ -1,0 +1,7 @@
+I run the following to create the app: 
+npm create vite@latest frontend
+
+I have node.js already installed 
+
+I run the following to run the vite server:
+npm run dev
