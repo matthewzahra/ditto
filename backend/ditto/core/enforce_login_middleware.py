@@ -1,5 +1,5 @@
-from django.urls import resolve
 from django.shortcuts import redirect
+from ditto.core.http_handling import api_response
 
 '''
 Middleware functionality to enforce that users are logged in.
@@ -26,4 +26,4 @@ class LoginRequiredMiddleware:
 		if url_name in self.public_paths:
 			return self.get_response(request)
 			
-		return redirect('login')
+		return api_response(False,error="User must be logged in",status=401)

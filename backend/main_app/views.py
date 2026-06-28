@@ -1,5 +1,4 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from main_app.models import CustomUser
 from django.contrib import messages
 from main_app.core.email_service import send_and_save_authentication_code
@@ -8,33 +7,23 @@ from django.db.models import Q
 from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from datetime import timedelta
-
-
-def index(request):
-    return render(request, 'home.html')
-
+from ditto.core.http_handling import api_response
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
-@require_http_methods(['GET','POST'])
-def register(request):
-    if request.method == "GET":
-        return render(request, "register.html")
-    
+@require_http_methods(['POST'])
+def register(request):  
     username = request.POST.get('username')
     password = request.POST.get('password')
     email = request.POST.get('email')
 
     if not all([username,password,email]):
-        messages.error(request, "Missing user information")
-        return render(request, 'register.html')
+        return api_response(False,error="Missing user information",status=400)
     
     if CustomUser.objects.filter(username=username, verified=True).exists():
-        messages.error(request, "Username taken.")
-        return render(request, 'register.html')
+        return api_response(False,error="Username taken",status=400)
     
     if CustomUser.objects.filter(email=email, verified=True).exists():
-        messages.error(request, "Email taken.")
-        return render(request, 'register.html')
+        return api_response(False,error="Email Taken",status=400)
     
     # delete all unverified users that are using the same username/email
     CustomUser.objects.filter(Q(verified=False) & (Q(username=username) | Q(email=email))).delete()
@@ -43,14 +32,11 @@ def register(request):
     
     send_and_save_authentication_code(user)
 
-    return redirect('register')
+    return api_response(True,status=200)
 
 # verify a user's email for when they login the 1st time, upgrading them from an UnverifiedUser to a CustomUser
-@require_http_methods(['GET','POST'])
-def verify_user(request):
-    if request.method == "GET":
-        return render(request, 'register.html')
-    
+@require_http_methods(['POST'])
+def verify_user(request):   
     email = request.POST.get('email')
     code = request.POST.get('code')
     user = CustomUser.objects.filter(email=email, verified=False)
@@ -59,32 +45,27 @@ def verify_user(request):
         user.verified = True
         user.auth_code_generated_at = timezone.now() - timedelta(days=1)
         user.save()
-        return redirect('index')
+        return api_response(True, status=200)
 
     else:
+        return api_response(False,error='Invalid authentication code',status=401)
         messages.error(request, 'Invalid authentication code.')
-        return render(request, 'register.html')
 
-@require_http_methods(['GET','POST'])
+@require_http_methods(['POST'])
 def login_user(request):
-    if request.method == "GET":
-        return render(request, "login.html")
-   
     username = request.POST.get("username")
     password = request.POST.get("password")
 
     if not username or not password:
-        messages.error(request, "Missing information.")
-        return render(request, "login.html")
+        return api_response(False,error='Missing information',status=400)
     
     user = authenticate(request, username=username, password=password)
 
     if user:
         login(request, user)
-        return redirect('index')
+        return api_response(True,status=200)
     else:
-        messages.error(request, "Login credentials are invalid")
-        return render(request, "login.html")
+        return api_response(False,error="Login credentials are invalid",status=401)
 
 @require_http_methods(['POST'])
 def request_password_change(request):
@@ -93,7 +74,7 @@ def request_password_change(request):
     if email and (user := CustomUser.objects.filter(email=email)):
         send_and_save_authentication_code(user)
 
-    return redirect('login')
+    return api_response(True,status=200)
 
 @require_http_methods(['POST'])
 def update_password(request):  
@@ -107,14 +88,14 @@ def update_password(request):
         if pass1 == pass2:
             user.set_password(pass1)
             user.save()
-            return redirect(request, 'login.html')
+            return api_response(True,status=200)
+
         else:
-            messages.error(request, "Passwords don't match.")
-            return render(request, 'login.html')
+            return api_response(False,error="Passwords don't match",status=400)
 
     else:
-        messages.error(request, "Invalid credentials.")
-        return render(request, 'login.html')
+        return api_response(False,error="Invalid credentials",status=401)
 
 def logout_user(request):
-    raise NotImplemented
+    logout(request)
+    return api_response(True,status=200)
