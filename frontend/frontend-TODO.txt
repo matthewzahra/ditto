@@ -1,4 +1,14 @@
 login page includes title, logo, use colour palette, figure out the animations -> includes reset password which has form including: password, confirm password, code
 registration page including way to authenticate email
 
+figure out what is needed re json for logins
+
 change filler logo to real logo
+
+figure out lock file download
+
+extract cookie
+
+Finish header
+
+Finish Navbar
