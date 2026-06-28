@@ -3,6 +3,7 @@ import {useState} from "react"
 
 function LoginForm() {
 
+    //creates a React hook to store the 
     const [formData, setFormData] = useState({email: "", password: ""})
 
     const handleChange = (e) => {
