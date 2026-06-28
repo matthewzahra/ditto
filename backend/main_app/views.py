@@ -8,6 +8,7 @@ from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from datetime import timedelta
 from ditto.core.http_handling import api_response
+import json
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @require_http_methods(['POST'])
@@ -53,8 +54,12 @@ def verify_user(request):
 
 @require_http_methods(['POST'])
 def login_user(request):
-    username = request.POST.get("username")
-    password = request.POST.get("password")
+    data = json.loads(request.body)
+    print(data)
+    #username = request.POST.get("username")
+    #password = request.POST.get("password")
+    username = data.get("username")
+    password = data.get("password")
 
     if not username or not password:
         return api_response(False,error='Missing information',status=400)

@@ -59,7 +59,7 @@ MIDDLEWARE = [
 
 # TODO - update this. This is to allow the front end to talk to the backend, intended only for dev mode
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:5173",
 ]
 
 # allows us to use authentication cookies with CORS
@@ -68,7 +68,7 @@ CORS_ALLOW_CREDENTIALS = True
 # TODO - update
 # allows us to use CSRF with CORS so that we can make use of POST requests safely
 CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:3000",
+    "http://localhost:5173",
 ]
 
 ROOT_URLCONF = 'ditto.urls'

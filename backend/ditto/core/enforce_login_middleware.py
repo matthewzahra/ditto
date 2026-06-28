@@ -14,7 +14,8 @@ class LoginRequiredMiddleware:
 		# define the urls that we don't need to be logged in for
 		self.public_paths = {
 			'/login/',
-			'/register/'
+			'/register/',
+			'/csrf/'
 		}	
 	
 	def __call__(self, request):
