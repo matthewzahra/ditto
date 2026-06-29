@@ -12,3 +12,5 @@ extract cookie
 Finish header
 
 Finish Navbar
+
+Change form data from username back to email/incorporate the rest

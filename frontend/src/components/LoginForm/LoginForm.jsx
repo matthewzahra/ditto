@@ -1,10 +1,12 @@
 import {useState} from "react"
+import API from "../../core/dev"
+import getCookie from "../../core/getCookie"
 
 
 function LoginForm() {
 
     //creates a React hook to store the 
-    const [formData, setFormData] = useState({email: "", password: ""})
+    const [formData, setFormData] = useState({username: "", password: ""})
 
     const handleChange = (e) => {
         const {name, value} = e.target
@@ -17,24 +19,24 @@ function LoginForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const response = await fetch("http://127.0.0.1:8000/api/login/", {
+        const response = await fetch(`${API}/login/`, {
             method: "POST",
+            credentials: "include",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "X-CSRFToken": getCookie("csrftoken")
             },
             body: JSON.stringify(formData)
         })
         
         const data = await response.json()
-
     }
 
     return (
         <form onSubmit={handleSubmit}>
 
             <label>Email:
-                <input type="text" name="email" value={formData.email} onChange={handleChange}/>
+                <input type="text" name="username" value={formData.username} onChange={handleChange}/>
             </label>
             <br></br>
             <label>Password:
