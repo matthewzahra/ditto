@@ -3,20 +3,23 @@ import {useEffect} from "react"
 
 import API from "./core/dev"
 
+// helper functions
 import getCSRF from "./core/getCSRF"
 
-import Navbar from "./components/Navbar/Navbar"
-import Header from "./components/Header/Header"
+// pages
 import Login from "./pages/Login/Login"
 import Home from "./pages/Home/Home"
 
 
 
 function App() {
+  
+  // creating csrf token
   useEffect(() => {
-    getCSRF();
-  }, []);
+    getCSRF()
+  }, [])
 
+  // Creating routes to each page based on current url
   return (
     <>
     <Routes>

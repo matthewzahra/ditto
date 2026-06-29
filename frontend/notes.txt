@@ -8,3 +8,6 @@ npm install react-router-dom
 
 I run the following to run the vite server:
 npm run dev
+
+To install the packages run:
+npm ci

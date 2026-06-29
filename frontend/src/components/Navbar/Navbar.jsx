@@ -1,12 +1,17 @@
 import {Link} from "react-router-dom"
 
 function Navbar() {
-    return (
-        <nav>
 
-            <Link to="/">Home</Link>
-            <br></br>
-            <Link to="/login">Login</Link>
+    // replace below with fetching logged in status /////////////////////////////////////
+    let userLoggedIn = false
+    return (
+        <nav className="navbar">
+            <div className="nav-left">
+                <Link to="/">Home</Link>
+            </div>
+            <div className="nav-right">
+                <Link to="/login">Login</Link>
+            </div>
 
         </nav>
     )

@@ -1,13 +1,16 @@
 import {useState} from "react"
+
 import API from "../../core/dev"
+
 import getCookie from "../../core/getCookie"
 
 
 function LoginForm() {
 
-    //creates a React hook to store the 
+    // initialising object for storing form data
     const [formData, setFormData] = useState({username: "", password: ""})
 
+    // function for updating form data
     const handleChange = (e) => {
         const {name, value} = e.target
 
@@ -18,7 +21,10 @@ function LoginForm() {
     }
 
     const handleSubmit = async (e) => {
+        // stops browser from reloading
         e.preventDefault()
+
+        // request login from backend
         const response = await fetch(`${API}/login/`, {
             method: "POST",
             credentials: "include",
@@ -29,7 +35,9 @@ function LoginForm() {
             body: JSON.stringify(formData)
         })
         
+        // login response data
         const data = await response.json()
+        console.log(data)
     }
 
     return (

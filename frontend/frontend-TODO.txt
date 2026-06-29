@@ -14,3 +14,7 @@ Finish header
 Finish Navbar
 
 Change form data from username back to email/incorporate the rest
+
+add fetching logged in status to navbar logic
+
+add robots.txt?
