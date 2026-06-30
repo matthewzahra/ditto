@@ -1,20 +1,42 @@
-import {Link} from "react-router-dom"
+import NavItem from "../NavItem/NavItem"
+
+import "./Navbar.css"
 
 function Navbar() {
 
-    // replace below with fetching logged in status /////////////////////////////////////
+    // replace below with actual auth /////////////////////////////////////
     let userLoggedIn = false
-    return (
-        <nav className="navbar">
-            <div className="nav-left">
-                <Link to="/">Home</Link>
-            </div>
-            <div className="nav-right">
-                <Link to="/login">Login</Link>
-            </div>
 
-        </nav>
-    )
+    // navbar for logged in users
+    if (userLoggedIn) {
+
+        return (
+            <nav className="navbar">
+                <div className="nav-left">
+                    <NavItem to="/home">Home</NavItem>
+                </div>
+                <div className="nav-right">
+                    <NavItem to="/logout">Logout</NavItem>
+                </div>
+            </nav>
+        )
+
+    // navbar for non-logged in users
+    } else {
+
+        return (
+            <nav className="navbar">
+                <div className="nav-left">
+                    <NavItem to="/">Home</NavItem>
+                </div>
+                <div className="nav-right">
+                    <NavItem to="/login">Login</NavItem>
+                    <NavItem to="/register">Register</NavItem>
+                </div>
+            </nav>
+        )
+
+    }
 }
 
 export default Navbar

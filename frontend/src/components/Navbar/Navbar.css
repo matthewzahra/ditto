@@ -1,0 +1,44 @@
+/* Navbar container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 24px;
+    background-color: #1f2937; /* dark slate */
+    color: white;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Left and right sections */
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Link styling */
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+
+    padding: 6px 10px;
+    border-radius: 6px;
+
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect */
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Optional: active/selected state if you later use NavLink */
+.nav-link.active {
+    background-color: #3b82f6;
+    color: white;
+}
