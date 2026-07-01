@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import API from "../../core/dev"
 
+import "./RegisterForm.css"
+
 import getCookie from "../../core/getCookie"
 
 
@@ -41,7 +43,7 @@ function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit}>
 
             <label>Username:
                 <input type="text" name="username" value={formData.username} onChange={handleChange}/>

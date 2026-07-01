@@ -1,6 +1,11 @@
 :root {
   /* colours */
-  --primary: white;
+  --primary: gray;
+  --primary-hover: red;
   --secondary: #3b82f6;
   --background: #1f2937;
+  --card-background: black;
+  --text: purple;
+  --muted: blue;
+  --border: #374151;
 }
