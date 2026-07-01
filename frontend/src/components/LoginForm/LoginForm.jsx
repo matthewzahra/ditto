@@ -2,6 +2,8 @@ import {useState} from "react"
 
 import API from "../../core/dev"
 
+import "./LoginForm.css"
+
 import getCookie from "../../core/getCookie"
 
 
@@ -41,16 +43,14 @@ function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
 
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <br></br>
             <label>Password:
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <br></br>
             <button type="submit">Login</button>
 
         </form>
