@@ -15,16 +15,10 @@ Finish Navbar
 
 Change form data from username back to email/incorporate the rest
 
-add fetching logged in status to navbar logic
+add fetching logged in status to navbar, logged out layout, logged in layout
 
 add robots.txt?
 
-change navbar to be part of App.jsx rather than each page so it doesn't have to reload
+note - have changed login to be based on email and password
 
-have changed login to be based on email and password
-
-registration currently email username password
-
-make use of layouts for App.jsx
-
-change link out for navlink
+note - registration currently email username password
