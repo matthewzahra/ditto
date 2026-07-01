@@ -9,6 +9,8 @@ from ditto.core.http_handling import api_response, validate
 from drf_spectacular.utils import extend_schema
 from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer
 from rest_framework.decorators import api_view
+from django.db.utils import IntegrityError
+from django.db import transaction
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @extend_schema(request=RegisterSerializer)
@@ -32,11 +34,15 @@ def register(request):
     # delete all unverified users that are using the same username/email
     CustomUser.objects.filter(Q(verified=False) & (Q(username=username) | Q(email=email))).delete()
     
-    user = CustomUser.objects.create_user(username=username, password=password, email=email, verified=False)
-    
-    send_and_save_authentication_code(user)
+    try:
+        with transaction.atomic():
+            user = CustomUser.objects.create_user(username=username, password=password, email=email, verified=False)
+            send_and_save_authentication_code(user)
 
-    return api_response(True,status=200)
+        return api_response(True,status=200)
+    except IntegrityError:
+        return api_response(False,error="Email Taken",status=400)
+    
 
 # verify a user's email for when they login the 1st time, upgrading them from an UnverifiedUser to a CustomUser
 @extend_schema(request=VerifyUserSerializer)
