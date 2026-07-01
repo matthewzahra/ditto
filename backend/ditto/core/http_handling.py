@@ -8,3 +8,9 @@ def api_response(success: bool, data=None, error=None, status=200):
 		'error': error,
 		'status': status
 	})
+
+# decorator to disable a view endpoint easily
+def disable_endpoint(func):
+	def wrapper():
+		return api_response(False,error="End point closed", status=423)
+	return wrapper
