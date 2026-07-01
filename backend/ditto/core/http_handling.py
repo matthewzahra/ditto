@@ -16,6 +16,6 @@ def disable_endpoint(func):
 
 # helper function to make use of dre serializers and validate input data
 def validate(serializerClass, data):
-	serializer = serializerClass(data)
+	serializer = serializerClass(data=data)
 	serializer.is_valid(raise_exception=True)
 	return serializer.validated_data
