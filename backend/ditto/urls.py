@@ -18,12 +18,21 @@ from django.contrib import admin
 from django.urls import path, include
 from ditto.core.views import csrf
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+ENV = os.getenv('ENV')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('', include("main_app.urls")),
 	path('csrf/', csrf),
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
-    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema")),
 ]
+
+# add any DEV only paths 
+if ENV == 'DEV':
+    urlpatterns += [
+        path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+        path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema")),
+    ]
