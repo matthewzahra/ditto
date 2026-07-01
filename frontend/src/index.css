@@ -1,8 +1,8 @@
 :root {
   /* colours */
-  --primary: gray;
+  --primary: MediumSlateBlue;
   --primary-hover: red;
-  --secondary: #3b82f6;
+  --secondary: MediumBlue;
   --background: #1f2937;
   --card-background: black;
   --text: purple;
