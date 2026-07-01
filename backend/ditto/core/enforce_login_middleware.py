@@ -15,7 +15,9 @@ class LoginRequiredMiddleware:
 		self.public_paths = {
 			'/login/',
 			'/register/',
-			'/csrf/'
+			'/csrf/',''
+			'/api/docs/',
+			'/api/schema/'
 		}	
 	
 	def __call__(self, request):

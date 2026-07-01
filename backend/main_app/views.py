@@ -1,21 +1,24 @@
 from django.contrib.auth import authenticate, login, logout
 from main_app.models import CustomUser
-from django.contrib import messages
 from main_app.core.email_service import send_and_save_authentication_code
 from main_app.core.authentication_code import validate_auth_code
 from django.db.models import Q
-from django.views.decorators.http import require_http_methods
 from django.utils import timezone
 from datetime import timedelta
-from ditto.core.http_handling import api_response
-import json
+from ditto.core.http_handling import api_response, validate
+from drf_spectacular.utils import extend_schema
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer
+from rest_framework.decorators import api_view
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
-@require_http_methods(['POST'])
+@extend_schema(request=RegisterSerializer)
+@api_view(['POST'])
 def register(request):  
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    email = request.POST.get('email')
+    data = validate(RegisterSerializer,request.data)
+
+    username = data["username"]
+    password = data["password"]
+    email = data["email"]
 
     if not all([username,password,email]):
         return api_response(False,error="Missing user information",status=400)
@@ -36,11 +39,15 @@ def register(request):
     return api_response(True,status=200)
 
 # verify a user's email for when they login the 1st time, upgrading them from an UnverifiedUser to a CustomUser
-@require_http_methods(['POST'])
-def verify_user(request):   
-    email = request.POST.get('email')
-    code = request.POST.get('code')
-    user = CustomUser.objects.filter(email=email, verified=False)
+@extend_schema(request=VerifyUserSerializer)
+@api_view(['POST'])
+def verify_user(request):  
+    data = validate(VerifyUserSerializer,request.data) 
+
+    email = data["email"]
+    code = data["code"]
+
+    user = CustomUser.objects.get(email=email, verified=False)
 
     if user and validate_auth_code(user,code): # verify the user and disable the auth code
         user.verified = True
@@ -50,19 +57,15 @@ def verify_user(request):
 
     else:
         return api_response(False,error='Invalid authentication code',status=401)
-        messages.error(request, 'Invalid authentication code.')
 
-@require_http_methods(['POST'])
+
+@extend_schema(request=LoginSerializer)
+@api_view(['POST'])
 def login_user(request):
-    data = json.loads(request.body)
-    print(data)
-    #username = request.POST.get("username")
-    #password = request.POST.get("password")
-    username = data.get("username")
-    password = data.get("password")
+    data = validate(LoginSerializer, request.data)
 
-    if not username or not password:
-        return api_response(False,error='Missing information',status=400)
+    username = data["username"]
+    password = data["password"]
     
     user = authenticate(request, username=username, password=password)
 
@@ -72,23 +75,31 @@ def login_user(request):
     else:
         return api_response(False,error="Login credentials are invalid",status=401)
 
-@require_http_methods(['POST'])
+@extend_schema(request=RequestPasswordChange)
+@api_view(['POST'])
 def request_password_change(request):
-    email = request.POST.get('email')
+    data = validate(RequestPasswordChange, request.data)
 
-    if email and (user := CustomUser.objects.filter(email=email)):
+    email =data["email"]
+
+    user = CustomUser.objects.filter(email=email).first()
+
+    if email and user:
         send_and_save_authentication_code(user)
 
     return api_response(True,status=200)
 
-@require_http_methods(['POST'])
-def update_password(request):  
-    email = request.POST.get('email')
-    code = request.POST.get('code')
-    pass1 = request.POST.get('pass1')
-    pass2 = request.POST.get('pass2')
+@extend_schema(request=UpdatePasswordSerializer)
+@api_view(['POST'])
+def update_password(request): 
+    data = validate(UpdatePasswordSerializer, request.data) 
 
-    user = CustomUser.objects.filter(email=email, verified=True)
+    email = data["email"]
+    code = data["code"]
+    pass1 = data["pass1"]
+    pass2 = data["pass2"]
+
+    user = CustomUser.objects.get(email=email, verified=True)
     if user and validate_auth_code(user,code):
         if pass1 == pass2:
             user.set_password(pass1)
