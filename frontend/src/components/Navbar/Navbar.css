@@ -3,8 +3,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    width: 100%;
 
     padding: 12px 24px;
+    box-sizing: border-box;
     background-color: var(--background); /* dark slate */
     color: var(--primary);
 

@@ -1,13 +1,18 @@
 import dittoLogo from "../../assets/logo.png"
 
+import "./Header.css"
+import Navbar from "../Navbar/Navbar"
+
 function Header() {
-
     return (
-        <>
-        
-        <img src={dittoLogo} height="300" alt=""/>
 
-        </>
+        <header className="header">
+            
+            <img className="header-logo" src={dittoLogo} alt="Ditto logo" />
+            <Navbar />
+            
+        </header>
+        
     )
 }
 

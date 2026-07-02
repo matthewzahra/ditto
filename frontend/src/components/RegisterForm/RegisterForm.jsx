@@ -10,7 +10,7 @@ import getCookie from "../../core/getCookie"
 function LoginForm() {
 
     // initialising object for storing form data
-    const [formData, setFormData] = useState({username: "", password: "", email: ""})
+    const [formData, setFormData] = useState({email: "", password: ""})
 
     // function for updating form data
     const handleChange = (e) => {
@@ -45,18 +45,12 @@ function LoginForm() {
     return (
         <form className="register-form" onSubmit={handleSubmit}>
 
-            <label>Username:
-                <input type="text" name="username" value={formData.username} onChange={handleChange}/>
-            </label>
-            <br></br>
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <br></br>
             <label>Password:
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <br></br>
             <button type="submit">Register</button>
 
         </form>
