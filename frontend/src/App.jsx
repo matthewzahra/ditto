@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { useEffect } from "react"
 
-import API from "./core/dev"
+import API from "./core/API"
 
 // helper functions
 import getCSRF from "./core/getCSRF"

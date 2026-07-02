@@ -1,4 +1,4 @@
-import API from "./dev"
+import API from "./API"
 
 async function getCSRF() {
   await fetch(`${API}/csrf/`, {

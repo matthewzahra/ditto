@@ -1,6 +1,6 @@
 import {useState} from "react"
 
-import API from "../../core/dev"
+import API from "../../core/API"
 
 import "./LoginForm.css"
 
