@@ -6,8 +6,11 @@ class CustomUser(AbstractUser):
 	'''
 	AbstractUser already implements a number of fields, including username, email, password and several permissions
 	'''
-	username = models.CharField(max_length=150, unique=True)
+	username = None
 	email = models.EmailField(unique=True)
+
+	USERNAME_FIELD = "email" # use the email field for Django's built in authentication system
+	REQUIRED_FIELDS = []
 
 	# user authentication
 	auth_code = models.CharField(max_length=128, blank=True, null=True)
@@ -15,4 +18,4 @@ class CustomUser(AbstractUser):
 	verified = models.BooleanField(default=False)
 
 	def __str__(self):
-		return self.username
+		return self.email

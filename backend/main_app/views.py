@@ -18,25 +18,18 @@ from django.db import transaction
 def register(request):  
     data = validate(RegisterSerializer,request.data)
 
-    username = data["username"]
     password = data["password"]
     email = data["email"]
-
-    if not all([username,password,email]):
-        return api_response(False,error="Missing user information",status=400)
-    
-    if CustomUser.objects.filter(username=username, verified=True).exists():
-        return api_response(False,error="Username taken",status=400)
-    
+     
     if CustomUser.objects.filter(email=email, verified=True).exists():
         return api_response(False,error="Email Taken",status=400)
     
-    # delete all unverified users that are using the same username/email
-    CustomUser.objects.filter(Q(verified=False) & (Q(username=username) | Q(email=email))).delete()
+    # delete all unverified users that are using the same email
+    CustomUser.objects.filter(Q(verified=False) & Q(email=email)).delete()
     
     try:
         with transaction.atomic():
-            user = CustomUser.objects.create_user(username=username, password=password, email=email, verified=False)
+            user = CustomUser.objects.create_user(password=password, email=email, verified=False)
             send_and_save_authentication_code(user)
 
         return api_response(True,status=200)
@@ -70,10 +63,10 @@ def verify_user(request):
 def login_user(request):
     data = validate(LoginSerializer, request.data)
 
-    username = data["username"]
+    email = data["email"]
     password = data["password"]
     
-    user = authenticate(request, username=username, password=password)
+    user = authenticate(request, email=email, password=password)
 
     if user:
         login(request, user)
