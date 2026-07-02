@@ -27,7 +27,7 @@ ENV = os.getenv('ENV')
 urlpatterns = [
     path('admin/', admin.site.urls),
 	path('csrf/', csrf),
-	path('', include("main_app.urls")),
+	path('api/user_auth/', include("user_auth.urls")),
 ]
 
 # add any DEV only paths 

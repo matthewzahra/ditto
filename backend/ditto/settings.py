@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
 	'corsheaders',
-	'main_app'
+	'user_auth'
 ]
 
 # help to enforce and document the REST API
@@ -147,4 +147,4 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / "ditto" / "static"] # also get the project wide static files
 
 # use a custom user model
-AUTH_USER_MODEL = "main_app.CustomUser" # found in main_app/models.py
+AUTH_USER_MODEL = "user_auth.CustomUser" # found in user_auth/models.py

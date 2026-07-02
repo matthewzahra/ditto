@@ -1,7 +1,7 @@
 from django.contrib.auth import authenticate, login, logout
-from main_app.models import CustomUser
-from main_app.core.email_service import send_and_save_authentication_code
-from main_app.core.authentication_code import validate_auth_code
+from user_auth.models import CustomUser
+from user_auth.core.email_service import send_and_save_authentication_code
+from user_auth.core.authentication_code import validate_auth_code
 from django.db.models import Q
 from django.utils import timezone
 from datetime import timedelta

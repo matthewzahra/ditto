@@ -2,9 +2,9 @@ import smtplib
 from email.message import EmailMessage
 from dotenv import load_dotenv 
 import os
-from main_app.models import CustomUser
+from user_auth.models import CustomUser
 from django.utils import timezone
-from main_app.core.authentication_code import generate_auth_code
+from user_auth.core.authentication_code import generate_auth_code
 import hashlib
 
 
