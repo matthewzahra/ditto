@@ -4,6 +4,8 @@ import API from "../../core/API"
 
 import "./LoginForm.css"
 
+import "./LoginForm.css"
+
 import getCookie from "../../core/getCookie"
 
 
