@@ -1,6 +1,10 @@
 import {useState} from "react"
 
-import API from "../../core/dev"
+import API from "../../core/API"
+
+import "./LoginForm.css"
+
+import "./LoginForm.css"
 
 import getCookie from "../../core/getCookie"
 
@@ -8,7 +12,7 @@ import getCookie from "../../core/getCookie"
 function LoginForm() {
 
     // initialising object for storing form data
-    const [formData, setFormData] = useState({username: "", password: ""})
+    const [formData, setFormData] = useState({email: "", password: ""})
 
     // function for updating form data
     const handleChange = (e) => {
@@ -41,16 +45,14 @@ function LoginForm() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
 
             <label>Email:
-                <input type="text" name="username" value={formData.username} onChange={handleChange}/>
+                <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <br></br>
             <label>Password:
-                <input type="text" name="password" value={formData.password} onChange={handleChange}/>
+                <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <br></br>
             <button type="submit">Login</button>
 
         </form>

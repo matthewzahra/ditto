@@ -15,6 +15,10 @@ Finish Navbar
 
 Change form data from username back to email/incorporate the rest
 
-add fetching logged in status to navbar logic
+add fetching logged in status to navbar, logged out layout, logged in layout
 
 add robots.txt?
+
+note - have changed login to be based on email and password
+
+note - registration currently email username password

@@ -1,0 +1,17 @@
+.logged-out-layout {
+    min-height: 100vh;
+    background: var(--background);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logged-out-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    padding-top: 160px; /* CRITICAL */
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
