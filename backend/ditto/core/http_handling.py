@@ -1,5 +1,11 @@
 from rest_framework.response import Response
+from rest_framework import serializers
 
+class ApiResponseSerializer(serializers.Serializer):
+    success = serializers.BooleanField()
+    data = serializers.JSONField(required=False, allow_null=True)
+    error = serializers.CharField(required=False, allow_null=True)
+	
 # helper function to stnadardise the Json Responses we send to the front end
 def api_response(success: bool, data=None, error=None, status=200):
 	return Response({

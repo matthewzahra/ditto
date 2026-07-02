@@ -5,7 +5,7 @@ from main_app.core.authentication_code import validate_auth_code
 from django.db.models import Q
 from django.utils import timezone
 from datetime import timedelta
-from ditto.core.http_handling import api_response, validate
+from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
 from drf_spectacular.utils import extend_schema
 from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer
 from rest_framework.decorators import api_view
@@ -13,7 +13,7 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
-@extend_schema(request=RegisterSerializer)
+@extend_schema(request=RegisterSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def register(request):  
     data = validate(RegisterSerializer,request.data)
@@ -38,7 +38,7 @@ def register(request):
     
 
 # verify a user's email for when they login the 1st time, upgrading them from an UnverifiedUser to a CustomUser
-@extend_schema(request=VerifyUserSerializer)
+@extend_schema(request=VerifyUserSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def verify_user(request):  
     data = validate(VerifyUserSerializer,request.data) 
@@ -58,7 +58,7 @@ def verify_user(request):
         return api_response(False,error='Invalid authentication code',status=401)
 
 
-@extend_schema(request=LoginSerializer)
+@extend_schema(request=LoginSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def login_user(request):
     data = validate(LoginSerializer, request.data)
@@ -74,7 +74,7 @@ def login_user(request):
     else:
         return api_response(False,error="Login credentials are invalid",status=401)
 
-@extend_schema(request=RequestPasswordChange)
+@extend_schema(request=RequestPasswordChange, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def request_password_change(request):
     data = validate(RequestPasswordChange, request.data)
@@ -88,7 +88,7 @@ def request_password_change(request):
 
     return api_response(True,status=200)
 
-@extend_schema(request=UpdatePasswordSerializer)
+@extend_schema(request=UpdatePasswordSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def update_password(request): 
     data = validate(UpdatePasswordSerializer, request.data) 

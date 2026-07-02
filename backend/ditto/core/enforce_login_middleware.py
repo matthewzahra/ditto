@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from ditto.core.http_handling import api_response
 
 '''
