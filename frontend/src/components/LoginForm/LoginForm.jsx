@@ -29,7 +29,7 @@ function LoginForm() {
         e.preventDefault()
 
         // request login from backend
-        const response = await fetch(`${API}/login/`, {
+        const response = await fetch(`${API}/api/user_auth/login/`, {
             method: "POST",
             credentials: "include",
             headers: {

@@ -27,7 +27,7 @@ function LoginForm() {
         e.preventDefault()
 
         // request register from backend
-        const response = await fetch(`${API}/register/`, {
+        const response = await fetch(`${API}/api/user_auth/register/`, {
             method: "POST",
             credentials: "include",
             headers: {
