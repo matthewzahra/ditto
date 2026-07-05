@@ -1,14 +1,15 @@
+import { useAuth } from "../../context/AuthContext"
+
 import NavItem from "../NavItem/NavItem"
 
 import "./Navbar.css"
 
 function Navbar() {
 
-    // replace below with actual auth /////////////////////////////////////
-    let userLoggedIn = false
+    const { loggedIn } = useAuth()
 
     // navbar for logged in users
-    if (userLoggedIn) {
+    if (loggedIn) {
 
         return (
             <nav className="navbar">

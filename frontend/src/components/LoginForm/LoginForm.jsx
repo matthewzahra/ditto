@@ -1,4 +1,7 @@
-import {useState} from "react"
+import { useAuth } from "../../context/AuthContext"
+
+import { useState } from "react"
+import { Navigate } from "react-router-dom"
 
 import API from "../../core/API"
 
@@ -11,8 +14,17 @@ import getCookie from "../../core/getCookie"
 
 function LoginForm() {
 
+    //fetching current loggedIn status
+    const { loggedIn } = useAuth()
+    const { setLoggedIn } = useAuth()
+
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
+
+    // checking current logged-in status
+    if (loggedIn) {
+        return <Navigate to="/home" />
+    }
 
     // function for updating form data
     const handleChange = (e) => {
@@ -42,6 +54,11 @@ function LoginForm() {
         // login response data
         const data = await response.json()
         console.log(data)
+        if (data.success) {
+            setLoggedIn(true)
+        } else {
+            alert("login failed")
+        }
     }
 
     return (

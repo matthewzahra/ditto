@@ -1,9 +1,14 @@
+import { useAuth } from "../../context/AuthContext"
+
 import dittoLogo from "../../assets/logo.png"
 
 import "./Header.css"
 import Navbar from "../Navbar/Navbar"
 
 function Header() {
+
+    const { loggedIn } = useAuth()
+    
     return (
 
         <header className="header">

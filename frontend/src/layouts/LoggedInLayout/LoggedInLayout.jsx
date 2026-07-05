@@ -1,22 +1,26 @@
 import { Outlet, Navigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext"
 
 import Header from "../../components/Header/Header"
 import Navbar from "../../components/Navbar/Navbar"
 
+import "./loggedInLayout.css"
+
 function LoggedInLayout() {
 
-    // replace below with actual auth ////////////////////////////////////////////
-    let userLoggedIn = true
+    const { loggedIn } = useAuth()
 
     // only display layout if users are logged in, otherwise send to login page
-    if (userLoggedIn) {
+    if (loggedIn) {
         return (
-        <>
+        <div className="logged-in-layout">
+        
             <Header />
-            <Navbar />
 
-            <Outlet />
-        </>
+            <div className="logged-in-content">
+                <Outlet />
+            </div>
+        </div>
         )
     } else {
         return (
