@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext"
 import Header from "../../components/Header/Header"
 import Navbar from "../../components/Navbar/Navbar"
 
-import "./loggedInLayout.css"
+import "./LoggedInLayout.css"
 
 function LoggedInLayout() {
 
