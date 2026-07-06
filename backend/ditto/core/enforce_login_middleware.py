@@ -15,7 +15,7 @@ class LoginRequiredMiddleware:
 			'/csrf/',
 			'/api/docs/',
 			'/api/schema/',
-			'api/user_auth/status',
+			'/api/user_auth/status/',
 			'/api/user_auth/login/',
 			'/api/user_auth/register/'
 		}	
