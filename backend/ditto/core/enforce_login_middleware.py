@@ -3,7 +3,7 @@ from ditto.core.http_handling import api_response
 '''
 Middleware functionality to enforce that users are logged in.
 
-NOTE: desigend for the synchronous HTTP lifecycle - does NOT support websockets. 
+NOTE: designed for the synchronous HTTP lifecycle - does NOT support websockets. 
 '''
 
 class LoginRequiredMiddleware:
