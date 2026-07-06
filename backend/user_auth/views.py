@@ -7,10 +7,19 @@ from django.utils import timezone
 from datetime import timedelta
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
 from drf_spectacular.utils import extend_schema
-from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatus
 from rest_framework.decorators import api_view
 from django.db.utils import IntegrityError
 from django.db import transaction
+
+# return if a user is authenticated or not
+@extend_schema(request=LoginStatus, response=ApiResponseSerializer)
+@api_view(['POST'])
+def login_status(request):
+    if request.user.is_authenticated:
+        return api_response(True,data={'loggedIn':True},status=200)
+    return api_response(True,data={'loggedIn':True},status=200)
+
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @extend_schema(request=RegisterSerializer, responses=ApiResponseSerializer)
