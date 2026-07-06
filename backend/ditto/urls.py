@@ -22,7 +22,7 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-ENV = os.getenv('ENV')
+ENV = os.getenv('ENV','PROD')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

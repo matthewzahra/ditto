@@ -1,4 +1,5 @@
 from ditto.core.http_handling import api_response
+from django.http import JsonResponse
 
 '''
 Middleware functionality to enforce that users are logged in.
@@ -28,5 +29,5 @@ class LoginRequiredMiddleware:
 
 		if url_name in self.public_paths:
 			return self.get_response(request)
-			
-		return api_response(False,error="User must be logged in",status=401)
+		
+		return JsonResponse({"error":"User"}, status=401)

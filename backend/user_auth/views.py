@@ -5,16 +5,16 @@ from user_auth.core.authentication_code import validate_auth_code
 from django.db.models import Q
 from django.utils import timezone
 from datetime import timedelta
-from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
+from ditto.core.http_handling import api_response, validate, ApiResponseSerializer, disable_endpoint_prod
 from drf_spectacular.utils import extend_schema
-from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatus
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer
 from rest_framework.decorators import api_view
 from django.db.utils import IntegrityError
 from django.db import transaction
 
 # return if a user is authenticated or not
-@extend_schema(request=LoginStatus, responses=ApiResponseSerializer)
-@api_view(['POST', 'GET'])
+@extend_schema(request=LoginStatusSerializer, responses=ApiResponseSerializer)
+@api_view(['POST','GET'])
 def login_status(request):
     if request.user.is_authenticated:
         return api_response(True,data={'loggedIn':True},status=200)
@@ -24,6 +24,7 @@ def login_status(request):
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @extend_schema(request=RegisterSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
+@disable_endpoint_prod
 def register(request):  
     data = validate(RegisterSerializer,request.data)
 
@@ -66,7 +67,7 @@ def verify_user(request):
     else:
         return api_response(False,error='Invalid authentication code',status=401)
 
-
+# TODO - check if a user is verified 
 @extend_schema(request=LoginSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def login_user(request):
@@ -88,7 +89,7 @@ def login_user(request):
 def request_password_change(request):
     data = validate(RequestPasswordChange, request.data)
 
-    email =data["email"]
+    email = data["email"]
 
     user = CustomUser.objects.filter(email=email).first()
 
@@ -120,6 +121,8 @@ def update_password(request):
     else:
         return api_response(False,error="Invalid credentials",status=401)
 
+@extend_schema(request=LogoutSerializer, responses=ApiResponseSerializer)
+@api_view(['POST'])
 def logout_user(request):
     logout(request)
     return api_response(True,status=200)

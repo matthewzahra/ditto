@@ -1,11 +1,14 @@
 from rest_framework import serializers
 
-class LoginStatus(serializers.Serializer):
+class LoginStatusSerializer(serializers.Serializer):
 	pass
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField()
     password = serializers.CharField()
+
+class LogoutSerializer(serializers.Serializer):
+	pass
     
 class RegisterSerializer(serializers.Serializer):
     password = serializers.CharField()
