@@ -14,7 +14,7 @@ from django.db import transaction
 
 # return if a user is authenticated or not
 @extend_schema(request=LoginStatus, responses=ApiResponseSerializer)
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def login_status(request):
     if request.user.is_authenticated:
         return api_response(True,data={'loggedIn':True},status=200)

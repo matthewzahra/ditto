@@ -24,3 +24,7 @@ note - have changed login to be based on email and password
 note - registration currently email username password
 
 change data.success to be based on success of sent back response rather than login
+
+implement new pages (including change password etc.)
+
+make decision re csrf token generation in context

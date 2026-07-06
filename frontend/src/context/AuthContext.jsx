@@ -20,11 +20,8 @@ export function AuthProvider({children}) {
     useEffect(() => {
         async function checkLogin() {
             const response = await fetch(`${API}/api/user_auth/status/`, {
-                method: "POST",
+                method: "GET",
                 credentials: "include",
-                headers: {
-                    "X-CSRFToken": getCookie("csrftoken")
-                }
             })
 
             const data = await response.json()
