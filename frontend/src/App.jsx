@@ -3,9 +3,6 @@ import { useEffect } from "react"
 
 import API from "./core/API"
 
-// helper functions
-import getCSRF from "./core/getCSRF"
-
 // layouts
 import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
 import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
@@ -21,10 +18,6 @@ import Home from "./pages/LoggedInPages/Home/Home"
 
 function App() {
   
-  // creating csrf token
-  useEffect(() => {
-    getCSRF()
-  }, [])
 
   // Creating routes to each page based on current url
   return (

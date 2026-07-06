@@ -2,23 +2,35 @@ import { createContext, useContext, useState, useEffect } from "react"
 
 import API from "../core/API"
 
+// helper functions
+import getCSRF from "../core/getCSRF"
+
+import getCookie from "../core/getCookie"
+
 const AuthContext = createContext()
 
 export function AuthProvider({children}) {
     const [loggedIn, setLoggedIn] = useState(false)
 
-    // check below, loading needed??? =============================================== also uncomment ================================================================
+    // creating csrf token
+    useEffect(() => {
+        getCSRF()
+    }, [])
 
-    
     useEffect(() => {
         async function checkLogin() {
             const response = await fetch(`${API}/api/user_auth/status/`, {
-                credentials: "include"
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "X-CSRFToken": getCookie("csrftoken")
+                }
             })
 
             const data = await response.json()
 
-            setLoggedIn(data.loggedIn)
+
+            setLoggedIn(data.data.loggedIn)
         }
 
         checkLogin()

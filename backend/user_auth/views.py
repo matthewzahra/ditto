@@ -13,12 +13,12 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 
 # return if a user is authenticated or not
-@extend_schema(request=LoginStatus, response=ApiResponseSerializer)
+@extend_schema(request=LoginStatus, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def login_status(request):
     if request.user.is_authenticated:
         return api_response(True,data={'loggedIn':True},status=200)
-    return api_response(True,data={'loggedIn':True},status=200)
+    return api_response(True,data={'loggedIn':False},status=200)
 
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
