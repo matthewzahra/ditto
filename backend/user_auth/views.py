@@ -67,7 +67,6 @@ def verify_user(request):
     else:
         return api_response(False,error='Invalid authentication code',status=401)
 
-# TODO - check if a user is verified 
 @extend_schema(request=LoginSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def login_user(request):
@@ -78,7 +77,7 @@ def login_user(request):
     
     user = authenticate(request, email=email, password=password)
 
-    if user:
+    if user and user.verified == True:
         login(request, user)
         return api_response(True,status=200)
     else:
