@@ -28,3 +28,5 @@ change data.success to be based on success of sent back response rather than log
 implement new pages (including change password etc.)
 
 make decision re csrf token generation in context
+
+lose the .ps1 reset script and make wsl2 work for the .sh script instead
