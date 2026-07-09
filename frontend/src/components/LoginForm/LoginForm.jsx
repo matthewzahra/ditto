@@ -21,6 +21,8 @@ function LoginForm() {
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
 
+    const [loginError, setLoginError] = useState("")
+
     // checking current logged-in status
     if (loggedIn) {
         return <Navigate to="/home" />
@@ -56,13 +58,17 @@ function LoginForm() {
         console.log(data)
         if (data.success) {
             setLoggedIn(true)
+        } else if (response.status == 401) {
+            setLoginError("Username password combination not found")
         } else {
-            alert("login failed")
+            setLoginError("Server unavailable")
         }
     }
 
     return (
         <form className="login-form" onSubmit={handleSubmit}>
+
+            {loginError && <p className="login-error">{loginError}</p>}
 
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>

@@ -1,4 +1,8 @@
+import { useAuth } from "../../context/AuthContext"
+
 import { useState } from "react"
+
+import { Navigate } from "react-router-dom"
 
 import API from "../../core/API"
 
@@ -9,8 +13,24 @@ import getCookie from "../../core/getCookie"
 
 function LoginForm() {
 
+    //fetching current loggedIn status
+    const { loggedIn } = useAuth()
+
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
+
+    const [registered, setRegistered] = useState(false)
+
+    const [registerError, setRegisterError] = useState("")
+
+    // checking current logged-in status
+    if (loggedIn) {
+        return <Navigate to="/home" />
+    }
+
+    if (registered) {
+        return <Navigate to="/verify" />
+    }
 
     // function for updating form data
     const handleChange = (e) => {
@@ -40,10 +60,19 @@ function LoginForm() {
         // register response data
         const data = await response.json()
         console.log(data)
+        if (data.success) {
+            setRegistered(true)
+        } else if (response.status == 400) {
+            setRegisterError("Email already taken")
+        } else {
+            setRegisterError("Server unavailable")
+        }
     }
 
     return (
         <form className="register-form" onSubmit={handleSubmit}>
+
+            {registerError && <p className="register-error">{registerError}</p>}
 
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>

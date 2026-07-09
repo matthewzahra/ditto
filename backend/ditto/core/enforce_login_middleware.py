@@ -18,7 +18,8 @@ class LoginRequiredMiddleware:
 			'/api/schema/',
 			'/api/user_auth/status/',
 			'/api/user_auth/login/',
-			'/api/user_auth/register/'
+			'/api/user_auth/register/',
+			'/api/user_auth/verify_user/'
 		}	
 	
 	def __call__(self, request):

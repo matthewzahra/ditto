@@ -62,3 +62,10 @@ body {
 .register-form button:hover {
     background: var(--primary-hover);
 }
+
+
+.register-error {
+    color: var(--error);
+    text-align: center;
+    margin-bottom: 5px;
+}

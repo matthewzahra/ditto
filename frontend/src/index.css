@@ -5,7 +5,8 @@
   --secondary: MediumBlue;
   --background: #1f2937;
   --card-background: black;
-  --text: purple;
-  --muted: blue;
+  --text: darkmagenta;
+  --muted: cornflowerblue;
+  --error: red;
   --border: #374151;
 }

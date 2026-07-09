@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom"
-import { useEffect } from "react"
 
 import API from "./core/API"
 
@@ -7,12 +6,16 @@ import API from "./core/API"
 import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
 import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
 
-// pages
+// logged-out pages
 import Login from "./pages/LoggedOutPages/Login/Login"
 import LoggedOutHome from "./pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
-import Logout from "./pages/LoggedInPages/Logout/Logout"
 import Register from "./pages/LoggedOutPages/Register/Register"
+import Verify from "./pages/LoggedOutPages/Verify/Verify"
+
+// logged-in pages
 import Home from "./pages/LoggedInPages/Home/Home"
+import Logout from "./pages/LoggedInPages/Logout/Logout"
+
 
 
 
@@ -29,6 +32,7 @@ function App() {
         <Route path="/" element={<LoggedOutHome />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/verify" element={<Verify />} />
       </Route>
 
       {/* Routes for pages with logged in layout */}

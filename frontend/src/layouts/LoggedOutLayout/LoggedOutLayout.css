@@ -9,6 +9,7 @@
 .logged-out-content {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 
     padding-top: 160px; /* CRITICAL */
