@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext"
 
 import { useState } from "react"
-import { Navigate } from "react-router-dom"
+import { Navigate, Link } from "react-router-dom"
 
 import API from "../../core/API"
 
@@ -79,6 +79,10 @@ function LoginForm() {
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
             <button type="submit">Login</button>
+
+            <Link to="/forgotpassword">
+                Forgot password?
+            </Link>
 
         </form>
     )

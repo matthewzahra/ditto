@@ -19,7 +19,9 @@ class LoginRequiredMiddleware:
 			'/api/user_auth/status/',
 			'/api/user_auth/login/',
 			'/api/user_auth/register/',
-			'/api/user_auth/verify_user/'
+			'/api/user_auth/verify_user/',
+			'/api/user_auth/request_password_change/',
+			'/api/user_auth/update_password/'
 		}	
 	
 	def __call__(self, request):

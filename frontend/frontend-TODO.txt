@@ -30,3 +30,9 @@ implement new pages (including change password etc.)
 make decision re csrf token generation in context
 
 lose the .ps1 reset script and make wsl2 work for the .sh script instead
+
+update errors based on error codes, go thru all errors, potentially change ifs to switch statements
+
+fix: no sessionId created when new account registered
+
+remove the email part of the verify form, should be added automatically via the register form (also for forgot password)
