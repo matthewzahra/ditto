@@ -4,8 +4,8 @@
 rm -f db.sqlite3
 
 # initilaise the database
-python manage.py makemigrations
-python manage.py migrate
+uv run python manage.py makemigrations
+uv run python manage.py migrate
 
 # populate the users 
-python -m scripts.users
+uv run python -m scripts.users
