@@ -22,7 +22,12 @@ def add_users():
 		verified=False
 	)
 
-	# TODO - add a user with a real email
+	# create a user with dev email
+	CustomUser.objects.create_user(
+		email="dittodev08@gmail.com",
+		password="dev",
+		verified=True
+	)
 
 
 add_users()

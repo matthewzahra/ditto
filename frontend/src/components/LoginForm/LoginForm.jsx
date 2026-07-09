@@ -59,9 +59,11 @@ function LoginForm() {
         if (data.success) {
             setLoggedIn(true)
         } else if (response.status == 401) {
-            setLoginError("Username password combination not found")
+            setLoginError("Email password combination not found")
+        } else if (response.status == 400) {
+            setLoginError(data.email?.[0] ?? "Please check your input.")
         } else {
-            setLoginError("Server unavailable")
+            setLoginError("Something went wrong. Please try again later")
         }
     }
 

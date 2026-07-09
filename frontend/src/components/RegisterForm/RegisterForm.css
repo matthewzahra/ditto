@@ -53,7 +53,7 @@ body {
     border: none;
     border-radius: 8px;
     background: var(--primary);
-    color: white;
+    color: var(--accent);
     font-weight: bold;
     cursor: pointer;
     transition: 0.2s;

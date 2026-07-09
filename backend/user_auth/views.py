@@ -120,6 +120,7 @@ def update_password(request):
     else:
         return api_response(False,error="Invalid credentials",status=401)
 
+# TODO find why this doesn't show in api/docs/
 @extend_schema(request=LogoutSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def logout_user(request):
