@@ -13,7 +13,7 @@ from django.db.utils import IntegrityError
 from django.db import transaction
 
 # return if a user is authenticated or not
-@extend_schema(request=LoginStatusSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=LoginStatusSerializer, responses=ApiResponseSerializer)
 @api_view(['POST','GET'])
 def login_status(request):
     if request.user.is_authenticated:
@@ -22,7 +22,7 @@ def login_status(request):
 
 
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
-@extend_schema(request=RegisterSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=RegisterSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 @disable_endpoint_prod
 def register(request):  
@@ -48,7 +48,7 @@ def register(request):
     
 
 # verify a user's email for when they login the 1st time, upgrading them from an UnverifiedUser to a CustomUser
-@extend_schema(request=VerifyUserSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=VerifyUserSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def verify_user(request):  
     data = validate(VerifyUserSerializer,request.data) 
@@ -67,7 +67,7 @@ def verify_user(request):
     else:
         return api_response(False,error='Invalid authentication code',status=401)
 
-@extend_schema(request=LoginSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=LoginSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def login_user(request):
     data = validate(LoginSerializer, request.data)
@@ -83,7 +83,7 @@ def login_user(request):
     else:
         return api_response(False,error="Login credentials are invalid",status=401)
 
-@extend_schema(request=RequestPasswordChange, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=RequestPasswordChange, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def request_password_change(request):
     data = validate(RequestPasswordChange, request.data)
@@ -97,7 +97,7 @@ def request_password_change(request):
 
     return api_response(True,status=200)
 
-@extend_schema(request=UpdatePasswordSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=UpdatePasswordSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def update_password(request): 
     data = validate(UpdatePasswordSerializer, request.data) 
@@ -120,8 +120,7 @@ def update_password(request):
     else:
         return api_response(False,error="Invalid credentials",status=401)
 
-# TODO find why this doesn't show in api/docs/
-@extend_schema(request=LogoutSerializer, responses=ApiResponseSerializer)
+@extend_schema(tags=['user_auth'], request=LogoutSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def logout_user(request):
     logout(request)
