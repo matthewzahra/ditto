@@ -50,12 +50,14 @@ def send_and_save_authentication_code(user):
 		msg["To"] = target_email
 		msg["Subject"] = "Ditto Authentication Code"
 
-		content = f'''Hello {user.username}, 
-				an authentication code for this email has been requested. If you did not request this, then ignore the rest of this email. Otherwise, the authentication code is below:
-				{code}
+		content = f'''Hello,
 
-				from Team Ditto
-				'''
+an authentication code for this email has been requested. If you did not request this, then ignore the rest of this email. Otherwise, the authentication code is below:
+
+{code}
+
+from Team Ditto
+'''
 
 		msg.set_content(content)
 
