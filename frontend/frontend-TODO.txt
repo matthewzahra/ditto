@@ -1,38 +1,9 @@
-login page includes title, logo, use colour palette, figure out the animations -> includes reset password which has form including: password, confirm password, code
-registration page including way to authenticate email
-
-figure out what is needed re json for logins
-
 change filler logo to real logo
-
-figure out lock file download
-
-extract cookie
-
-Finish header
-
-Finish Navbar
-
-Change form data from username back to email/incorporate the rest
-
-add fetching logged in status to navbar, logged out layout, logged in layout
 
 add robots.txt?
 
-note - have changed login to be based on email and password
-
-note - registration currently email username password
-
-change data.success to be based on success of sent back response rather than login
-
-implement new pages (including change password etc.)
-
-make decision re csrf token generation in context
-
 lose the .ps1 reset script and make wsl2 work for the .sh script instead
 
-update errors based on error codes, go thru all errors and actually fix them, potentially change ifs to switch statements
+update errors based on error codes, potentially change ifs to switch statements
 
-fix: no sessionId created when new account registered
-
-remove the email part of the verify form, should be added automatically via the register form (also for forgot password)
+when doing forgot password with a non-registered email no error is thrown by the backend before going to update password page

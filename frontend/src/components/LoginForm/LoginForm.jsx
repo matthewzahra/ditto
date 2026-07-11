@@ -44,6 +44,7 @@ function LoginForm() {
         // stops browser from reloading
         e.preventDefault()
 
+        setLoginError("")
         setLoading(true)
 
         try {
@@ -61,7 +62,6 @@ function LoginForm() {
             
             // login response data
             const data = await response.json()
-            console.log(data)
             if (response.ok) {
                 setLoggedIn(true)
             } else if (response.status === 401) {

@@ -7,10 +7,13 @@ import getCSRF from "../core/getCSRF"
 
 import getCookie from "../core/getCookie"
 
+import logoutRequest from "../core/logoutRequest"
+
 const AuthContext = createContext()
 
 export function AuthProvider({children}) {
     const [loggedIn, setLoggedIn] = useState(false)
+    const [logoutError, setLogoutError] = useState("")
 
     // creating csrf token
     useEffect(() => {
@@ -32,13 +35,26 @@ export function AuthProvider({children}) {
 
         checkLogin()
     }, [])
+
+    async function logout() {
+
+        const response = await logoutRequest()
+
+        if (response.ok) {
+            setLoggedIn(false)
+            setLogoutError("")
+        } else {
+            setLogoutError("Logout failed")
+        }
+    }
     
 
     return (
         <AuthContext.Provider
             value={{
                 loggedIn,
-                setLoggedIn
+                setLoggedIn,
+                logout
             }}
         >
             {children}

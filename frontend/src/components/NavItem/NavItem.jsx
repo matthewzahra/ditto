@@ -7,7 +7,7 @@ function NavItem({ to, children }) {
         <NavLink
             to={to}
             className={({ isActive }) =>
-                isActive ? "nav-link active" : "nav-link"
+                isActive ? "nav-item active" : "nav-item"
             }
         >
             {children}

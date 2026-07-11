@@ -62,6 +62,7 @@ def verify_user(request):
         user.verified = True
         user.auth_code_generated_at = timezone.now() - timedelta(days=1)
         user.save()
+        login(request, user)
         return api_response(True, status=200)
 
     else:

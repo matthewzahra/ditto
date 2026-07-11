@@ -7,6 +7,7 @@ import "./Navbar.css"
 function Navbar() {
 
     const { loggedIn } = useAuth()
+    const { logout } = useAuth()
 
     // navbar for logged in users
     if (loggedIn) {
@@ -17,7 +18,7 @@ function Navbar() {
                     <NavItem to="/home">Home</NavItem>
                 </div>
                 <div className="nav-right">
-                    <NavItem to="/logout">Logout</NavItem>
+                    <button className="nav-item" onClick={logout}>Logout</button>
                 </div>
             </nav>
         )

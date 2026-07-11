@@ -19,7 +19,7 @@ function VerificationForm() {
     const { setLoggedIn } = useAuth()
 
     // initialising object for storing form data
-    const [formData, setFormData] = useState({email: "", code: ""})
+    const [formData, setFormData] = useState({email: sessionStorage.getItem("registerEmail"), code: ""})
 
     const [verificationError, setVerificationError] = useState("")
 
@@ -44,6 +44,7 @@ function VerificationForm() {
         // stops browser from reloading
         e.preventDefault()
 
+        setVerificationError("")
         setLoading(true)
 
         try {
@@ -61,8 +62,8 @@ function VerificationForm() {
             
             // verification response data
             const data = await response.json()
-            console.log(data)
             if (response.ok) {
+                sessionStorage.removeItem("registerEmail")
                 setLoggedIn(true)
             } else if (response.status === 401) {
                 setVerificationError("Code incorrect")
@@ -81,9 +82,6 @@ function VerificationForm() {
 
             {verificationError && <p className="verification-error">{verificationError}</p>}
 
-            <label>Email:
-                <input type="text" name="email" value={formData.email} onChange={handleChange}/>
-            </label>
             <label>Verification code:
                 <input type="text" name="code" value={formData.code} onChange={handleChange}/>
             </label>

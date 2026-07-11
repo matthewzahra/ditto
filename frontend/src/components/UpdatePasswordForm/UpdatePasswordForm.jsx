@@ -17,7 +17,7 @@ function UpdatePasswordForm() {
     const { loggedIn } = useAuth()
 
     // initialising object for storing form data
-    const [formData, setFormData] = useState({email: "", code: "", pass1: "", pass2: ""})
+    const [formData, setFormData] = useState({email: sessionStorage.getItem("resetEmail"), code: "", pass1: "", pass2: ""})
 
     const [changed, setChanged] = useState(false)
 
@@ -48,6 +48,7 @@ function UpdatePasswordForm() {
         // stops browser from reloading
         e.preventDefault()
 
+        setRequestError("")
         setLoading(true)
 
         try {
@@ -65,11 +66,13 @@ function UpdatePasswordForm() {
             
             // register response data
             const data = await response.json()
-            console.log(data)
             if (response.ok) {
+                sessionStorage.removeItem("resetEmail")
                 setChanged(true)
             } else if (response.status === 400) {
-                setRequestError("Email already taken")
+                setRequestError("Passwords must match")
+            } else if (response.status === 401) {
+                setRequestError("Code incorrect")
             } else {
                 setRequestError("Server unavailable")
             }
@@ -85,9 +88,6 @@ function UpdatePasswordForm() {
 
             {requestError && <p className="request-error">{requestError}</p>}
 
-            <label>Email:
-                <input type="text" name="email" value={formData.email} onChange={handleChange}/>
-            </label>
             <label>Password change code:
                 <input type="text" name="code" value={formData.code} onChange={handleChange}/>
             </label>

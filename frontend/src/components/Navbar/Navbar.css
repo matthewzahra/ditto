@@ -22,25 +22,31 @@
 }
 
 /* Link styling */
-.nav-link {
+.nav-item {
     color: var(--primary);
     text-decoration: none;
     font-size: 16px;
     font-weight: 500;
+    font-family: inherit;
 
     padding: 6px 10px;
     border-radius: 6px;
+
+    background: none;
+    border: none;
+
+    cursor: pointer;
 
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 /* Hover effect */
-.nav-link:hover {
+.nav-item:hover {
     background-color: rgba(255, 255, 255, 0.15);
 }
 
 /* Active link styling */
-.nav-link.active {
+.nav-item.active {
     background-color: var(--secondary);
     color: var(--primary);
 }

@@ -48,6 +48,7 @@ function LoginForm() {
         // stops browser from reloading
         e.preventDefault()
 
+        setRegisterError("")
         setLoading(true)
 
         try{
@@ -65,8 +66,8 @@ function LoginForm() {
             
             // register response data
             const data = await response.json()
-            console.log(data)
             if (response.ok) {
+                sessionStorage.setItem("registerEmail", formData.email)
                 setRegistered(true)
             } else if (response.status === 400) {
                 setRegisterError("Email already taken")

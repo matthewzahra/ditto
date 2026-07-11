@@ -48,6 +48,7 @@ function ForgotPasswordForm() {
         // stops browser from reloading
         e.preventDefault()
 
+        setRequestError("")
         setLoading(true)
 
         try {
@@ -65,11 +66,13 @@ function ForgotPasswordForm() {
             
             // register response data
             const data = await response.json()
-            console.log(data)
             if (response.ok) {
+                sessionStorage.setItem("resetEmail", formData.email)
                 setRequested(true)
             } else if (response.status === 400) {
-                setRequestError("Email already taken")
+                setRequestError("Invalid email")
+            } else if (response.status === 500) {
+                setRequestError("Server error. Please try again later")
             } else {
                 setRequestError("Server unavailable")
             }
@@ -88,7 +91,7 @@ function ForgotPasswordForm() {
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <button type="submit" disabled={loading}>{loading ? "Requesting" : "Request password change code"}</button>
+            <button type="submit" disabled={loading}>{loading ? "Requesting..." : "Request password change code"}</button>
 
         </form>
     )

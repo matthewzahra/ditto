@@ -16,7 +16,6 @@ import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword
 
 // logged-in pages
 import Home from "./pages/LoggedInPages/Home/Home"
-import Logout from "./pages/LoggedInPages/Logout/Logout"
 
 
 
@@ -41,7 +40,6 @@ function App() {
 
       {/* Routes for pages with logged in layout */}
       <Route element={<LoggedInLayout />}>
-        <Route path="/logout" element={<Logout />} />
         <Route path="/home" element={<Home />} />
       </Route>
       
