@@ -1,11 +1,24 @@
 #!/bin/bash
 
-# delete the current databse
-rm -f db.sqlite3
+# NOTE: run this from backend/
 
-# initilaise the database
-uv run python manage.py makemigrations
-uv run python manage.py migrate
+# load the environment variables
+echo "Reading environment variables"
+source ../.env
 
-# populate the users 
-uv run python -m scripts.users
+if [ "$ENV" = "DEV" ]; then 
+	# delete the current databse
+	echo "Deleting Database"
+	rm -f db.sqlite3
+
+	# initilaise the database
+	echo "Initialising Databse"
+	uv run python manage.py makemigrations
+	uv run python manage.py migrate
+
+	# populate the users 
+	echo "Adding test users to database"
+	uv run python -m scripts.users
+else
+	echo "In PROD, cannot reset database"
+fi
