@@ -23,6 +23,8 @@ function ForgotPasswordForm() {
 
     const [requestError, setRequestError] = useState("")
 
+    const [loading, setLoading] = useState(false)
+
     // checking current logged-in status
     if (loggedIn) {
         return <Navigate to="/home" />
@@ -46,26 +48,35 @@ function ForgotPasswordForm() {
         // stops browser from reloading
         e.preventDefault()
 
-        // request register from backend
-        const response = await fetch(`${API}/api/user_auth/request_password_change/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: JSON.stringify(formData)
-        })
-        
-        // register response data
-        const data = await response.json()
-        console.log(data)
-        if (data.success) {
-            setRequested(true)
-        } else if (response.status == 400) {
-            setRequestError("Email already taken")
-        } else {
-            setRequestError("Server unavailable")
+        setLoading(true)
+
+        try {
+
+            // request register from backend
+            const response = await fetch(`${API}/api/user_auth/request_password_change/`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: JSON.stringify(formData)
+            })
+            
+            // register response data
+            const data = await response.json()
+            console.log(data)
+            if (response.ok) {
+                setRequested(true)
+            } else if (response.status === 400) {
+                setRequestError("Email already taken")
+            } else {
+                setRequestError("Server unavailable")
+            }
+        } catch (err) {
+            setRequestError("Unable to connect to the server")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -77,7 +88,7 @@ function ForgotPasswordForm() {
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <button type="submit">Request password change code</button>
+            <button type="submit" disabled={loading}>{loading ? "Requesting" : "Request password change code"}</button>
 
         </form>
     )

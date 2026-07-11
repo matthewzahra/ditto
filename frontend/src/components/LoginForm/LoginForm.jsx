@@ -23,6 +23,8 @@ function LoginForm() {
 
     const [loginError, setLoginError] = useState("")
 
+    const [loading, setLoading] = useState(false)
+
     // checking current logged-in status
     if (loggedIn) {
         return <Navigate to="/home" />
@@ -42,28 +44,37 @@ function LoginForm() {
         // stops browser from reloading
         e.preventDefault()
 
-        // request login from backend
-        const response = await fetch(`${API}/api/user_auth/login/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: JSON.stringify(formData)
-        })
-        
-        // login response data
-        const data = await response.json()
-        console.log(data)
-        if (data.success) {
-            setLoggedIn(true)
-        } else if (response.status == 401) {
-            setLoginError("Email password combination not found")
-        } else if (response.status == 400) {
-            setLoginError(data.email?.[0] ?? "Please check your input.")
-        } else {
-            setLoginError("Something went wrong. Please try again later")
+        setLoading(true)
+
+        try {
+
+            // request login from backend
+            const response = await fetch(`${API}/api/user_auth/login/`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: JSON.stringify(formData)
+            })
+            
+            // login response data
+            const data = await response.json()
+            console.log(data)
+            if (response.ok) {
+                setLoggedIn(true)
+            } else if (response.status === 401) {
+                setLoginError("Email password combination not found")
+            } else if (response.status === 400) {
+                setLoginError(data.email?.[0] ?? "Please check your input.")
+            } else {
+                setLoginError("Something went wrong. Please try again later")
+            }
+        } catch (err) {
+            setLoginError("Unable to connect to the server")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -78,7 +89,7 @@ function LoginForm() {
             <label>Password:
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <button type="submit">Login</button>
+            <button type="submit" disabled={loading}>{loading ? "Logging in" : "Login"}</button>
 
             <Link to="/forgotpassword">
                 Forgot password?

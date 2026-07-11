@@ -31,7 +31,7 @@ make decision re csrf token generation in context
 
 lose the .ps1 reset script and make wsl2 work for the .sh script instead
 
-update errors based on error codes, go thru all errors, potentially change ifs to switch statements
+update errors based on error codes, go thru all errors and actually fix them, potentially change ifs to switch statements
 
 fix: no sessionId created when new account registered
 

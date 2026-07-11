@@ -23,6 +23,8 @@ function LoginForm() {
 
     const [registerError, setRegisterError] = useState("")
 
+    const [loading, setLoading] = useState(false)
+
     // checking current logged-in status
     if (loggedIn) {
         return <Navigate to="/home" />
@@ -46,26 +48,35 @@ function LoginForm() {
         // stops browser from reloading
         e.preventDefault()
 
-        // request register from backend
-        const response = await fetch(`${API}/api/user_auth/register/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: JSON.stringify(formData)
-        })
-        
-        // register response data
-        const data = await response.json()
-        console.log(data)
-        if (data.success) {
-            setRegistered(true)
-        } else if (response.status == 400) {
-            setRegisterError("Email already taken")
-        } else {
-            setRegisterError("Server unavailable")
+        setLoading(true)
+
+        try{
+
+            // request register from backend
+            const response = await fetch(`${API}/api/user_auth/register/`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: JSON.stringify(formData)
+            })
+            
+            // register response data
+            const data = await response.json()
+            console.log(data)
+            if (response.ok) {
+                setRegistered(true)
+            } else if (response.status === 400) {
+                setRegisterError("Email already taken")
+            } else {
+                setRegisterError("Server unavailable")
+            }
+        } catch (err) {
+            setRegisterError("Unable to connect to the server")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -80,7 +91,7 @@ function LoginForm() {
             <label>Password:
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <button type="submit">Register</button>
+            <button type="submit" disabled={loading}>{loading ? "Registering" : "Register"}</button>
 
         </form>
     )

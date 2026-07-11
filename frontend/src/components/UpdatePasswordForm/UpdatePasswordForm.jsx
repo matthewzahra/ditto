@@ -22,6 +22,8 @@ function UpdatePasswordForm() {
     const [changed, setChanged] = useState(false)
 
     const [requestError, setRequestError] = useState("")
+    
+    const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
     if (loggedIn) {
@@ -46,26 +48,35 @@ function UpdatePasswordForm() {
         // stops browser from reloading
         e.preventDefault()
 
-        // request register from backend
-        const response = await fetch(`${API}/api/user_auth/update_password/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": getCookie("csrftoken")
-            },
-            body: JSON.stringify(formData)
-        })
-        
-        // register response data
-        const data = await response.json()
-        console.log(data)
-        if (data.success) {
-            setChanged(true)
-        } else if (response.status == 400) {
-            setRequestError("Email already taken")
-        } else {
-            setRequestError("Server unavailable")
+        setLoading(true)
+
+        try {
+
+            // request register from backend
+            const response = await fetch(`${API}/api/user_auth/update_password/`, {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCookie("csrftoken")
+                },
+                body: JSON.stringify(formData)
+            })
+            
+            // register response data
+            const data = await response.json()
+            console.log(data)
+            if (response.ok) {
+                setChanged(true)
+            } else if (response.status === 400) {
+                setRequestError("Email already taken")
+            } else {
+                setRequestError("Server unavailable")
+            }
+        } catch (err) {
+            setRequestError("Unable to connect to the server")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -86,7 +97,7 @@ function UpdatePasswordForm() {
             <label>Confirm password:
                 <input type="password" name="pass2" value={formData.pass2} onChange={handleChange}/>
             </label>
-            <button type="submit">Request Password change</button>
+            <button type="submit" disabled={loading}>{loading ? "Updating" : "Update Password"}</button>
 
         </form>
     )
