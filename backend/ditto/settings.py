@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
 	'corsheaders',
-	'user_auth'
+	'user_auth',
+	'inbox'
 ]
 
 # help to enforce and document the REST API
