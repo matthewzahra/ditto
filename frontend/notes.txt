@@ -11,3 +11,6 @@ npm run dev
 
 To install the packages run:
 npm ci
+
+To activate venv in ubuntu: 
+source .venv/bin/activate

@@ -18,6 +18,7 @@ function Navbar() {
                     <NavItem to="/home">Home</NavItem>
                 </div>
                 <div className="nav-right">
+                    <NavItem to="/inbox">Inbox</NavItem>
                     <button className="nav-item" onClick={logout}>Logout</button>
                 </div>
             </nav>
