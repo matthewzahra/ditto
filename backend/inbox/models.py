@@ -16,6 +16,21 @@ class InboxMessage(models.Model):
 	read=models.BooleanField(default=False)
 
 
+# define the possible actions that we can embed in an inbox message
+class Actions(models.TextChoices):
+	pass
+
+
 # a potential action that a user can execute that will be embedded in an InboxMessage
 class InboxMessageAction(models.Model):
-	pass
+	# user that the action corresponds to (for verification purposes)
+	user = models.ForeignKey(
+		to=settings.AUTH_USER_MODEL,
+		on_delete=models.CASCADE,
+		related_name="inbox_actions"
+	)
+	
+	action = models.CharField(
+		max_length=20,
+		choices=Actions.choices
+	)
