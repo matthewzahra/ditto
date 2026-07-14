@@ -29,6 +29,12 @@ class InboxMessageAction(models.Model):
 		on_delete=models.CASCADE,
 		related_name="inbox_actions"
 	)
+
+	message = models.ForeignKey(
+		to=InboxMessage,
+		on_delete=models.CASCADE,
+		related_name="actions"
+	)
 	
 	action = models.CharField(
 		max_length=20,

@@ -18,9 +18,9 @@ def get_messages(request):
 	user = request.user
 
 	if end:
-		messages = InboxMessage.objects.filter(user=user).order_by("-created_at")[start:end]	
+		messages = InboxMessage.objects.filter(user=user).prefetch_related('actions').order_by("-created_at")[start:end]	
 	else:
-		messages = InboxMessage.objects.filter(user=user).order_by("-created_at")[start:]
+		messages = InboxMessage.objects.filter(user=user).prefetch_related('actions').order_by("-created_at")[start:]
 
 	serializer = MessageSerializer(messages, many=True)
 	return api_response(True,data=serializer.data)
