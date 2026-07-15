@@ -12,5 +12,8 @@ npm run dev
 To install the packages run:
 npm ci
 
-To activate venv in ubuntu: 
+To activate venv in ubuntu run from backend: 
 source .venv/bin/activate
+
+To run the script run from backend:
+./scripts/reset-db.sh

@@ -1,0 +1,84 @@
+.inbox-messages {
+    width: 100%;
+    max-width: 800px;
+    min-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.filter {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.filter select {
+    padding: 10px 14px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.filter select:hover {
+    border-color: var(--primary);
+}
+
+.filter select:focus {
+    border-color: var(--secondary);
+}
+
+.sort {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.sort select {
+    padding: 10px 14px;
+    border: 2px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+.sort select:hover {
+    border-color: var(--primary);
+}
+
+.sort select:focus {
+    border-color: var(--secondary);
+}
+
+.notifications {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.notifications {
+    width: 100%;
+    max-width: 600px;
+
+    padding: 20px;
+
+    border: 2px solid var(--primary);
+    border-radius: 16px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}

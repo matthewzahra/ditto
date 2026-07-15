@@ -1,0 +1,46 @@
+.inbox-notification {
+    width: 100%;
+    max-width: 500px;
+
+    padding: 16px 20px;
+    margin: 10px 0;
+
+    background-color: var(--secondary);
+    color: var(--primary);
+
+    border-radius: 12px;
+
+    box-sizing: border-box;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inbox-notification:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.inbox-notification h1 {
+    margin: 0 0 8px 0;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.inbox-notification p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    opacity: 0.85;
+
+    max-height: 42px; /* roughly 2 lines */
+    overflow: hidden;
+}
