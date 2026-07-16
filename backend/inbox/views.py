@@ -30,8 +30,11 @@ def get_messages(request):
 def delete_message(request):
 	data = validate(SingleMessageSerializer,request.data)
 	message_id = data['message_id']
-	InboxMessage.objects.filter(user=request.user, id=message_id).delete()
-	return api_response(True)
+	deleted_count,_ = InboxMessage.objects.filter(user=request.user, id=message_id).delete()
+	if deleted_count == 0:
+		logger.warning("No message to delete.")
+	else:
+		return api_response(True)
 
 # log that a message has been read
 @extend_schema(tags=['inbox'], request=SingleMessageSerializer, responses=ApiResponseSerializer)
@@ -39,12 +42,10 @@ def delete_message(request):
 def read_message(request):
 	data = validate(SingleMessageSerializer,request.data)
 	message_id = data['message_id']
-	deleted_count,_ = InboxMessage.objects.filter(user=request.user, id=message_id).delete()
-
-	if deleted_count == 0:
-		logger.warning("No message to delete.")
-	else:
-		return api_response(True)
+	message = InboxMessage.objects.filter(user=request.user, id=message_id).get()
+	message.read = True
+	message.save()
+	return api_response(True)
 	
 @extend_schema(tags=['inbox'], request=ActionSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
