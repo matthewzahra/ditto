@@ -4,12 +4,11 @@ import { useState } from "react"
 import { Navigate, Link } from "react-router-dom"
 
 import API from "../../core/API"
-
-import "./LoginForm.css"
-
-import "./LoginForm.css"
-
 import getCookie from "../../core/getCookie"
+
+import "./LoginForm.css"
+
+
 
 
 function LoginForm() {

@@ -12,7 +12,7 @@ npm run dev
 To install the packages run:
 npm ci
 
-To activate venv in ubuntu run from backend: 
+To activate venv in ubuntu run: 
 source .venv/bin/activate
 
 To run the script run from backend:

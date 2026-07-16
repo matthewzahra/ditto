@@ -6,4 +6,16 @@ lose the .ps1 reset script and make wsl2 work for the .sh script instead
 
 update errors based on error codes, potentially change ifs to switch statements
 
-when doing forgot password with a non-registered email no error is thrown by the backend before going to update password page
+inbox needs to display when notification is from (i.e. created at)
+
+make delete request in inboxmessages
+
+add catch to failed requests
+
+show error when relevant
+
+add mark message as unread
+
+Look into vite environment variables
+
+add about section about the engineers

@@ -1,13 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
 :root {
-  /* colours */
   --primary: MediumSlateBlue;
-  --primary-hover: purple;
-  --secondary: MediumBlue;
+  --primary-hover: SlateBlue;
+
+  --secondary: blue;
   --accent: white;
-  --background: #1f2937;
-  --card-background: black;
-  --text: darkmagenta;
+
+  --background: darkslategray;
+  --card-background: #263238;
+
+  --text: white;
   --muted: cornflowerblue;
+
   --error: red;
   --border: #374151;
 }

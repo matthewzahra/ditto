@@ -37,13 +37,13 @@
     border-color: var(--secondary);
 }
 
-.sort {
+.sort-order {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
 }
 
-.sort select {
+.sort-order select {
     padding: 10px 14px;
     border: 2px solid var(--primary);
     border-radius: 8px;
@@ -53,11 +53,11 @@
     outline: none;
 }
 
-.sort select:hover {
+.sort-order select:hover {
     border-color: var(--primary);
 }
 
-.sort select:focus {
+.sort-order select:focus {
     border-color: var(--secondary);
 }
 
@@ -81,4 +81,10 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+}
+
+.inbox-error {
+    color: var(--error);
+    text-align: center;
+    margin-bottom: 5px;
 }
