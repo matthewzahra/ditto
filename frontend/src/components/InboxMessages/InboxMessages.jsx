@@ -13,6 +13,7 @@ function InboxMessages() {
     const [sortOrder, setSortOrder] = useState("newest")
     const [readingMessages, setReadingMessages] = useState([])
     const [inboxError, setInboxError] = useState("")
+    const [expandedMessage, setExpandedMessage] = useState(null)
 
     const markAsRead = async (id) => {
         setReadingMessages((prev) => [...prev, id])
@@ -60,7 +61,7 @@ function InboxMessages() {
                 setMessages((prevMessages) =>
                 prevMessages.filter((message) => message.id !== id))
             } else {
-                console.error("Failed to mark message as read")
+                console.error("Failed to delete message")
             }
         } catch (err) {
             setInboxError("Unbale to connect to the server")
@@ -117,9 +118,12 @@ function InboxMessages() {
 
     console.log(filteredMessages)
     console.log(sortedMessages)
+
     return (
         <div className="inbox-messages">
+
             {inboxError && <p className="inbox-error">{inboxError}</p>}
+
             <div className="controls">
                 <div className="filter">
                     <select value={filter} onChange={(e) => setFilter(e.target.value)}>
@@ -137,7 +141,18 @@ function InboxMessages() {
             </div>
             <div className="notifications">
                 {sortedMessages.map((message) => (
-                    <InboxNotification key={message.id} title={message.title} body={message.body} read={message.read} onRead={() => markAsRead(message.id)} disabled={readingMessages.includes(message.id)} deleteMessage={() => deleteRequest(message.id)} />
+                    <InboxNotification 
+                    key={message.id} 
+                    title={message.title} 
+                    body={message.body} 
+                    read={message.read} 
+                    onRead={() => markAsRead(message.id)} 
+                    disabled={readingMessages.includes(message.id)} 
+                    deleteMessage={() => deleteRequest(message.id)} 
+                    expanded={expandedMessage === message.id} 
+                    onExpand={() => {
+                        setExpandedMessage(expandedMessage === message.id ? null : message.id)
+                    }} />
                 ))}
             </div>
         </div>

@@ -13,7 +13,9 @@ const AuthContext = createContext()
 
 export function AuthProvider({children}) {
     const [loggedIn, setLoggedIn] = useState(false)
+    const [logInError, setLogInError] = useState("")
     const [logoutError, setLogoutError] = useState("")
+    const [loadingIn, setLoadingIn] = useState(true)
 
     // creating csrf token
     useEffect(() => {
@@ -22,15 +24,21 @@ export function AuthProvider({children}) {
 
     useEffect(() => {
         async function checkLogin() {
-            const response = await fetch(`${API}/api/user_auth/status/`, {
-                method: "GET",
-                credentials: "include",
-            })
+            try {
+                const response = await fetch(`${API}/api/user_auth/status/`, {
+                    method: "GET",
+                    credentials: "include",
+                })
 
-            const data = await response.json()
+                const data = await response.json()
 
 
-            setLoggedIn(data.data.loggedIn)
+                setLoggedIn(data.data.loggedIn)
+            } catch (err) {
+                setLogInError("failed to connect to the server")
+            } finally {
+                setLoadingIn(false)
+            }
         }
 
         checkLogin()
@@ -54,7 +62,8 @@ export function AuthProvider({children}) {
             value={{
                 loggedIn,
                 setLoggedIn,
-                logout
+                logout,
+                loadingIn
             }}
         >
             {children}

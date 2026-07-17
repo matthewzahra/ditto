@@ -1,3 +1,5 @@
+Outstanding todos:
+
 change filler logo to real logo
 
 add robots.txt?
@@ -6,16 +8,22 @@ lose the .ps1 reset script and make wsl2 work for the .sh script instead
 
 update errors based on error codes, potentially change ifs to switch statements
 
-inbox needs to display when notification is from (i.e. created at)
-
-make delete request in inboxmessages
-
-add catch to failed requests
-
-show error when relevant
-
-add mark message as unread
+add mark message as unread? (requires new backend endpoint)
 
 Look into vite environment variables
 
+limit notifications to 10 at a time
+
 add about section about the engineers
+
+add animation or something to make it clear when a notification is deleted?
+
+Current todos:
+
+inbox needs to display when notification is from (i.e. created at)
+
+show error when relevant
+
+blow up message when clicked on
+
+actions and websockets

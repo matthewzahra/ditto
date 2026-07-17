@@ -8,24 +8,28 @@ import "./LoggedOutLayout.css"
 
 function LoggedOutLayout() {
 
-    const { loggedIn } = useAuth()
+    const { loggedIn, loadingIn } = useAuth()
 
-    // only display layout if users are logged in, otherwise send to login page
-    if (!loggedIn) {
-        return (
-        <div className="logged-out-layout">
-            <Header />
-
-            <div className="logged-out-content">
-                <Outlet />
-            </div>
-            
-        </div>
-        )
+    if (loadingIn) {
+        
     } else {
-        return (
-            <Navigate to="/home" />
-        )
+        // only display layout if users are logged in, otherwise send to login page
+        if (!loggedIn) {
+            return (
+            <div className="logged-out-layout">
+                <Header />
+
+                <div className="logged-out-content">
+                    <Outlet />
+                </div>
+                
+            </div>
+            )
+        } else {
+            return (
+                <Navigate to="/home" />
+            )
+        }
     }
 }
 
