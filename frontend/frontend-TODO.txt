@@ -18,12 +18,10 @@ add about section about the engineers
 
 add animation or something to make it clear when a notification is deleted?
 
-Current todos:
-
 inbox needs to display when notification is from (i.e. created at)
 
-show error when relevant
+Current todos:
 
-blow up message when clicked on
+show error when relevant
 
 actions and websockets
