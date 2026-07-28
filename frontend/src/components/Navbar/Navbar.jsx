@@ -46,8 +46,12 @@ function Navbar() {
                         <button className="profile-picture" onClick={() => setProfileMenuOpen(!profileMenuOpen)}> <img src={userPic} alt="Profile" /> </button>
                         {profileMenuOpen && (
                             <div className="profile-dropdown">
+
                                 <NavItem to="/profile"><img src={userIcon} alt="" />Profile</NavItem>
                                 <NavItem to="/inbox"><img src={inboxIcon} alt="" />Inbox</NavItem>
+
+                                <hr className="profile-dropdown-separator" />
+
                                 <button className="nav-item" onClick={logout}><img src={logoutIcon} alt="" />Logout</button>
                             </div>
                         )}
