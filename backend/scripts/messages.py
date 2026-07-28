@@ -58,5 +58,13 @@ def add_inbox_messages():
         read=False
     )
 
+        # unread messages
+    InboxMessage.objects.create(
+        user=user,
+        title="Test title 7",
+        body="=========-=========-=========-=========-=========-=========-=========-=========-=========-=========0=========-=========-=========-=========-=========-=========-=========-=========-=========-=========0", #200 characters
+        read=True
+    )
+
 
 add_inbox_messages()
