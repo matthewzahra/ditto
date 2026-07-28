@@ -1,22 +1,16 @@
-import API from "./API"
-
-import getCookie from "./getCookie"
+import apiRequest from "./apiRequest"
 
 async function logoutRequest() {
 
     try{
-        const response = await fetch(`${API}/api/user_auth/logout/`, {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "X-CSRFToken": getCookie("csrftoken")
-            }
+        const response = await apiRequest("/api/user_auth/logout/", {
+            method: "POST"
         })
 
         return response
     } catch (err) {
-        console.error("Logout failed: ", error)
-        throw error
+        console.error("Logout failed: ", err)
+        throw err
     }
 }
 

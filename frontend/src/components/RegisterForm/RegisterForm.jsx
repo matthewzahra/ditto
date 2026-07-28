@@ -4,11 +4,10 @@ import { useState } from "react"
 
 import { Navigate } from "react-router-dom"
 
-import API from "../../core/API"
+import apiRequest from "../../core/apiRequest"
 
 import "./RegisterForm.css"
 
-import getCookie from "../../core/getCookie"
 
 
 function LoginForm() {
@@ -54,14 +53,9 @@ function LoginForm() {
         try{
 
             // request register from backend
-            const response = await fetch(`${API}/api/user_auth/register/`, {
+            const response = await apiRequest("/api/user_auth/register/", {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify(formData)
+                body: fordData
             })
             
             // register response data

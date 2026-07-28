@@ -6,9 +6,7 @@ import { useState } from "react"
 
 import { Navigate } from "react-router-dom"
 
-import API from "../../core/API"
-
-import getCookie from "../../core/getCookie"
+import apiRequest from "../../core/apiRequest"
 
 
 function ForgotPasswordForm() {
@@ -54,14 +52,9 @@ function ForgotPasswordForm() {
         try {
 
             // request register from backend
-            const response = await fetch(`${API}/api/user_auth/request_password_change/`, {
+            const response = await apiRequest("/api/user_auth/request_password_change/", {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify(formData)
+                body: formData
             })
             
             // register response data

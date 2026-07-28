@@ -1,10 +1,9 @@
 import API from "./API"
 
+import apiRequest from "./apiRequest"
+
 async function getCSRF() {
-  await fetch(`${API}/csrf/`, {
-    method: "GET",
-    credentials: "include",
-  })
+  await apiRequest("/csrf/")
 }
 
 export default getCSRF

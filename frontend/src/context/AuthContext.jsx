@@ -1,13 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react"
 
-import API from "../core/API"
-
 // helper functions
 import getCSRF from "../core/getCSRF"
 
-import getCookie from "../core/getCookie"
-
 import logoutRequest from "../core/logoutRequest"
+
+import apiRequest from "../core/apiRequest"
 
 const AuthContext = createContext()
 
@@ -25,9 +23,8 @@ export function AuthProvider({children}) {
     useEffect(() => {
         async function checkLogin() {
             try {
-                const response = await fetch(`${API}/api/user_auth/status/`, {
-                    method: "GET",
-                    credentials: "include",
+                const response = await apiRequest("/api/user_auth/status/", {
+                    method: "GET"
                 })
 
                 const data = await response.json()

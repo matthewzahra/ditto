@@ -3,8 +3,7 @@ import { useAuth } from "../../context/AuthContext"
 import { useState } from "react"
 import { Navigate, Link } from "react-router-dom"
 
-import API from "../../core/API"
-import getCookie from "../../core/getCookie"
+import apiRequest from "../../core/apiRequest"
 
 import "./LoginForm.css"
 
@@ -49,14 +48,9 @@ function LoginForm() {
         try {
 
             // request login from backend
-            const response = await fetch(`${API}/api/user_auth/login/`, {
+            const response = await apiRequest("/api/user_auth/login/", {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify(formData)
+                body: formData
             })
             
             // login response data

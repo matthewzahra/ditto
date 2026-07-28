@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
-import API from "../../core/API"
-import getCookie from "../../core/getCookie"
+import apiRequest from "../../core/apiRequest"
 
 import InboxNotification from "../InboxNotification/InboxNotification"
 
@@ -19,14 +18,11 @@ function InboxMessages() {
         setReadingMessages((prev) => [...prev, id])
 
         try {
-            const response = await fetch(`${API}/api/inbox/read_message/`, {
+
+            // mark inbox message as read
+            const response = await apiRequest("/api/inbox/read_message/", {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify({message_id: id})
+                body: {message_id: id}
             })
 
             if (response.ok) {
@@ -47,14 +43,11 @@ function InboxMessages() {
         setReadingMessages((prev) => [...prev, id])
 
         try {
-            const response = await fetch(`${API}/api/inbox/delete_message/`, {
+
+            // delete inbox message
+            const response = await apiRequest("/api/inbox/delete_message/", {
                 method: "POST",
-                credentials: "include",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": getCookie("csrftoken")
-                },
-                body: JSON.stringify({message_id: id})
+                body: {message_id: id}
             })
 
             if (response.ok) {
@@ -74,10 +67,11 @@ function InboxMessages() {
     useEffect(() => {
         async function getMessages() {
             try {
-                const response = await fetch(`${API}/api/inbox/get_messages/`, {
-                    method: "GET",
-                    credentials: "include",
-                })
+
+                // fetch messages from backend
+                const response = await apiRequest("/api/inbox/get_messages/", {
+                method: "GET"
+            })
 
                 const data = await response.json()
 
