@@ -17,6 +17,7 @@ import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword
 // logged-in pages
 import Home from "./pages/LoggedInPages/Home/Home"
 import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
+import Profile from "./pages/LoggedInPages/Profile/Profile"
 
 
 
@@ -43,6 +44,7 @@ function App() {
       <Route element={<LoggedInLayout />}>
         <Route path="/home" element={<Home />} />
         <Route path="/inbox" element={<Inbox />} />
+        <Route path="/profile" element={<Profile />} />
       </Route>
       
     </Routes>

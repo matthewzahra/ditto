@@ -9,7 +9,7 @@ function PageTitle() {
             case "/":
                 document.title = "Home | Ditto"
                 break
-                
+
             case "/home":
                 document.title = "Home | Ditto"
                 break
@@ -36,6 +36,10 @@ function PageTitle() {
 
             case "/inbox":
                 document.title = "Inbox | Ditto"
+                break
+            
+            case "/profile":
+                document.title = "Profile | Ditto"
                 break
 
             default:
