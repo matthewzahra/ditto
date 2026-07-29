@@ -41,6 +41,10 @@ function PageTitle() {
             case "/profile":
                 document.title = "Profile | Ditto"
                 break
+            
+            case "/quote":
+                document.title = "Quote | Ditto"
+                break
 
             default:
                 document.title = "Ditto"
