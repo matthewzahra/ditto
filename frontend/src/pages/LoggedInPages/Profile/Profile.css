@@ -2,6 +2,17 @@
     width: 100%;
     align-self: stretch;
     padding: 30px;
+    box-sizing: border-box;
+}
+
+.profile-page h1 {
+    text-align: center;
+}
+
+.profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .profile-page-picture {
@@ -15,4 +26,15 @@
     box-sizing: border-box;
     object-fit: cover;
     display: block;
+}
+
+.profile-info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.profile-info-container h2,
+.profile-info-container p {
+    margin: 0;
 }
