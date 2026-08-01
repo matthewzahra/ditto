@@ -2,10 +2,10 @@ import "./LoggedOutHome.css"
 
 function LoggedOutHome() {
     return (
-        <>
-        <h1>Home</h1>
-        <h1>Login to access features</h1>
-        </>
+        <div className="loggedout-home-page">
+            <h1>Home</h1>
+            <h2>Login to access features</h2>
+        </div>
     )
 }
 

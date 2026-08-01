@@ -18,3 +18,7 @@
   --error: red;
   --border: #374151;
 }
+
+#root {
+  width: 100%;
+}

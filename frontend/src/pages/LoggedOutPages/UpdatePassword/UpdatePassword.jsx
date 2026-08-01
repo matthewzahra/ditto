@@ -4,7 +4,7 @@ import "./UpdatePassword.css"
 
 function UpdatePassword() {
     return (
-        <div className="UpdatePassword-page">
+        <div className="update-password-page">
             <h1>Forgot Password</h1>
             {<UpdatePasswordForm />}
         </div>

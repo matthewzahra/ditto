@@ -4,7 +4,7 @@ import InboxMessages from "../../../components/InboxMessages/InboxMessages"
 
 function Inbox() {
         return (
-        <div>
+        <div className="inbox-page">
             <h1>Inbox page</h1>
             <InboxMessages />
         </div>

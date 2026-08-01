@@ -4,7 +4,7 @@ import "./ForgotPassword.css"
 
 function ForgotPassword() {
     return (
-        <div className="ForgotPassword-page">
+        <div className="forgot-password-page">
             <h1>Forgot Password</h1>
             <ForgotPasswordForm />
         </div>
