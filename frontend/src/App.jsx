@@ -19,6 +19,8 @@ import Home from "./pages/LoggedInPages/Home/Home"
 import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
 import Profile from "./pages/LoggedInPages/Profile/Profile"
 import Quote from "./pages/LoggedInPages/Quote/Quote"
+import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
+import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
 
 
 
@@ -46,7 +48,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/inbox" element={<Inbox />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/quote" element={<Quote />} />
+        <Route path="restaurant-tracker" element={<RestaurantTracker />} />
       </Route>
       
     </Routes>

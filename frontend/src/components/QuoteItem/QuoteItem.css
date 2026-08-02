@@ -1,0 +1,59 @@
+.quote-item {
+    width: 100%;
+    max-width: 700px;
+    padding: 32px 40px;
+    box-sizing: border-box;
+
+    background-color: var(--background);
+    border: 1px solid var(--secondary);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    text-align: center;
+}
+
+.quote-item h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.quote-separator {
+    width: 80%;
+    margin: 16px auto 24px;
+
+    border: none;
+    border-top: 1px solid var(--secondary);
+}
+
+.quote-text {
+    margin: 0;
+
+    font-size: 1.5rem;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+.quote-author {
+    margin: 16px 0 0;
+
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.favourite-button {
+    margin-top: 24px;
+
+    background: none;
+    border: none;
+
+    font-size: 2rem;
+
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+.favourite-button:hover {
+    transform: scale(1.15);
+}

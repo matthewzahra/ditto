@@ -17,6 +17,7 @@ function Navbar() {
                 <div className="nav-left">
                     <NavItem to="/home">Home</NavItem>
                     <NavItem to="/quote">Quote</NavItem>
+                    <NavItem to="/restaurant-tracker">Restaurant</NavItem>
                 </div>
                 <div className="nav-right">
                     <ProfileDropdown />

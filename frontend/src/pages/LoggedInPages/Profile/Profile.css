@@ -28,6 +28,12 @@
     display: block;
 }
 
+.profile-picture-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .profile-info-container {
     display: flex;
     flex-direction: column;

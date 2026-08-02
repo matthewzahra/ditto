@@ -25,3 +25,7 @@ Current todos:
 show error when relevant
 
 actions and websockets
+
+on quote page add link to quote feed
+
+on quote page add link to view previous quote of the days?
