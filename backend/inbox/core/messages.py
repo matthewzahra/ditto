@@ -2,6 +2,8 @@ from typing import str, list
 from user_auth.models import CustomUser
 from inbox.models import InboxMessage, InboxMessageAction, Actions
 from django.db import transaction
+from ws.services import send_user_event
+from ws.event_types import NEW_INBOX_MESSAGE
 
 # add a message to a user's inbox, potentially embedding several actions in it 
 def add_message(target_user: CustomUser, title: str, body: str , actions: list[str]):
@@ -24,3 +26,6 @@ def add_message(target_user: CustomUser, title: str, body: str , actions: list[s
 					)
 				else:
 					raise ValueError(f"Action `{action_str}` is not defined.")
+
+		# if the user is logged in, notify them of a new message via a ws
+		send_user_event(user=target_user, event_type=NEW_INBOX_MESSAGE)

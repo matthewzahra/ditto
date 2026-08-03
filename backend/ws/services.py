@@ -4,7 +4,7 @@ from channels.layers import get_channel_layer
 Generic way to send events over the websocket
 '''
 
-def send_user_event(user, event_type, data):
+def send_user_event(user, event_type, data=None):
 	# get the channels messaging system
     channel_layer = get_channel_layer()
 
