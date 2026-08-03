@@ -1,8 +1,8 @@
 import { useRef, useEffect } from "react"
 
-import WebSocketContext from "./WebSocketContext"
+import WebSocketContext from "../context/WebSocketContext"
 
-function WebSocketProvider() {
+function WebSocketProvider({ children }) {
     const socketRef = useRef(null)
 
     useEffect(() => {

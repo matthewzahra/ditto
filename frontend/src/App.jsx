@@ -23,7 +23,7 @@ import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
 
 
-
+import Tempwebcomp from "./components/tempwebcomp/Tempwebcomp"
 
 function App() {
   
@@ -51,6 +51,7 @@ function App() {
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/quote" element={<Quote />} />
         <Route path="restaurant-tracker" element={<RestaurantTracker />} />
+        <Route path="/temp" element={<Tempwebcomp />} />
       </Route>
       
     </Routes>

@@ -20,7 +20,6 @@ class RealtimeConsumer(AsyncJsonWebsocketConsumer):
 			self.group_name,
 			self.channel_name
 		)
-
 		await self.accept()
 
 
