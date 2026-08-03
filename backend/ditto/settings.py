@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+	'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
 	'corsheaders',
+	'channels',
 	'user_auth',
 	'inbox'
 ]
@@ -95,6 +97,14 @@ TEMPLATES = [
         },
     },
 ]
+
+# asynchronous setup so that we can use sockets
+ASGI_APPLICATION = "ditto.asgi.application" #routing.py will handle the ASGI
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': "channels.layers.InMemoryChannelLayer"
+        }
+    }
 
 WSGI_APPLICATION = 'ditto.wsgi.application'
 
