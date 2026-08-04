@@ -25,6 +25,14 @@ def get_messages(request):
 	serializer = MessageSerializer(messages, many=True)
 	return api_response(True,data=serializer.data)
 
+# get a count of how many unread messages a user
+@extend_schema(tags=['inbox'],responses=ApiResponseSerializer)
+@api_view(['GET'])
+def unread_count(request):
+	user = request.user
+	count = InboxMessage.objects.filter(user=user,read=False).count()
+	return api_response(True, data=count)
+
 @extend_schema(tags=['inbox'], request=SingleMessageSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
 def delete_message(request):
