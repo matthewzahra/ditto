@@ -1,0 +1,19 @@
+.restaurant-grid-container {
+    max-height: 250px; /* approximately two rows */
+    overflow-y: auto;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+
+    width: 100%;
+    padding: 24px;
+    box-sizing: border-box;
+
+    border: 2px solid var(--border);
+    border-radius: 12px;
+
+    background-color: var(--surface);
+}
