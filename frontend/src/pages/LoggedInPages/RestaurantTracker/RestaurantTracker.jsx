@@ -1,9 +1,12 @@
+import { useState } from "react"
+
 import "./RestaurantTracker.css"
 
 import RestaurantMap from "../../../components/RestaurantMap/RestaurantMap"
 import RestaurantGrid from "../../../components/RestaurantGrid/RestaurantGrid"
 
 function RestaurantTracker() {
+    const [selectedRestaurant, setSelectedRestaurant] = useState(null)
 
     const restaurants = [
         {
@@ -131,8 +134,8 @@ function RestaurantTracker() {
     return (
         <div className="restaurant-tracker-page">
             <h1>Restaurant tracker page</h1>
-            <RestaurantGrid restaurants={restaurants}/>
-            <RestaurantMap restaurants={restaurants}/>
+            <RestaurantGrid restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant}/>
+            <RestaurantMap restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant}/>
         </div>
     )
 }

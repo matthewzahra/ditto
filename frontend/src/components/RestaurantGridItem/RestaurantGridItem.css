@@ -25,3 +25,8 @@
     margin: 0;
     font-size: 1rem;
 }
+
+.restaurant-grid-item.selected {
+    border: 2px solid red;
+    background-color: red;
+}
