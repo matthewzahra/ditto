@@ -78,3 +78,4 @@ def execute_action(request):
 @api_view(['POST'])
 def add_message_test(request):
 	add_message(target_user=request.user,title='test message', body='u suck')
+	return api_response(True)
