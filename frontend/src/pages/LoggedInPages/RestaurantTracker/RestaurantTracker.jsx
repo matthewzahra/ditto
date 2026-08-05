@@ -122,8 +122,8 @@ function RestaurantTracker() {
         },
         {
             id: 20,
-            name: "Croydon Kitchen",
-            location: [51.3762, -0.0982],
+            name: "Poon's",
+            location: [51.51082425901178, -0.11823100305978697],
             rating: 4
         }
     ]
