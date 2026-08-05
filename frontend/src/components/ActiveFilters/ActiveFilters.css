@@ -1,0 +1,31 @@
+.active-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.active-filter {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.active-filter button {
+    border: none;
+    background: none;
+
+    color: var(--text);
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.active-filter button:hover {
+    opacity: 0.7;
+}
