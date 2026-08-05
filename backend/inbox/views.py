@@ -43,8 +43,7 @@ def delete_message(request):
 	deleted_count,_ = InboxMessage.objects.filter(user=request.user, id=message_id).delete()
 	if deleted_count == 0:
 		logger.warning("No message to delete.")
-	else:
-		return api_response(True)
+	return api_response(True)
 
 # log that a message has been read
 @extend_schema(tags=['inbox'], request=SingleMessageSerializer, responses=ApiResponseSerializer)
