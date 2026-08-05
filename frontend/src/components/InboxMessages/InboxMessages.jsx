@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import { useUnreadMessages } from "../../context/UnreadMessagesContext"
+import { useWebSocket } from "../../context/WebSocketContext"
 
 import apiRequest from "../../core/apiRequest"
 
@@ -17,6 +18,7 @@ function InboxMessages() {
     const [expandedMessage, setExpandedMessage] = useState(null)
 
     const { decrementUnreadInboxCount } = useUnreadMessages()
+    const { newInboxMessage } = useWebSocket()
 
     const markAsRead = async (id) => {
         setReadingMessages((prev) => [...prev, id])
@@ -61,6 +63,12 @@ function InboxMessages() {
             })
 
             if (response.ok) {
+                const message = messages.find(message => message.id === id)
+
+                if (message && !message.read) {
+                    decrementUnreadInboxCount()
+                }
+
                 setMessages((prevMessages) =>
                 prevMessages.filter((message) => message.id !== id))
             } else {
@@ -72,28 +80,46 @@ function InboxMessages() {
             setReadingMessages((prev) => prev.filter((messageId) => messageId !== id))
         }
     }
-    
-    // get notifications to be displayed
-    useEffect(() => {
-        async function getMessages() {
-            try {
 
-                // fetch messages from backend
-                const response = await apiRequest("/api/inbox/get_messages/", {
-                method: "GET"
-            })
+    async function getMessages(signal) {
+        try {
 
-                const data = await response.json()
+            // fetch messages from backend
+            const response = await apiRequest("/api/inbox/get_messages/", {
+            method: "GET", signal
+        })
 
-                setMessages(data.data ?? [])
-            } catch (err) {
+            const data = await response.json()
+
+            setMessages(data.data ?? [])
+        } catch (err) {
+            if (err.name !== "AbortError") {
                 setInboxError("Unbale to connect to the server")
             }
-
         }
 
-        getMessages()
+    }
+
+    // get notifications to be displayed
+    useEffect(() => {
+        const controller = new AbortController()
+
+        getMessages(controller.signal)
+
+        return () => {
+            controller.abort()
+        }
     }, [])
+
+    useEffect(() => {
+        const controller = new AbortController()
+
+        getMessages(controller.signal)
+
+        return () => {
+            controller.abort()
+        }
+    }, [newInboxMessage])
 
 
     // filter and sort messages according to current filter and sort selected

@@ -6,7 +6,8 @@ async function apiRequest(endpoint, options = {}) {
     const {
         method = "GET",
         body = null,
-        headers = {}
+        headers = {},
+        signal = null
     } = options
 
 
@@ -18,7 +19,8 @@ async function apiRequest(endpoint, options = {}) {
             headers: {
                 "X-CSRFToken": getCookie("csrftoken"),
                 ...headers
-            }
+            },
+            signal
         }
 
         if (body !== null) {
@@ -31,7 +33,9 @@ async function apiRequest(endpoint, options = {}) {
         return response
 
     } catch (err) {
-        console.error("API request failed: ", err)
+        if (err.name !== "AbortError"){
+            console.error("API request failed: ", err)
+        }
         throw err
     }
 }

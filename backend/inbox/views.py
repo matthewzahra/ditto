@@ -73,9 +73,3 @@ def execute_action(request):
 		return api_response(False, error="Invalid Action ID.", status=400)
 	
 	return handle_action(action=action.action, user=request.user, data=data.get('data',None))
-
-# TODO - delete from here and from urls.py
-@api_view(['POST'])
-def add_message_test(request):
-	add_message(target_user=request.user,title='test message', body='u suck')
-	return api_response(True)

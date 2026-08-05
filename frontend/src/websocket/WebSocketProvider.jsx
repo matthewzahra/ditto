@@ -1,10 +1,12 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
 import { useUnreadMessages } from "../context/UnreadMessagesContext"
 
 import WebSocketContext from "../context/WebSocketContext"
 
 function WebSocketProvider({ children }) {
+    const [newInboxMessage, setNewInboxMessage] = useState(0)
+
     const socketRef = useRef(null)
     const { incrementUnreadInboxCount } = useUnreadMessages()
 
@@ -19,8 +21,9 @@ function WebSocketProvider({ children }) {
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data)
-            if (data.event_type === "NEW_INBOX_MESSAGE") {
+            if (data.type === "NEW_INBOX_MESSAGE") {
                 incrementUnreadInboxCount()
+                setNewInboxMessage(prev => prev + 1)
             }
 
             console.log("Received:", data)
@@ -51,6 +54,7 @@ function WebSocketProvider({ children }) {
     <WebSocketContext.Provider
         value={{
             sendMessage,
+            newInboxMessage
         }}
     >
         {children}

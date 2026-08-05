@@ -7,5 +7,4 @@ urlpatterns = [
 	path("delete_message/", views.delete_message, name='delete_message'),
 	path("read_message/", views.read_message, name='read_message'),
 	path("execute_action/", views.execute_action, name='execute_action'),
-	path("add_message_test/", views.add_message_test, name='add_message_test'), # TODO - delete
 ]
