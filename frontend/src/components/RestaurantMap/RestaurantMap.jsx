@@ -1,14 +1,33 @@
 import { MapContainer, TileLayer } from "react-leaflet"
 
+import RestaurantMapMarker from "../RestaurantMapMarker/RestaurantMapMarker"
+
 import "leaflet/dist/leaflet.css"
 import "./RestaurantMap.css"
 
 function RestaurantMap() {
+    const restaurants = [
+        {
+            id: 1,
+            name: "The London Kitchen",
+            location: [51.5131, -0.1122],
+            rating: 5
+        },
+        {
+            id: 2,
+            name: "Pizza Place",
+            location: [52.5862, -2.1284],
+            rating: 4
+        }
+    ]
 
     return (
         <div className="restaurant-map">
-            <MapContainer center={[52.5862, -2.1284]} zoom={13} scrollWheelZoom={true} className="map">
+            <MapContainer center={[51.5131, -0.1122]} zoom={13} scrollWheelZoom={true} className="map">
                 <TileLayer attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+                {restaurants.map((restaurant) => (
+                    <RestaurantMapMarker key={restaurant.id} restaurant={restaurant}/>
+                ))}
             </MapContainer>
         </div>
 
