@@ -6,6 +6,8 @@ from inbox.serializers import MessageSerializer, MessageRequestSerializer, Singl
 from inbox.core.actions import handle_action
 import logging
 
+from inbox.core.messages import add_message
+
 logger = logging.getLogger(__name__)
 
 # return messages start-end 
@@ -71,3 +73,8 @@ def execute_action(request):
 		return api_response(False, error="Invalid Action ID.", status=400)
 	
 	return handle_action(action=action.action, user=request.user, data=data.get('data',None))
+
+# TODO - delete from here and from urls.py
+@api_view(['POST'])
+def add_message_test(request):
+	add_message(user=request.user,title='test message', body='u suck')
