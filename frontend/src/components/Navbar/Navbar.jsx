@@ -1,5 +1,4 @@
 import { useAuth } from "../../context/AuthContext"
-import { useUnreadMessages } from "../../context/UnreadMessagesContext"
 
 import NavItem from "../NavItem/NavItem"
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown"
@@ -9,7 +8,6 @@ import "./Navbar.css"
 function Navbar() {
 
     const { loggedIn } = useAuth()
-    const { unreadInboxCount } = useUnreadMessages()
 
     // navbar for logged in users
     if (loggedIn) {

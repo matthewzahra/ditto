@@ -7,10 +7,10 @@
 
     padding: 12px 24px;
     box-sizing: border-box;
-    background-color: var(--background); /* dark slate */
+    background-color: var(--background);
     color: var(--primary);
 
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
 /* Left and right sections */
@@ -29,7 +29,7 @@
 
     color: var(--primary);
     text-decoration: none;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 500;
     font-family: inherit;
 
