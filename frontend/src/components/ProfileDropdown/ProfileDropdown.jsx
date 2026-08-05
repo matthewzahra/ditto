@@ -3,6 +3,7 @@ import "./ProfileDropdown.css"
 import { useState, useRef, useEffect } from "react"
 
 import { useAuth } from "../../context/AuthContext"
+import { useUnreadMessages } from "../../context/UnreadMessagesContext"
 
 import NavItem from "../NavItem/NavItem"
 
@@ -12,9 +13,10 @@ import logoutIcon from "../../assets/logoutIcon.svg"
 import inboxIcon from "../../assets/inboxIcon.svg"
 
 function ProfileDropdown() {
+    const [profileMenuOpen, setProfileMenuOpen] = useState(false)
 
     const { logout } = useAuth()
-    const [profileMenuOpen, setProfileMenuOpen] = useState(false)
+    const { unreadInboxCount } = useUnreadMessages()
 
     const profileMenuRef = useRef(null)
 
@@ -35,12 +37,34 @@ function ProfileDropdown() {
 
     return (
         <div className="profile-menu" ref={profileMenuRef}>
-            <button className="profile-picture" onClick={() => setProfileMenuOpen(!profileMenuOpen)}> <img src={userPic} alt="Profile" /> </button>
+            <button className={`profile-picture ${unreadInboxCount > 0 ? "has-notification" : ""}`} onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
+                <span className="profile-picture-image">
+                    <img src={userPic} alt="Profile" />
+                </span>
+
+                {unreadInboxCount > 0 && (
+                    <span className="profile-inbox-notification-badge">
+                        {unreadInboxCount}
+                    </span>
+                )}
+
+            </button>
             {profileMenuOpen && (
                 <div className="profile-dropdown">
 
                     <NavItem to="/profile"><img src={userIcon} alt="" />Profile</NavItem>
-                    <NavItem to="/inbox"><img src={inboxIcon} alt="" />Inbox</NavItem>
+                    <NavItem to="/inbox" className={unreadInboxCount > 0 ? "has-unread" : ""}>
+                    
+                    <img src={inboxIcon} alt="" />
+                    Inbox
+
+                    {unreadInboxCount > 0 && (
+                        <span className="inbox-notification-badge"> 
+                            {unreadInboxCount}
+                        </span>
+                    )}
+
+                    </NavItem>
 
                     <hr className="profile-dropdown-separator" />
 

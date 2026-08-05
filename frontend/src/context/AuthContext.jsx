@@ -31,6 +31,7 @@ export function AuthProvider({children}) {
 
 
                 setLoggedIn(data.data.loggedIn)
+                setLogInError("")
             } catch (err) {
                 setLogInError("failed to connect to the server")
             } finally {

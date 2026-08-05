@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import { useUnreadMessages } from "../../context/UnreadMessagesContext"
+
 import apiRequest from "../../core/apiRequest"
 
 import InboxNotification from "../InboxNotification/InboxNotification"
@@ -14,6 +16,8 @@ function InboxMessages() {
     const [inboxError, setInboxError] = useState("")
     const [expandedMessage, setExpandedMessage] = useState(null)
 
+    const { decrementUnreadInboxCount } = useUnreadMessages()
+
     const markAsRead = async (id) => {
         setReadingMessages((prev) => [...prev, id])
 
@@ -26,6 +30,12 @@ function InboxMessages() {
             })
 
             if (response.ok) {
+                const message = messages.find(message => message.id === id)
+
+                if (message && !message.read) {
+                    decrementUnreadInboxCount()
+                }
+
                 setMessages((prevMessages) =>
                 prevMessages.map((message) => 
                 message.id === id ? {...message, read: true} : message))
@@ -85,7 +95,6 @@ function InboxMessages() {
         getMessages()
     }, [])
 
-    console.log(messages)
 
     // filter and sort messages according to current filter and sort selected
     const filteredMessages = messages.filter((message) => {
@@ -110,8 +119,6 @@ function InboxMessages() {
         }
     })
 
-    console.log(filteredMessages)
-    console.log(sortedMessages)
 
     return (
         <div className="inbox-messages">
