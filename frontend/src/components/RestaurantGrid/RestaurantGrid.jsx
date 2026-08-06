@@ -5,11 +5,9 @@ import ActiveFilters from "../ActiveFilters/ActiveFilters"
 
 import "./RestaurantGrid.css"
 
-function RestaurantGrid({ restaurants, selectedRestaurant, setSelectedRestaurant }) {
+function RestaurantGrid({ restaurants, selectedRestaurant, setSelectedRestaurant, filters, setFilters, filteredRestaurants }) {
     const [filterOpen, setFilterOpen] = useState(false)
-    const [filters, setFilters] = useState({
-        fiveStars: false,
-    })
+    
     const filterRef = useRef(null)
 
     useEffect(() => {
@@ -25,14 +23,6 @@ function RestaurantGrid({ restaurants, selectedRestaurant, setSelectedRestaurant
             document.removeEventListener("mousedown", handleClickOutside)
         }
     }, [])
-
-    const filteredRestaurants = restaurants.filter((restaurant) => {
-        if (filters.fiveStars && restaurant.rating !== 5) {
-            return false
-        }
-
-        return true
-    })
 
     return (
         <div className="restaurant-grid-container">
