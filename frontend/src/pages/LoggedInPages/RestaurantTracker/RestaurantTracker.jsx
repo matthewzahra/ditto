@@ -7,6 +7,9 @@ import RestaurantGrid from "../../../components/RestaurantGrid/RestaurantGrid"
 
 function RestaurantTracker() {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null)
+    const [filters, setFilters] = useState({
+            fiveStars: false,
+        })
 
     const restaurants = [
         {
@@ -131,11 +134,19 @@ function RestaurantTracker() {
         }
     ]
 
+    const filteredRestaurants = restaurants.filter((restaurant) => {
+        if (filters.fiveStars && restaurant.rating !== 5) {
+            return false
+        }
+
+        return true
+    })
+
     return (
         <div className="restaurant-tracker-page">
             <h1>Restaurant tracker page</h1>
-            <RestaurantGrid restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant}/>
-            <RestaurantMap restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant}/>
+            <RestaurantGrid restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants}/>
+            <RestaurantMap restaurants={restaurants} selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filteredRestaurants={filteredRestaurants}/>
         </div>
     )
 }
