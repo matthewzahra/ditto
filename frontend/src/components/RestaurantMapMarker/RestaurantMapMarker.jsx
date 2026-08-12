@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react"
 import { Marker, Popup } from "react-leaflet"
 import L from "leaflet"
 
@@ -22,15 +23,21 @@ const selectedMarker = new L.icon({
 
 function RestaurantMapMarker({ restaurant, selected, onSelect }) {
 
+    const markerRef = useRef(null)
+
+    useEffect(() => {
+        if (selected) {
+            markerRef.current?.openPopup()
+        }
+    }, [selected])
+
     return (
-        <>
-        <Marker position={restaurant.location} icon={selected ? selectedMarker : normalMarker} eventHandlers={{click: () => onSelect(restaurant.id)}}>
-            <Popup>
+        <Marker position={restaurant.location} icon={selected ? selectedMarker : normalMarker} eventHandlers={{click: () => onSelect(restaurant.id)}} ref={markerRef}>
+            <Popup autoPan={false}>
                 <h3>{restaurant.name}</h3>
                 <p>Rating: {restaurant.rating}/5</p>
             </Popup>
         </Marker>
-        </>
     )
 
 }
