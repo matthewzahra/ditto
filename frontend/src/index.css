@@ -3,20 +3,21 @@
 }
 
 :root {
+  --background: #263238;        /* Main page */
+  --card-background: #303C42;  /* Cards */
+  --surface: #37474F;           /* Raised elements */
+
   --primary: MediumSlateBlue;
   --primary-hover: SlateBlue;
 
-  --secondary: blue;
+  --secondary: #4A90E2;
   --accent: white;
 
-  --background: darkslategray;
-  --card-background: #263238;
+  --text: #F8FAFC;
+  --muted: #94A3B8;
 
-  --text: white;
-  --muted: cornflowerblue;
-
-  --error: red;
-  --border: #374151;
+  --error: #EF4444;
+  --border: #455A64;
 }
 
 #root {

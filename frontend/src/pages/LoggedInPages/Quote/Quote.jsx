@@ -38,8 +38,8 @@ function Quote() {
             <div className="saved-quotes-container">
                 <div className="saved-quotes-header">
                     <h3>Saved Quotes</h3>
-                    <QuoteGrid />
                 </div>
+                <QuoteGrid onFavourite={toggleFavourite} />
             </div>
         </div>
     )

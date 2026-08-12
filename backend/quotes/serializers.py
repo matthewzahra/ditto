@@ -19,4 +19,4 @@ class QuoteSerializer(serializers.Serializer):
 class QuotesOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Quote
-		fields = ("usewr", "author", "body")
+		fields = ("user", "author", "body")
