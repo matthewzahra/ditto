@@ -28,7 +28,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 	path('csrf/', csrf),
 	path('api/user_auth/', include("user_auth.urls")),
-    path('api/inbox/', include('inbox.urls'))
+    path('api/inbox/', include('inbox.urls')),
+    path('api/quotes/', include('quotes.uls'))
 ]
 
 # add any DEV only paths 
