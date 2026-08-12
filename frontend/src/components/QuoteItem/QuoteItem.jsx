@@ -2,7 +2,7 @@ import {useState } from "react"
 
 import "./QuoteItem.css"
 
-function QuoteItem({ quoteText, author, title, currentFavourite, onFavourite}) {
+function QuoteItem({ quoteText, author, title, favourited, onFavourite}) {
 
     return (
 
@@ -15,7 +15,7 @@ function QuoteItem({ quoteText, author, title, currentFavourite, onFavourite}) {
             <p className="quote-text">"{quoteText}"</p>
             <p className="quote-author">- {author}</p>
 
-            <button className="favourite-button" onClick={onFavourite}>{currentFavourite ? "★" : "☆"}</button>
+            <button className="favourite-button" onClick={onFavourite}>{favourited ? "★" : "☆"}</button>
 
         </div>
 

@@ -8,8 +8,6 @@ import apiRequest from "../../core/apiRequest"
 import "./LoginForm.css"
 
 
-
-
 function LoginForm() {
 
     //fetching current loggedIn status
