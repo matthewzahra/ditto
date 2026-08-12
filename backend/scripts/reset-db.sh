@@ -23,6 +23,10 @@ if [ "$ENV" = "DEV" ]; then
 	# populate test inbox messages
 	echo "Adding test inbox messages to database"
 	uv run python -m scripts.messages
+
+	# populate test quotes
+	echo "Adding test quotes to database"
+	uv run python -m scripts.quotes
 else
 	echo "In PROD, cannot reset database"
 fi
