@@ -1,6 +1,9 @@
 import "./QuoteItem.css"
 
-function QuoteItem({ quoteText, author, title="", favourited=false, onFavourite=null }) {
+import bookmark from "../../assets/bookmark.svg"
+import bookmarkFilled from "../../assets/bookmarkFilled.svg"
+
+function QuoteItem({ quoteText, author, title="", saved=false, onSave=null }) {
 
     return (
 
@@ -13,7 +16,7 @@ function QuoteItem({ quoteText, author, title="", favourited=false, onFavourite=
             <p className="quote-text">"{quoteText}"</p>
             <p className="quote-author">- {author}</p>
 
-            {onFavourite && <button className="favourite-button" onClick={onFavourite}>{favourited ? "★" : "☆"}</button>}
+            {onSave && <button className="save-button" onClick={onSave}><img src={saved ? bookmarkFilled : bookmark} alt={saved? "Unsave quote" : "Save quote"} /></button>}
 
         </div>
 

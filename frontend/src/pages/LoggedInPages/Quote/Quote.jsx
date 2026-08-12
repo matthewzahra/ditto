@@ -8,7 +8,7 @@ import QuoteItem from "../../../components/QuoteItem/QuoteItem"
 import QuoteGrid from "../../../components/quoteGrid/quoteGrid"
 
 function Quote() {
-    const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", favourited: false})
+    const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", saved: false})
 
     useEffect(() => {
         async function fetchDailyQuote() {
@@ -22,24 +22,41 @@ function Quote() {
 
     
 
-    function toggleFavourite() {
-        setQuoteOfTheDay(prev => ({
-            ...prev,
-            favourited: !prev.favourited
-        }))
+    async function toggleSave() {
+        const method = quoteOfTheDay.saved ? "DELETE" : "POST"
+
+        const response = await apiRequest(
+            quoteOfTheDay.saved ? "/api/quotes/delete_quote/" : "/api/quotes/record_quote/", {
+                method: method,
+                body: {
+                    body: quoteOfTheDay.quoteText,
+                    author: quoteOfTheDay.author
+                }
+            }
+        )
+
+        const data = await response.json()
+        console.log(data)
+
+        if (data.success) {
+            setQuoteOfTheDay(prev => ({
+                ...prev,
+                saved: !prev.saved
+            }))
+        }
     }
 
     return (
         <div className="quote-page">
             <h1>Quote page</h1>
             <div className="quote-of-the-day-container">
-                <QuoteItem quoteText={quoteOfTheDay.quoteText} author={quoteOfTheDay.author} title={quoteOfTheDay.title} favourited={quoteOfTheDay.favourited} onFavourite={toggleFavourite} />
+                <QuoteItem quoteText={quoteOfTheDay.quoteText} author={quoteOfTheDay.author} title={quoteOfTheDay.title} saved={quoteOfTheDay.saved} onSave={toggleSave} />
             </div>
             <div className="saved-quotes-container">
                 <div className="saved-quotes-header">
                     <h3>Saved Quotes</h3>
                 </div>
-                <QuoteGrid onFavourite={toggleFavourite} />
+                <QuoteGrid />
             </div>
         </div>
     )

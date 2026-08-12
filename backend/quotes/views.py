@@ -58,4 +58,4 @@ def delete_quote(request):
 
 	deleted_count,_ = Quote.objects.filter(user=request.user, id=data['quote_id']).delete()
 
-	return api_response(True)
+	return api_response(True, status=204)

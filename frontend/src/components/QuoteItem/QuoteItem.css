@@ -42,7 +42,7 @@
     font-weight: 600;
 }
 
-.favourite-button {
+.save-button {
     margin-top: 1.5rem;
 
     background: none;
@@ -55,6 +55,11 @@
     transition: transform 0.2s ease;
 }
 
-.favourite-button:hover {
+.save-button:hover {
     transform: scale(1.15);
+}
+
+.save-button img {
+    width: 1.5rem;
+    height: 1.5rem;
 }
