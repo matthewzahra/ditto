@@ -13,7 +13,11 @@ urlpatterns = [
     path("verify_user/", views.verify_user, name="verify_user"),
     path("request_password_change/", views.request_password_change, name="request_password_change"),
     path("update_password/", views.update_password, name="update_password"),
-	path("logout/", views.logout_user, name="logout")
+	path("logout/", views.logout_user, name="logout"),
+	path("<int:user_id>/profile-photo/", views.get_profile_photo, name="profile-photo"),
+	path("get_users/", views.get_users, name='get_users'),
+	path("update_profile_picture/", views.update_profile_picture, name="update_profile_picture"),
+	path("delete_profile_picture/", views.delete_profile_picture, name="delete_profile_pciture")
 ]
 
 # endpoints only intended for DEV work

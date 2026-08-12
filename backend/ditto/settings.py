@@ -158,5 +158,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# save user uploaded files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # use a custom user model
 AUTH_USER_MODEL = "user_auth.CustomUser" # found in user_auth/models.py

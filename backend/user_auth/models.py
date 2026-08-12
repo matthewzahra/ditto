@@ -38,5 +38,8 @@ class CustomUser(AbstractUser):
 	auth_code_generated_at = models.DateTimeField(blank=True, null=True)
 	verified = models.BooleanField(default=False)
 
+	# user customisations
+	profile_picture = models.ImageField(upload_to="profile_pictures/", blank=True, null=True)
+
 	def __str__(self):
 		return self.email

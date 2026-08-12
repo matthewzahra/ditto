@@ -1,4 +1,3 @@
-from ditto.core.http_handling import api_response
 from django.http import JsonResponse
 
 '''
@@ -33,4 +32,4 @@ class LoginRequiredMiddleware:
 		if url_name in self.public_paths:
 			return self.get_response(request)
 		
-		return JsonResponse({"error":"User"}, status=401)
+		return JsonResponse({"error":"User authentication"}, status=401)

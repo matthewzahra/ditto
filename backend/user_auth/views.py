@@ -7,10 +7,17 @@ from django.utils import timezone
 from datetime import timedelta
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer, disable_endpoint_prod
 from drf_spectacular.utils import extend_schema
-from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer
-from rest_framework.decorators import api_view
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer, RequestUserDataSeralizer, GetPublicUserSerializer, ProfilePhotoSerializer
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser
 from django.db.utils import IntegrityError
 from django.db import transaction
+from django.http import FileResponse
+import mimetypes
+
+################
+# AUTHENTICATION
+################
 
 # return if a user is authenticated or not
 @extend_schema(tags=['user_auth'], request=LoginStatusSerializer, responses=ApiResponseSerializer)
@@ -126,3 +133,65 @@ def update_password(request):
 def logout_user(request):
     logout(request)
     return api_response(True,status=200)
+
+###############
+# USER PROFILES
+###############
+@extend_schema(
+    tags=['user_auth'],
+    responses=FileResponse,
+    summary="get profile photo of a user"
+)
+@api_view(['GET'])
+def get_profile_photo(request, user_id):
+    user = CustomUser.objects.fitler(id=user_id)
+    if not user.profile_photo:
+        return None
+
+    content_type, _ = mimetypes.guess_type(user.profile_picture.name)
+
+    return FileResponse(
+        user.profile_picture.open("rb"),
+        content_type=content_type
+    )
+
+# this gets non-confidential user-information
+@extend_schema(
+    tags=['user_auth'],
+    request=RequestUserDataSeralizer,
+    responses=ApiResponseSerializer,
+    summary="get non-confidential user information provided a list of their user ids"
+)
+@api_view(['POST'])
+def get_users(request):
+    data = validate(RequestUserDataSeralizer, request.data)
+    users = CustomUser.objects.filter(id__in=data.user_ids)
+    serializer = GetPublicUserSerializer(users, many=True, context={"request":request})
+    return api_response(True,data=serializer.data)
+
+# update a users' profile photo
+@extend_schema(
+    tags=['user_auth'],
+    request=ProfilePhotoSerializer,
+    responses=ApiResponseSerializer,
+    summary="update a user's profile photo"
+)
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def update_profile_picture(request):
+    data = validate(ProfilePhotoSerializer)
+    user = request.user
+    user.profile_photo = data.profile_photo
+    user.save(update_fields=['profile_photo'])
+    return api_response(True)
+
+@extend_schema(
+    tags=['user_auth'],
+    responses=ApiResponseSerializer,
+    summary="delete a user's profile picture"
+)
+@api_view(['DELETE'])
+def delete_profile_picture(request):
+    user = request.user
+    user.profile_picture.delete(save=True)
+    return api_response(True,status=204)
