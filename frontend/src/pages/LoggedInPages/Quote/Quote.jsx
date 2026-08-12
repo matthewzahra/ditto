@@ -17,9 +17,10 @@ function Quote() {
     return (
         <div className="quote-page">
             <h1>Quote page</h1>
-            {/* TODO fetch quote of the day from backend */}
-            <QuoteItem quoteText={currentQuote.quoteText} author={currentQuote.author} title={currentQuote.title} currentFavourite={currentQuote.currentFavourite} onFavourite={toggleFavourite} />
-            <button className="random-quote-button" onClick={() => setCurrentQuote({quoteText: "dolor sit amet", author: "Nick 2", title: "Random quote", currentFavourite: false})}>Random Quote</button>
+            <div className="quote-of-the-day-container">
+                {/* TODO fetch quote of the day from backend */}
+                <QuoteItem quoteText={currentQuote.quoteText} author={currentQuote.author} title={currentQuote.title} currentFavourite={currentQuote.currentFavourite} onFavourite={toggleFavourite} />
+            </div>
         </div>
     )
 }

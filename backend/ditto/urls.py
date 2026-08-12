@@ -29,7 +29,7 @@ urlpatterns = [
 	path('csrf/', csrf),
 	path('api/user_auth/', include("user_auth.urls")),
     path('api/inbox/', include('inbox.urls')),
-    path('api/quotes/', include('quotes.uls'))
+    path('api/quotes/', include('quotes.urls'))
 ]
 
 # add any DEV only paths 

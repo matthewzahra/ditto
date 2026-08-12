@@ -47,7 +47,8 @@ INSTALLED_APPS = [
 	'corsheaders',
 	'channels',
 	'user_auth',
-	'inbox'
+	'inbox',
+    'quotes'
 ]
 
 # help to enforce and document the REST API
@@ -155,7 +156,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / "ditto" / "static"] # also get the project wide static files
 
 # use a custom user model
 AUTH_USER_MODEL = "user_auth.CustomUser" # found in user_auth/models.py
