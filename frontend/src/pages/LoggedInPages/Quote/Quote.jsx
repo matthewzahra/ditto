@@ -10,6 +10,9 @@ import QuoteGrid from "../../../components/quoteGrid/quoteGrid"
 function Quote() {
     const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", saved: false, id: null})
     const [userQuotes, setUserQuotes] = useState([])
+    const [recordQuoteOpen, setRecordQuoteOpen] = useState(false)
+    const [recordQuoteText, setRecordQuoteText] = useState("")
+    const [recordQuoteAuthor, setRecordQuoteAuthor] = useState("")
 
     useEffect(() => {
         async function fetchQuotes() {
@@ -106,6 +109,42 @@ function Quote() {
         }
     }
 
+    async function onRecordQuote() {
+        if (!recordQuoteText.trim()) {
+            return
+        }
+
+        const response = await apiRequest(
+            "/api/quotes/record_quote/",
+            {
+                method: "POST",
+                body: {
+                    body: recordQuoteText.trim(),
+                    author: recordQuoteAuthor.trim()
+                }
+            }
+        )
+
+        const data = await response.json()
+
+        if (data.success) {
+            const savedQuote = {
+                id: data.data.id,
+                body: data.data.body,
+                author: data.data.author
+            }
+
+            setUserQuotes(prev => [
+                ...prev,
+                savedQuote
+            ])
+
+            setRecordQuoteText("")
+            setRecordQuoteAuthor("")
+            setRecordQuoteOpen(false)
+        }
+    }
+
     return (
         <div className="quote-page">
             <h1>Quote page</h1>
@@ -115,9 +154,41 @@ function Quote() {
             <div className="saved-quotes-container">
                 <div className="saved-quotes-header">
                     <h3>Saved Quotes</h3>
+                    <button className="record-quote-button" onClick={() => setRecordQuoteOpen(true)}>Record quote</button>
                 </div>
                 <QuoteGrid userQuotes={userQuotes} onDelete={onDelete}/>
             </div>
+
+            {recordQuoteOpen && (
+                <div className="record-quote-overlay">
+                    <div className="record-quote-form">
+                        <h2>Record Quote</h2>
+
+                        <textarea
+                            placeholder="Enter quote..."
+                            value={recordQuoteText}
+                            onChange={event => setRecordQuoteText(event.target.value)}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder="Author"
+                            value={recordQuoteAuthor}
+                            onChange={event => setRecordQuoteAuthor(event.target.value)}
+                        />
+
+                        <div className="record-quote-buttons">
+                            <button onClick={onRecordQuote}>
+                                Save quote
+                            </button>
+
+                            <button onClick={() => setRecordQuoteOpen(false)}>
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     )
 }
