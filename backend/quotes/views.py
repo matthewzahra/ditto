@@ -40,7 +40,9 @@ def record_quote(request):
 
 	quote = Quote.objects.create(user = request.user, body=body, author=author)
 
-	return api_response(True)
+	serializer = QuotesOutputSerializer(quote)
+
+	return api_response(True, data=serializer.data)
 
 @extend_schema(tags=['quotes'], responses=ApiResponseSerializer)
 @api_view(['GET'])

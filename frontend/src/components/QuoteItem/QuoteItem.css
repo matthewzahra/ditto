@@ -1,6 +1,7 @@
 .quote-item {
     width: 100%;
     max-width: 700px;
+    min-width: 0;
 
     padding: 2rem 2.5rem;
     box-sizing: border-box;
@@ -33,6 +34,8 @@
     font-size: 1.5rem;
     line-height: 1.6;
     font-style: italic;
+
+    overflow-wrap: break-word;
 }
 
 .quote-author {
@@ -40,6 +43,8 @@
 
     font-size: 1rem;
     font-weight: 600;
+
+    overflow-wrap: break-word;
 }
 
 .save-button {
@@ -62,4 +67,34 @@
 .save-button img {
     width: 1.5rem;
     height: 1.5rem;
+}
+
+.delete-button {
+    margin-top: 12px;
+    padding: 7px 14px;
+
+    border: 1px solid var(--error);
+    border-radius: 6px;
+
+    background-color: transparent;
+    color: var(--error);
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.delete-button:hover {
+    background-color: var(--error);
+    color: white;
+}
+
+.delete-button:active {
+    transform: scale(0.97);
 }

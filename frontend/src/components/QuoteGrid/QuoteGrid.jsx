@@ -1,34 +1,42 @@
 import { useState, useEffect } from "react"
 
-import apiRequest from "../../core/apiRequest"
-
 import QuoteItem from "../QuoteItem/QuoteItem"
 
 import "./quoteGrid.css"
 
-function QuoteGrid() {
-    const [userQuotes, setUserQuotes] = useState([])
+function QuoteGrid({ userQuotes, onDelete }) {
+    const [displayedQuotes, setDisplayedQuotes] = useState([])
 
     useEffect(() => {
-        async function fetchUserQuotes() {
-            const response = await apiRequest("/api/quotes/get_user_quotes/")
-            const data = await response.json()
-            setUserQuotes(data.data)
-        }
+        setDisplayedQuotes(prev => {
+            if (prev.length === 0) {
+                const shuffled = [...userQuotes]
 
-        fetchUserQuotes()
-    }, [])
+                for (let i = shuffled.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1))
+                    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+                }
+                
+                return shuffled
+            }
 
+            const newQuotes = userQuotes.filter(quote => !prev.some(existing => existing.id === quote.id))
 
+            const existingQuotes = prev.filter(quote => userQuotes.some(existing => existing.id === quote.id))
+
+            return [...existingQuotes, ...newQuotes]
+        })
+    }, [userQuotes])
     return (
         <div className="quote-grid">
-            {userQuotes.map((quote, index) => (
+            {displayedQuotes.map((quote) => (
                 <QuoteItem
-                    key={index}
+                    key={quote.id}
                     quoteText={quote.body}
                     author={quote.author}
+                    onDelete={onDelete}
+                    id={quote.id}
                 />
-
             ))}
         </div>
     )
