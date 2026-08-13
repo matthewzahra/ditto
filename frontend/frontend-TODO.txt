@@ -32,6 +32,4 @@ on quote page add link to view previous quote of the days?
 
 make it so websocket doesn't try to connect if user is not logged in
 
-record quotes
-
-quote styling for when a quote is very long
+refactor quote.jsx to move functions into helper functions and things into their own components etc.
