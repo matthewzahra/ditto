@@ -1,6 +1,7 @@
 import "./QuoteItem.css"
 
 import bookmark from "../../assets/bookmark.svg"
+import trashCan from "../../assets/trashCan.svg"
 
 function QuoteItem({ quoteText, author, title="", saved=false, onSave=null, id, onDelete=null }) {
 
@@ -15,8 +16,8 @@ function QuoteItem({ quoteText, author, title="", saved=false, onSave=null, id, 
             <p className="quote-text">"{quoteText}"</p>
             <p className="quote-author">- {author}</p>
 
-            {onSave && !saved && <button className="save-button" onClick={onSave}><img src={bookmark} alt={"Save quote"} /></button>}
-            {onDelete && <button className="delete-button" onClick={() => onDelete(id)}>Delete</button>}
+            {onSave && !saved && <button className="quote-item-save-button" onClick={onSave}><img src={bookmark} alt={"Save quote"} /></button>}
+            {onDelete && <button className="quote-item-delete-button" onClick={() => onDelete(id)}><img src={trashCan} alt="Delete" /></button>}
 
         </div>
 

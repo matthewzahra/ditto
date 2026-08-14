@@ -47,7 +47,7 @@
     overflow-wrap: break-word;
 }
 
-.save-button {
+.quote-item-save-button {
     margin-top: 1.5rem;
 
     background: none;
@@ -60,41 +60,57 @@
     transition: transform 0.2s ease;
 }
 
-.save-button:hover {
+.quote-item-save-button:hover {
     transform: scale(1.15);
 }
 
-.save-button img {
+.quote-item-save-button img {
     width: 1.5rem;
     height: 1.5rem;
 }
 
-.delete-button {
-    margin-top: 12px;
-    padding: 7px 14px;
+/* Delete button */
+.quote-item-delete-button {
+    width: 40px;
+    height: 40px;
 
-    border: 1px solid var(--error);
-    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background-color: transparent;
-    color: var(--error);
+    margin: 1.5rem auto 0;
+    padding: 0;
 
-    font-size: 14px;
-    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--error);
 
     cursor: pointer;
 
     transition:
         background-color 0.2s ease,
-        color 0.2s ease,
-        transform 0.1s ease;
+        transform 0.2s ease,
+        opacity 0.2s ease;
 }
 
-.delete-button:hover {
-    background-color: var(--error);
-    color: white;
+.quote-item-delete-button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
 }
 
-.delete-button:active {
-    transform: scale(0.97);
+.quote-item-delete-button:active {
+    transform: scale(0.95);
+}
+
+.quote-item-delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Trash icon */
+.quote-item-delete-button img {
+    width: 18px;
+    height: 18px;
 }

@@ -1,0 +1,162 @@
+.record-quote-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
+}
+
+.record-quote-form {
+    width: 400px;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    border: 2px solid var(--border);
+    border-radius: 12px;
+
+    background-color: var(--card-background);
+}
+
+.record-quote-form h2 {
+    margin: 0;
+    align-self: center;
+}
+
+/* Form inputs */
+
+.record-quote-form textarea,
+.record-quote-form input {
+    width: 100%;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background-color: var(--surface);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.record-quote-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.record-quote-form textarea:focus,
+.record-quote-form input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+/* Record quote button */
+
+.record-quote-button {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--primary);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-quote-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.record-quote-button:active {
+    transform: scale(0.97);
+}
+
+/* Modal button layout */
+
+.record-quote-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+/* Modal buttons */
+
+.record-quote-buttons button {
+    height: 40px;
+
+    padding: 0 18px;
+
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    flex: 0 0 auto;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-quote-buttons button:active {
+    transform: scale(0.97);
+}
+
+/* Save button */
+
+.record-quote-buttons .record-quote-save-button {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.record-quote-buttons .record-quote-save-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Discard button */
+
+.record-quote-buttons .record-quote-discard-button {
+    background-color: transparent;
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.record-quote-buttons .record-quote-discard-button:hover {
+    background-color: var(--error);
+    color: white;
+}

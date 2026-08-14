@@ -21,6 +21,10 @@ function ProfileDropdown() {
     const profileMenuRef = useRef(null)
 
     useEffect(() => {
+        if (!profileMenuOpen) {
+            return
+        }
+        
         function handleClickOutside(event) {
 
             if (profileMenuRef.current && !profileMenuRef.current.contains(event.target)) {
@@ -33,7 +37,7 @@ function ProfileDropdown() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside)
         }
-    }, [])
+    }, [profileMenuOpen])
 
     return (
         <div className="profile-menu" ref={profileMenuRef}>

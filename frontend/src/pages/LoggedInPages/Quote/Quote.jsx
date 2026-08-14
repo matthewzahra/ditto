@@ -6,6 +6,7 @@ import "./Quote.css"
 
 import QuoteItem from "../../../components/QuoteItem/QuoteItem"
 import QuoteGrid from "../../../components/quoteGrid/quoteGrid"
+import RecordQuote from "../../../components/RecordQuote/RecordQuote"
 
 function Quote() {
     const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", saved: false, id: null})
@@ -14,6 +15,7 @@ function Quote() {
     const [recordQuoteText, setRecordQuoteText] = useState("")
     const [recordQuoteAuthor, setRecordQuoteAuthor] = useState("")
 
+    // effect to fetch daily quote and user's saved quotes
     useEffect(() => {
         async function fetchQuotes() {
             const quotesResponse = await apiRequest("/api/quotes/get_user_quotes/")
@@ -47,7 +49,7 @@ function Quote() {
         fetchQuotes()
     }, [])
 
-
+    // function to handle saving quote of the day
     async function onSave() {
         if (quoteOfTheDay.saved) {
             return
@@ -86,6 +88,7 @@ function Quote() {
         }
     }
 
+    // function to handle deleting saved quotes
     async function onDelete(id) {
         const response = await apiRequest(
             "/api/quotes/delete_quote/",
@@ -109,42 +112,7 @@ function Quote() {
         }
     }
 
-    async function onRecordQuote() {
-        if (!recordQuoteText.trim()) {
-            return
-        }
-
-        const response = await apiRequest(
-            "/api/quotes/record_quote/",
-            {
-                method: "POST",
-                body: {
-                    body: recordQuoteText.trim(),
-                    author: recordQuoteAuthor.trim()
-                }
-            }
-        )
-
-        const data = await response.json()
-
-        if (data.success) {
-            const savedQuote = {
-                id: data.data.id,
-                body: data.data.body,
-                author: data.data.author
-            }
-
-            setUserQuotes(prev => [
-                ...prev,
-                savedQuote
-            ])
-
-            setRecordQuoteText("")
-            setRecordQuoteAuthor("")
-            setRecordQuoteOpen(false)
-        }
-    }
-
+    // the actual page
     return (
         <div className="quote-page">
             <h1>Quote page</h1>
@@ -158,37 +126,11 @@ function Quote() {
                 </div>
                 <QuoteGrid userQuotes={userQuotes} onDelete={onDelete}/>
             </div>
-
-            {recordQuoteOpen && (
-                <div className="record-quote-overlay">
-                    <div className="record-quote-form">
-                        <h2>Record Quote</h2>
-
-                        <textarea
-                            placeholder="Enter quote..."
-                            value={recordQuoteText}
-                            onChange={event => setRecordQuoteText(event.target.value)}
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Author"
-                            value={recordQuoteAuthor}
-                            onChange={event => setRecordQuoteAuthor(event.target.value)}
-                        />
-
-                        <div className="record-quote-buttons">
-                            <button onClick={onRecordQuote}>
-                                Save quote
-                            </button>
-
-                            <button onClick={() => setRecordQuoteOpen(false)}>
-                                Cancel
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            
+            {/* record quote form, only pops up when record quote button is pressed */}
+            <div>
+                <RecordQuote recordQuoteOpen={recordQuoteOpen} setRecordQuoteOpen={setRecordQuoteOpen} recordQuoteText={recordQuoteText} setRecordQuoteText={setRecordQuoteText} recordQuoteAuthor={recordQuoteAuthor} setRecordQuoteAuthor={setRecordQuoteAuthor} setUserQuotes={setUserQuotes} />
+            </div>
         </div>
     )
 }

@@ -34,14 +34,4 @@ make it so websocket doesn't try to connect if user is not logged in
 
 quote page:
 
-refactor quote.jsx to move functions into helper functions and things into their own components etc.
-
 confirm delete for quotes
-
-make it so record quote dialogue closes when clicking outside form
-
-change cancel button to be delete button
-
-change colour of bookmark
-
-change word delete to trashcan icon
