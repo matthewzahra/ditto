@@ -17,7 +17,7 @@ function QuoteItem({ quoteText, author, title="", saved=false, onSave=null, id, 
             <p className="quote-author">- {author}</p>
 
             {onSave && !saved && <button className="quote-item-save-button" onClick={onSave}><img src={bookmark} alt={"Save quote"} /></button>}
-            {onDelete && <button className="quote-item-delete-button" onClick={() => onDelete(id)}><img src={trashCan} alt="Delete" /></button>}
+            {onDelete && <button className="quote-item-delete-button" onClick={() => onDelete({quoteText: quoteText, author: author, id: id})}><img src={trashCan} alt="Delete" /></button>}
 
         </div>
 

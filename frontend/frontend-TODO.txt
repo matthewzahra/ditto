@@ -24,14 +24,6 @@ Current todos:
 
 show error when relevant
 
-actions and websockets
-
-on quote page add link to quote feed
-
-on quote page add link to view previous quote of the days?
-
 make it so websocket doesn't try to connect if user is not logged in
 
-quote page:
-
-confirm delete for quotes
+deal with websocket error always appearing

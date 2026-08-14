@@ -10,14 +10,20 @@ function RecordQuote({ recordQuoteOpen, setRecordQuoteOpen, recordQuoteText, set
             return
         }
         try {
+            const requestBody = {
+                body: recordQuoteText.trim(),
+            }
+            const author = recordQuoteAuthor.trim()
+
+            if (author) {
+                requestBody.author = author
+            }
+
             const response = await apiRequest(
                 "/api/quotes/record_quote/",
                 {
                     method: "POST",
-                    body: {
-                        body: recordQuoteText.trim(),
-                        author: recordQuoteAuthor.trim()
-                    }
+                    body: requestBody
                 }
             )
 

@@ -7,6 +7,7 @@ import "./Quote.css"
 import QuoteItem from "../../../components/QuoteItem/QuoteItem"
 import QuoteGrid from "../../../components/quoteGrid/quoteGrid"
 import RecordQuote from "../../../components/RecordQuote/RecordQuote"
+import ConfirmQuoteDelete from "../../../components/ConfirmQuoteDelete/ConfirmQuoteDelete"
 
 function Quote() {
     const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", saved: false, id: null})
@@ -14,6 +15,8 @@ function Quote() {
     const [recordQuoteOpen, setRecordQuoteOpen] = useState(false)
     const [recordQuoteText, setRecordQuoteText] = useState("")
     const [recordQuoteAuthor, setRecordQuoteAuthor] = useState("")
+    const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
+    const [quoteToDelete, setQuoteToDelete] = useState(null)
 
     // effect to fetch daily quote and user's saved quotes
     useEffect(() => {
@@ -88,6 +91,12 @@ function Quote() {
         }
     }
 
+    // function to handle confirming the delete
+    function onRequestDelete(quote) {
+        setQuoteToDelete(quote)
+        setConfirmDeleteOpen(true)
+    }
+
     // function to handle deleting saved quotes
     async function onDelete(id) {
         const response = await apiRequest(
@@ -124,13 +133,15 @@ function Quote() {
                     <h3>Saved Quotes</h3>
                     <button className="record-quote-button" onClick={() => setRecordQuoteOpen(true)}>Record quote</button>
                 </div>
-                <QuoteGrid userQuotes={userQuotes} onDelete={onDelete}/>
+                <QuoteGrid userQuotes={userQuotes} onDelete={onRequestDelete}/>
             </div>
             
             {/* record quote form, only pops up when record quote button is pressed */}
             <div>
                 <RecordQuote recordQuoteOpen={recordQuoteOpen} setRecordQuoteOpen={setRecordQuoteOpen} recordQuoteText={recordQuoteText} setRecordQuoteText={setRecordQuoteText} recordQuoteAuthor={recordQuoteAuthor} setRecordQuoteAuthor={setRecordQuoteAuthor} setUserQuotes={setUserQuotes} />
             </div>
+            {/* request delete, only pops up when a quote deletion is requested */}
+            <ConfirmQuoteDelete quoteToDelete={quoteToDelete} confirmDeleteOpen={confirmDeleteOpen} setConfirmDeleteOpen={setConfirmDeleteOpen} onConfirm={() => onDelete(quoteToDelete.id)} />
         </div>
     )
 }
