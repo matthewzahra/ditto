@@ -9,5 +9,5 @@ class Quote(models.Model):
 		on_delete=models.CASCADE,
 		related_name="quote"
 	)
-	author = models.CharField(128)
+	author = models.CharField(128, default="anon")
 	body = models.TextField()
