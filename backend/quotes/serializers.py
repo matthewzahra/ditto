@@ -10,7 +10,7 @@ class SingleQuoteSerializer(serializers.Serializer):
 
 class QuoteSerializer(serializers.Serializer):
 	body = serializers.CharField(min_length=1)
-	author = serializers.CharField(max_length=128) # can be blank 
+	author = serializers.CharField(max_length=128, required=False) # can be blank 
 
 ###########
 # OUTPUT
