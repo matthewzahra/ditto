@@ -20,6 +20,8 @@ add animation or something to make it clear when a notification is deleted?
 
 inbox needs to display when notification is from (i.e. created at)
 
+for confirm delete quote, move author to centre
+
 Current todos:
 
 show error when relevant
