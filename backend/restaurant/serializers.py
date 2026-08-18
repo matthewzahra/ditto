@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from restaurant.models import Restaurant
 
 #######
 # INPUT
@@ -19,3 +20,17 @@ class SingleRestaurantIDSerializer(serializers.Serializer):
 ########
 # OUTPUT
 ########
+
+class RestaurantSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Restaurant
+		fields = [
+			"id",
+			"name",
+			"address",
+			"latitude",
+			"longitude",
+			"cuisine",
+			"rating",
+			"info"
+		]

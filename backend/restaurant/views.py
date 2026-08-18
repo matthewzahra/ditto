@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
-from restaurant.serializers import SingleRestaurantSerializer,SingleRestaurantIDSerializer
+from restaurant.serializers import SingleRestaurantSerializer,SingleRestaurantIDSerializer, RestaurantSerializer
 from restaurant.models import Restaurant
 from restaurant.core.geo import get_coordinates
 
@@ -42,8 +42,16 @@ def delete_restaurant(request):
 
 	return api_response(True, status=204)
 
+# TODO - implement this endpoint
 def edit_restuarant(request):
-	pass
+	raise NotImplemented
 
-def get_restaurants(request):
-	pass
+@extend_schema(
+	tags=['restaurant'],
+	responses=ApiResponseSerializer
+)
+@api_view(['GET'])
+def get_user_restaurants(request):
+	restaurants = RestaurantSerializer.filter(request.user)
+	serialzier = RestaurantSerializer(restaurants,many=True)
+	return api_response(True, data=serialzier.data)

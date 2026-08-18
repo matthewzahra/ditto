@@ -19,4 +19,4 @@ class Restaurant(models.Model):
 	cuisine = models.CharField(max_length=128)
 	rating = models.FloatField(validators=[MinValueValidator(0.0),MaxValueValidator(10.0)])
 
-	info = models.TextField()
+	info = models.TextField(blank=True,null=True)
