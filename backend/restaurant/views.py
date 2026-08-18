@@ -22,12 +22,13 @@ def record_restaurant(request):
 	if location_data['confidence'] < 0.25:
 		return api_response(False,data={'confidence': location_data['confidence']}, error=f'Confidence too low, need better address.',status=400)
 
-	data['latitude'] = location_data['latitiude']
+	data['latitude'] = location_data['latitude']
 	data['longitude'] = location_data['longitude']
 
-	restaurant = Restaurant.objects.create(data)
+	restaurant = Restaurant.objects.create(user=request.user, **data)
 
-	return api_response(True)
+	serialzier = RestaurantSerializer(restaurant)
+	return api_response(True, data=serialzier.data)
 
 @extend_schema(
 	tags=['restaurant'],

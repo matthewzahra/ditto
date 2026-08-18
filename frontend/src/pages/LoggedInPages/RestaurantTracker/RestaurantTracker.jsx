@@ -5,14 +5,21 @@ import "./RestaurantTracker.css"
 import RestaurantMap from "../../../components/RestaurantMap/RestaurantMap"
 import RestaurantGrid from "../../../components/RestaurantGrid/RestaurantGrid"
 import ConfirmRestaurantDelete from "../../../components/ConfirmRestaurantDelete/ConfirmRestaurantDelete"
+import RecordRestaurant from "../../../components/RecordRestaurant/RecordRestaurant"
 import apiRequest from "../../../core/apiRequest"
 
 function RestaurantTracker() {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null)
     const [restaurants, setRestaurants] = useState([])
     const [filteredRestaurants, setFilteredRestaurants] = useState([])
+    const [recordRestaurantOpen, setRecordRestaurantOpen] = useState(false)
     const [restaurantToDelete, setRestaurantToDelete] = useState(null)
     const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false)
+    const [restaurantName, setRestaurantName] = useState("")
+    const [restaurantAddress, setRestaurantAddress] = useState("")
+    const [restaurantCuisine, setRestaurantCuisine] = useState("")
+    const [restaurantRating, setRestaurantRating] = useState("")
+    const [restaurantInfo, setRestaurantInfo] = useState("")
     const [filters, setFilters] = useState({
             fiveStars: false,
         })
@@ -79,9 +86,10 @@ function RestaurantTracker() {
         <div className="restaurant-tracker-page">
             <h1>Restaurant tracker page</h1>
             <RestaurantMap selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filteredRestaurants={filteredRestaurants}/>
-            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} />
+            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} setRecordRestaurantOpen={setRecordRestaurantOpen} />
             {/* request delete popup, only displayed when deletion is requested */}
             <ConfirmRestaurantDelete restaurantToDelete={restaurantToDelete} confirmDeleteOpen={confirmDeleteOpen} setConfirmDeleteOpen={setConfirmDeleteOpen} onConfirm={() => onDelete(restaurantToDelete.id)} />
+            <RecordRestaurant recordRestaurantOpen={recordRestaurantOpen} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurantName={restaurantName} setRestaurantName={setRestaurantName} restaurantAddress={restaurantAddress} setRestaurantAddress={setRestaurantAddress} restaurantCuisine={restaurantCuisine} setRestaurantCuisine={setRestaurantCuisine} restaurantRating={restaurantRating} setRestaurantRating={setRestaurantRating} restaurantInfo={restaurantInfo} setRestaurantInfo={setRestaurantInfo} setRestaurants={setRestaurants} />
         </div>
     )
 }

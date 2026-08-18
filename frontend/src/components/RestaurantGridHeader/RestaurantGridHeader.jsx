@@ -4,7 +4,7 @@ import "./RestaurantGridHeader.css"
 
 import ActiveFilters from "../ActiveFilters/ActiveFilters"
 
-function RestaurantGridHeader({ filters, setFilters }) {
+function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen }) {
     const [filterOpen, setFilterOpen] = useState(false)
         
     const filterRef = useRef(null)
@@ -34,6 +34,9 @@ function RestaurantGridHeader({ filters, setFilters }) {
                         <button className={`filter-option ${filters.fiveStars ? "selected" : ""}`} onClick={() => setFilters(prev => ({...prev, fiveStars: !prev.fiveStars}))}>5 stars</button>
                     </div>
                 )}
+            </div>
+            <div className="record-restaurant-container">
+                <button className="record-restaurant-button" onClick={() => setRecordRestaurantOpen(true)}>Record Restaurant</button>
             </div>
         </div>
     )
