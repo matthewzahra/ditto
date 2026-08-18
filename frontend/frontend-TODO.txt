@@ -33,3 +33,11 @@ show error when relevant
 make it so websocket doesn't try to connect if user is not logged in
 
 deal with websocket error always appearing
+
+Restaurant todos:
+
+add saving new restaurants
+
+fix filters
+
+restyle filtering to be more obvious
