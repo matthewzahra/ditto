@@ -27,6 +27,10 @@ if [ "$ENV" = "DEV" ]; then
 	# populate test quotes
 	echo "Adding test quotes to database"
 	uv run python -m scripts.quotes
+
+	# populate test restaurants
+	echo "Adding test restaurants to database"
+	uv run python -m scripts.restaurants
 else
 	echo "In PROD, cannot reset database"
 fi
