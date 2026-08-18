@@ -19,8 +19,12 @@ def record_restaurant(request):
 	if location_data.get('error',None):
 		return api_response(False,error = location_data['error'],status=500)
 
-	if location_data['confidence'] < 0.25:
-		return api_response(False,data={'confidence': location_data['confidence']}, error=f'Confidence too low, need better address.',status=400)
+	if location_data.get('user_error','') or location_data['confidence'] < 0.25:
+		if location_data.get('user_error',''):
+			error = f'Confidence too low, need better address. ' + location_data.get('user_error','')
+		else:
+			error = location_data.get('user_error','')
+		return api_response(False,data={'confidence': location_data['confidence']}, error=error,status=400)
 
 	data['latitude'] = location_data['latitude']
 	data['longitude'] = location_data['longitude']

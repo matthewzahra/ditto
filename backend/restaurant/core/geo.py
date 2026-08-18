@@ -28,8 +28,13 @@ def get_coordinates(location:str):
 		return result
 
 	data = resp.json()
-	result['longitude'] = data['features'][0]['geometry']['coordinates'][0]
-	result['latitude'] = data['features'][0]['geometry']['coordinates'][1]
-	result['confidence'] = data['features'][0]['properties']['rank']['confidence']
+
+	if data['features']:		
+		result['longitude'] = data['features'][0]['geometry']['coordinates'][0]
+		result['latitude'] = data['features'][0]['geometry']['coordinates'][1]
+		result['confidence'] = data['features'][0]['properties']['rank']['confidence']
+
+	else:
+		result['error'] = f"CANNOT DEDUCE LOCATION FROM {location}"
 
 	return result
