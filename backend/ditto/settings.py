@@ -48,7 +48,8 @@ INSTALLED_APPS = [
 	'channels',
 	'user_auth',
 	'inbox',
-    'quotes'
+    'quotes',
+	'restaurant'
 ]
 
 # help to enforce and document the REST API
