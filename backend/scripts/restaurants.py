@@ -16,24 +16,24 @@ def add_restaurants():
 
     Restaurant.objects.create(
         user=user,
-        name="Westminster Bistro",
+        name="The Westminster Kitchen",
         address="Westminster",
         latitude=51.4995,
         longitude=-0.1248,
-        cuisine="English",
-        rating=5,
-        info="Is a cool bistro"
+        cuisine="British",
+        rating=8,
+        info="A relaxed restaurant serving modern British dishes made with seasonal ingredients."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Camden Kitchen",
+        name="Camden Spice House",
         address="Camden",
         latitude=51.5416,
         longitude=-0.1420,
-        cuisine="English",
-        rating=4,
-        info="Is a cool kitchen"
+        cuisine="Indian",
+        rating=7,
+        info="A lively Indian restaurant with a good selection of curries, naan and sharing dishes."
     )
 
     Restaurant.objects.create(
@@ -42,185 +42,185 @@ def add_restaurants():
         address="Shoreditch",
         latitude=51.5256,
         longitude=-0.0754,
-        cuisine="English",
-        rating=5,
-        info="Is a cool grill"
+        cuisine="British",
+        rating=9,
+        info="A stylish neighbourhood grill known for hearty portions and a relaxed evening atmosphere."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Canary Wharf Café",
+        name="Canary Wharf Pasta Co.",
         address="Canary Wharf",
         latitude=51.5054,
         longitude=-0.0235,
-        cuisine="English",
-        rating=4,
-        info="Is a cool café"
+        cuisine="Italian",
+        rating=8,
+        info="A modern Italian restaurant specialising in fresh pasta, risotto and classic desserts."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Greenwich Table",
+        name="The Greenwich Table",
         address="Greenwich",
         latitude=51.4826,
         longitude=-0.0077,
-        cuisine="English",
-        rating=5,
-        info="Is a cool restaurant"
+        cuisine="British",
+        rating=7,
+        info="A cosy spot with a seasonal menu and a good selection of traditional British favourites."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Notting Hill Eatery",
+        name="Notting Hill Kitchen",
         address="Notting Hill",
         latitude=51.5098,
         longitude=-0.1967,
-        cuisine="English",
-        rating=4,
-        info="Is a cool eatery"
+        cuisine="Italian",
+        rating=9,
+        info="A popular Italian restaurant with fresh ingredients, generous portions and a lively atmosphere."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Chelsea Steakhouse",
+        name="Chelsea Steak & Grill",
         address="Chelsea",
         latitude=51.4875,
         longitude=-0.1687,
-        cuisine="Steakhouse",
-        rating=5,
-        info="Is a cool steakhouse"
+        cuisine="British",
+        rating=10,
+        info="An upmarket restaurant offering quality steaks, classic sides and an extensive drinks menu."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Brixton Bites",
+        name="Brixton Taco Club",
         address="Brixton",
         latitude=51.4613,
         longitude=-0.1156,
-        cuisine="English",
-        rating=3,
-        info="Is a cool restaurant"
+        cuisine="Mexican",
+        rating=8,
+        info="A colourful and casual restaurant serving tacos, burritos and freshly made salsa."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Clapham Corner",
+        name="Clapham Ramen",
         address="Clapham",
         latitude=51.4627,
         longitude=-0.1387,
-        cuisine="English",
-        rating=4,
-        info="Is a cool restaurant"
+        cuisine="Japanese",
+        rating=7,
+        info="A small Japanese restaurant serving rich ramen, gyoza and a selection of rice dishes."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Wimbledon Pantry",
+        name="The Wimbledon Pantry",
         address="Wimbledon",
         latitude=51.4214,
         longitude=-0.2063,
-        cuisine="English",
-        rating=5,
-        info="Is a cool pantry"
+        cuisine="British",
+        rating=8,
+        info="A friendly neighbourhood restaurant with a menu built around comforting British classics."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Richmond Riverside",
+        name="Riverside Trattoria",
         address="Richmond",
         latitude=51.4613,
         longitude=-0.3037,
-        cuisine="English",
-        rating=5,
-        info="Is a cool restaurant"
+        cuisine="Italian",
+        rating=9,
+        info="A charming Italian restaurant with homemade pasta and a particularly good tiramisu."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Kingston Kitchen",
+        name="Kingston Curry Room",
         address="Kingston",
         latitude=51.4123,
         longitude=-0.3007,
-        cuisine="English",
-        rating=4,
-        info="Is a cool kitchen"
+        cuisine="Indian",
+        rating=7,
+        info="A welcoming curry house offering both familiar favourites and a few regional specialities."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Hammersmith House",
+        name="Hammersmith Bento",
         address="Hammersmith",
         latitude=51.4927,
         longitude=-0.2230,
-        cuisine="English",
-        rating=4,
-        info="Is a cool restaurant"
+        cuisine="Japanese",
+        rating=8,
+        info="A modern Japanese restaurant with sushi, bento boxes and freshly prepared noodle dishes."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Ealing Express",
+        name="Ealing Cantina",
         address="Ealing",
         latitude=51.5130,
         longitude=-0.3089,
-        cuisine="English",
-        rating=3,
-        info="Is a cool restaurant"
+        cuisine="Mexican",
+        rating=6,
+        info="A casual Mexican restaurant with affordable food, generous portions and a lively atmosphere."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Wembley Spice",
+        name="Wembley Masala",
         address="Wembley",
         latitude=51.5560,
         longitude=-0.2795,
         cuisine="Indian",
-        rating=5,
-        info="Is a cool restaurant"
+        rating=9,
+        info="A busy Indian restaurant praised for its rich curries, freshly baked naan and generous portions."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Hampstead Hearth",
+        name="Hampstead Pizzeria",
         address="Hampstead",
         latitude=51.5567,
         longitude=-0.1780,
-        cuisine="English",
-        rating=5,
-        info="Is a cool restaurant"
+        cuisine="Italian",
+        rating=8,
+        info="A cosy pizzeria serving thin-crust pizzas, fresh salads and homemade Italian desserts."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Islington Social",
+        name="Islington Izakaya",
         address="Islington",
         latitude=51.5380,
         longitude=-0.1022,
-        cuisine="English",
-        rating=4,
-        info="Is a cool restaurant"
+        cuisine="Japanese",
+        rating=7,
+        info="A relaxed Japanese spot offering small plates, grilled dishes and a selection of sushi."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Stratford Kitchen",
+        name="Stratford Taco Kitchen",
         address="Stratford",
         latitude=51.5413,
         longitude=0.0032,
-        cuisine="English",
-        rating=4,
-        info="Is a cool kitchen"
+        cuisine="Mexican",
+        rating=9,
+        info="A popular Mexican kitchen known for its tacos, spicy chicken and freshly prepared guacamole."
     )
 
     Restaurant.objects.create(
         user=user,
-        name="Walthamstow Grill",
+        name="Walthamstow Arms",
         address="Walthamstow",
         latitude=51.5886,
         longitude=-0.0190,
-        cuisine="English",
-        rating=3,
-        info="Is a cool grill"
+        cuisine="British",
+        rating=6,
+        info="A traditional local pub-style restaurant serving pies, roasts and other British comfort food."
     )
 
     Restaurant.objects.create(
@@ -229,9 +229,9 @@ def add_restaurants():
         address="Westminster",
         latitude=51.51082425901178,
         longitude=-0.11823100305978697,
-        cuisine="Chinese",
-        rating=4,
-        info="Is a cool restaurant"
+        cuisine="Indian",
+        rating=8,
+        info="A well-established restaurant with a varied Indian menu and plenty of vegetarian options."
     )
 
 
