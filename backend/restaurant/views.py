@@ -52,6 +52,6 @@ def edit_restuarant(request):
 )
 @api_view(['GET'])
 def get_user_restaurants(request):
-	restaurants = RestaurantSerializer.filter(request.user)
+	restaurants = Restaurant.objects.filter(user = request.user)
 	serialzier = RestaurantSerializer(restaurants,many=True)
 	return api_response(True, data=serialzier.data)
