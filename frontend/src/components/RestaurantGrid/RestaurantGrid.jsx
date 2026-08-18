@@ -3,7 +3,7 @@ import RestaurantGridHeader from "../RestaurantGridHeader/RestaurantGridHeader"
 
 import "./RestaurantGrid.css"
 
-function RestaurantGrid({ selectedRestaurant, setSelectedRestaurant, filters, setFilters, filteredRestaurants }) {
+function RestaurantGrid({ selectedRestaurant, setSelectedRestaurant, filters, setFilters, filteredRestaurants, onRequestDelete }) {
 
     return (
         <div className="restaurant-grid-container">
@@ -11,7 +11,7 @@ function RestaurantGrid({ selectedRestaurant, setSelectedRestaurant, filters, se
 
             <div className="restaurant-grid">
                 {filteredRestaurants.map((restaurant) => (
-                    <RestaurantGridItem key={restaurant.id} restaurant={restaurant} selected={selectedRestaurant === restaurant.id} onSelect={setSelectedRestaurant}/>
+                    <RestaurantGridItem key={restaurant.id} restaurant={restaurant} selected={selectedRestaurant === restaurant.id} onSelect={setSelectedRestaurant} onRequestDelete={onRequestDelete} />
                 ))}
             </div>
         </div>

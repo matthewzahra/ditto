@@ -1,4 +1,6 @@
 .restaurant-grid-item {
+    position: relative;
+
     border-radius: 12px;
     padding: 20px;
 
@@ -50,4 +52,48 @@
 
 .restaurant-grid-item-selected {
     border: 2px solid var(--primary);
+}
+
+/* Delete button */
+
+.restaurant-grid-item-delete-button {
+    position: absolute;
+    bottom: 16px;
+    right: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--error);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-delete-button:hover {
+    background-color: var(--error);
+    opacity: 0.75;
+}
+
+.restaurant-grid-item-delete-button:active {
+    transform: scale(0.95);
+}
+
+.restaurant-grid-item-delete-button img {
+    width: 20px;
+    height: 20px;
+
+    display: block;
 }
