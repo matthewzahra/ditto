@@ -34,7 +34,7 @@ def record_restaurant(request):
 	request=SingleRestaurantIDSerializer,
 	responses=ApiResponseSerializer
 )
-@api_view({'DELETE'})
+@api_view(['DELETE'])
 def delete_restaurant(request):
 	data = validate(SingleRestaurantIDSerializer,request.data)
 
