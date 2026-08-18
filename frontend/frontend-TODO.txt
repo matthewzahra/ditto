@@ -22,6 +22,8 @@ inbox needs to display when notification is from (i.e. created at)
 
 for confirm delete quote, move author to centre
 
+on restaurant map, fix white lines appearing when viewing on a bigger screen
+
 Current todos:
 
 show error when relevant

@@ -35,7 +35,7 @@ function RestaurantMapMarker({ restaurant, selected, onSelect }) {
         <Marker position={restaurant.location} icon={selected ? selectedMarker : normalMarker} eventHandlers={{click: () => onSelect(restaurant.id)}} ref={markerRef}>
             <Popup autoPan={false}>
                 <h3>{restaurant.name}</h3>
-                <p>Rating: {restaurant.rating}/5</p>
+                <p>Rating: {restaurant.rating}/10</p>
             </Popup>
         </Marker>
     )

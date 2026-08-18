@@ -1,13 +1,14 @@
 .restaurant-grid-item {
     border-radius: 12px;
-
     padding: 20px;
+
+    background-color: var(--card-background);
 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-    background-color: var(--card-background);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 .restaurant-grid-item:hover {
@@ -16,17 +17,37 @@
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
 
-.restaurant-grid-item h3 {
-    margin: 0 0 12px;
+.restaurant-grid-item-name {
+    margin: 0 0 8px;
+
     font-size: 1.25rem;
+    font-weight: 600;
 }
 
-.restaurant-grid-item p {
-    margin: 0;
+.restaurant-grid-item-cuisine {
+    margin: 0 0 12px;
+
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+.restaurant-grid-item-info {
+    margin: 0 0 16px;
+
     font-size: 1rem;
+    line-height: 1.5;
+
+    color: var(--text);
 }
 
-.restaurant-grid-item.selected {
-    border: 2px solid red;
-    background-color: red;
+.restaurant-grid-item-rating {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.restaurant-grid-item-selected {
+    border: 2px solid var(--primary);
 }
