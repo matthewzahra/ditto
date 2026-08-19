@@ -5,7 +5,7 @@ import apiRequest from "../../../core/apiRequest"
 import "./Quote.css"
 
 import QuoteItem from "../../../components/QuoteItem/QuoteItem"
-import QuoteGrid from "../../../components/quoteGrid/quoteGrid"
+import QuoteGrid from "../../../components/QuoteGrid/QuoteGrid"
 import RecordQuote from "../../../components/RecordQuote/RecordQuote"
 import ConfirmQuoteDelete from "../../../components/ConfirmQuoteDelete/ConfirmQuoteDelete"
 
