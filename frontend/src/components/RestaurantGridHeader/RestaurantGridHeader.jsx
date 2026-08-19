@@ -26,17 +26,18 @@ function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen }) 
     return (
         <div className="restaurant-grid-header">
             <ActiveFilters filters={filters} setFilters={setFilters} />
-            <div className="filter-container" ref={filterRef}>
-                <button className="filter-button" onClick={() => setFilterOpen(prev => !prev)}>Filter</button>
-                {filterOpen && (
-                    <div className="filter-dropdown">
-                        <p>Filter options here</p>
-                        <button className={`filter-option ${filters.fiveStars ? "selected" : ""}`} onClick={() => setFilters(prev => ({...prev, fiveStars: !prev.fiveStars}))}>5 stars</button>
-                    </div>
-                )}
-            </div>
-            <div className="record-restaurant-container">
-                <button className="record-restaurant-button" onClick={() => setRecordRestaurantOpen(true)}>Record Restaurant</button>
+            <div className="restaurant-grid-header-actions">
+                <div className="filter-container" ref={filterRef}>
+                    <button className="filter-button" onClick={() => setFilterOpen(prev => !prev)}>Filter</button>
+                    {filterOpen && (
+                        <div className="filter-dropdown">
+                            <button className={`filter-option ${filters.fiveStars ? "selected" : ""}`} onClick={() => setFilters(prev => ({...prev, fiveStars: !prev.fiveStars}))}>5 stars</button>
+                        </div>
+                    )}
+                </div>
+                <div className="record-restaurant-container">
+                    <button className="record-restaurant-button" onClick={() => setRecordRestaurantOpen(true)}>Record Restaurant</button>
+                </div>
             </div>
         </div>
     )

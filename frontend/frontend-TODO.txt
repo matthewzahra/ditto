@@ -26,6 +26,8 @@ on restaurant map, fix white lines appearing when viewing on a bigger screen
 
 fix websockets (doesn't connect if first joining session and then logging in, stop websocket attempting connection when logged out, re-attempt connection post login)
 
+fix pop ups closing when clicking off by accident (specifically clicking on it, moving mouse off of it, and then releasing - makes it disappear)
+
 Current todos:
 
 show error when relevant
@@ -35,8 +37,6 @@ make it so websocket doesn't try to connect if user is not logged in
 deal with websocket error always appearing
 
 Restaurant todos:
-
-add saving new restaurants
 
 fix filters
 

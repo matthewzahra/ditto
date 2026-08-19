@@ -6,12 +6,29 @@
     margin-bottom: 12px;
 }
 
+/* Header actions */
+
+.restaurant-grid-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Filter */
+
 .filter-container {
     position: relative;
 }
 
-.filter-button {
-    padding: 8px 16px;
+/* Filter and Record Restaurant buttons */
+
+.filter-button,
+.record-restaurant-button {
+    height: 40px;
+
+    padding: 0 16px;
+
+    box-sizing: border-box;
 
     border: none;
     border-radius: 8px;
@@ -19,12 +36,32 @@
     background-color: var(--primary);
     color: var(--text);
 
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
     cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
 }
 
-.filter-button:hover {
+.filter-button:hover,
+.record-restaurant-button:hover {
     background-color: var(--primary-hover);
 }
+
+.filter-button:active,
+.record-restaurant-button:active {
+    transform: scale(0.97);
+}
+
+/* Filter dropdown */
 
 .filter-dropdown {
     position: absolute;
@@ -45,8 +82,19 @@
     z-index: 100;
 }
 
+/* Filter dropdown heading */
+
+.filter-dropdown p {
+    margin: 0 0 8px;
+
+    font-weight: bold;
+}
+
+/* Filter option */
+
 .filter-option {
     width: 100%;
+
     padding: 8px;
 
     border: none;
@@ -55,18 +103,24 @@
     background-color: var(--primary);
     color: var(--text);
 
+    font-family: inherit;
+    font-size: 14px;
+
     cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
 }
 
 .filter-option:hover {
     background-color: var(--primary-hover);
 }
 
-.filter-option.selected {
-    background-color: red;
+.filter-option:active {
+    transform: scale(0.97);
 }
 
-.filter-dropdown p {
-    margin: 0 0 8px;
-    font-weight: bold;
+.filter-option.selected {
+    background-color: red;
 }
