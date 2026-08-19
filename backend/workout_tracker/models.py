@@ -23,19 +23,13 @@ class Workout(models.Model):
 	)
 	workout_type = models.CharField(
 		max_length=20,
-		choices=WorkoutTypes
+		choices=WorkoutTypes.choices
 	)
 	date = models.DateField(auto_now_add=True)
-	num_rounds = models.IntegerField(validators=[MinValueValidator(1)])
+	num_rounds = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
 # for Gym workouts
 class Exericse(models.Model):
-	workout = models.ForeignKey(
-		to=Workout,
-		on_delete=models.CASCADE,
-		related_name="exercise",
-	)
-
 	name = models.CharField(max_length=128)
 
 	class Meta:
