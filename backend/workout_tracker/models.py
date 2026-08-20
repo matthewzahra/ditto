@@ -54,6 +54,8 @@ class Reps(models.Model):
 		related_name="reps",
 	)
 
+	rep_count = models.IntegerField(validators=[MinValueValidator(1)])
+
 
 # For Bike/Run sessions
 class Route(models.Model):

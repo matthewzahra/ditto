@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from workout_tracker.models import Workout
+from workout_tracker.models import Workout, Exericse, Reps
 from datetime import timedelta
 
 #######
@@ -15,7 +15,6 @@ class WorkoutSerializer(serializers.Serializer):
 	date = serializers.DateField(required=False)
 	num_rounds = serializers.IntegerField(required=False, default=1)
 	
-
 # receive a single exercise to be added
 class ExerciseSerializer(serializers.Serializer):
 	name = serializers.CharField(max_length=128)
@@ -42,8 +41,37 @@ class RouteSerializer(serializers.Serializer):
 			raise serializers.ValidationError("Can only add a route to a RUN or BIKE session.")
 		return value
 
+# receive an ID as an input
+class IDSerializer(serializers.Serializer):
+	id = serializers.IntegerField()
 
+# for selecting all workouts of a certain type
+class WorkoutTypeSerializer(serializers.Serializer):
+	workout_type = serializers.ChoiceField(
+		max_length=20,
+		choices=Workout.WorkoutTypes.choices
+	)
 
 ########
 # OUTPUT
 ########
+# for returning an exercise
+class ExerciseOutputSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Exericse
+		fields = ("id","name")
+
+class RepsOutputSerializer(serializers.ModelSerializer):
+	exercise = ExerciseOutputSerializer(read_only=True)
+
+	class Meta:
+		model = Reps
+		fields = ("rep_count")
+
+# for returning workouts, including exercises and reps
+class WorkoutOutputSerializer(serializers.ModelSerializer):
+	reps = RepsOutputSerializer(many=True, read_only=True)
+
+	class Meta:
+		model = Workout
+		fields = ("name")
