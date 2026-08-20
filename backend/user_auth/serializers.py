@@ -49,6 +49,7 @@ class GetPublicUserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = CustomUser
 		fields = [
+			"id"
 			"email",
 			"profile_picture"
 		]

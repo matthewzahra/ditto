@@ -155,6 +155,16 @@ def get_profile_picture(request, user_id):
         content_type=content_type
     )
 
+@extend_schema(
+    tags=['user_auth'],
+    responses=ApiResponseSerializer,
+    summary="get data about the current logged in user"
+)
+@api_view(['GET'])
+def get_current_user(request):
+    serializer = GetPublicUserSerializer(request.user)
+    return api_response(True,data=serializer.data)
+
 # this gets non-confidential user-information
 @extend_schema(
     tags=['user_auth'],
@@ -162,9 +172,9 @@ def get_profile_picture(request, user_id):
     responses=ApiResponseSerializer,
     summary="get non-confidential user information provided a list of their user ids"
 )
-@api_view(['POST'])
+@api_view(['GET'])
 def get_users(request):
-    data = validate(RequestUserDataSeralizer, request.data)
+    data = validate(RequestUserDataSeralizer, request.query_params)
     users = CustomUser.objects.filter(id__in=data.user_ids)
     serializer = GetPublicUserSerializer(users, many=True, context={"request":request})
     return api_response(True,data=serializer.data)
