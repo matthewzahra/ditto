@@ -9,36 +9,24 @@ WORKOUT_TYPES = [
 	"GYM"
 ]
 
-class Workout(models.Model):
-	class WorkoutTypes(models.TextChoices):
-		RUN = "RUN", "Run"
-		BIKE = "BIKE", "Bike"
-		GYM = "GYM", "Gym"
+##############
+# GYM WORKOUTS
+##############
 
+class Workout(models.Model):
 	# user that workout corresponds to
 	user = models.ForeignKey(
 		to=settings.AUTH_USER_MODEL,
 		on_delete=models.CASCADE,
 		related_name="workout"
 	)
-	workout_type = models.CharField(
-		max_length=20,
-		choices=WorkoutTypes.choices
-	)
+
 	date = models.DateField(auto_now_add=True)
 	num_rounds = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
 # for Gym workouts
 class Exericse(models.Model):
 	name = models.CharField(max_length=128)
-
-	class Meta:
-		constraints = [
-			models.CheckConstraint(
-				check=Q(workout__workout_type="GYM"),
-				name="exercise_corresponds_to_gym"
-			)
-		]
 
 # intermediate table that links the an exercise to a workout and notes the number of reps
 class Reps(models.Model):
@@ -56,23 +44,25 @@ class Reps(models.Model):
 
 	rep_count = models.IntegerField(validators=[MinValueValidator(1)])
 
+#################
+# CARDIO SESSIONS
+#################
 
-# For Bike/Run sessions
-class Route(models.Model):
-	workout = models.ForeignKey(
-		to=Workout,
+class Endurance(models.Model):
+	class ExerciseTypes(models.TextChoices):
+		RUN = "RUN","Run"
+		CYCLE = "CYCLE","Cycle"
+
+	# user that workout corresponds to
+	user = models.ForeignKey(
+		to=settings.AUTH_USER_MODEL,
 		on_delete=models.CASCADE,
-		related_name="exercise",
+		related_name="workout"
 	)
-
+	exercise_type = models.CharField(
+		max_length=20,
+		choices=ExerciseTypes.choices,
+		default=ExerciseTypes.RUN
+	)
 	kms = models.FloatField(validators=[MinValueValidator(1)])
 	time = models.DurationField()
-
-	class Meta:
-		constraints = [
-			models.CheckConstraint(
-				condition=Q(workout__workout_type="RUN") | Q(workout__workout_type="BIKE"),
-				name="exercise_corresponds_to_gym"
-			)
-		]
-

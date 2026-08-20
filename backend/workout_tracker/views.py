@@ -4,7 +4,9 @@ from ditto.core.http_handling import api_response, validate, ApiResponseSerializ
 from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutTypeSerializer, WorkoutSerializer
 from workout_tracker.models import Exericse, Workout
 
-
+##############
+# GYM SESSIONS
+##############
 @extend_schema(
 	tags=['workout_tracker'],
 	request=ExerciseSerializer,
@@ -68,3 +70,15 @@ def delete_workout(request):
 	data = validate(IDSerializer,request.data)
 	deleted_count,_ = Workout.objects.filter(user=request.user, id=data['id'])
 	return api_response(True,status=204)
+
+#################
+# CARDIO SESSIONS
+#################
+def get_cardio(request):
+	pass
+
+def add_cardio(request):
+	pass
+
+def delete_cardio(request):
+	pass

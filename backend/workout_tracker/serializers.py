@@ -8,10 +8,6 @@ from datetime import timedelta
 
 # receive a single workout to add 
 class WorkoutSerializer(serializers.Serializer):
-	workout_type = serializers.ChoiceField(
-		max_length=20,
-		choices=Workout.WorkoutTypes.choices
-	)
 	date = serializers.DateField(required=False)
 	num_rounds = serializers.IntegerField(required=False, default=1)
 	
@@ -30,16 +26,10 @@ class RepsSerializer(serializers.Serializer):
 			raise serializers.ValidationError("Can only add reps of exercises to a GYM session.")
 		return value
 
-class RouteSerializer(serializers.Serializer):
-	workout_id = serializers.IntegerField()
+class EnduranceSerializer(serializers.Serializer):
+	exercise_type = serializers.CharField(max_length=20)
 	kms = serializers.FloatField(min_value=0.0)
 	time = serializers.DurationField(min_value=timedelta(seconds=1))
-
-	# validate that we only add a route to a cycle or a run
-	def validate_workout_id(self, value):
-		if not (Workout.objects.filter(id=value, workout_type="RUN").exists() or Workout.objects.filter(id=value, workout_type="BIKE").exists()):
-			raise serializers.ValidationError("Can only add a route to a RUN or BIKE session.")
-		return value
 
 # receive an ID as an input
 class IDSerializer(serializers.Serializer):
