@@ -1,0 +1,10 @@
+.workout-tracker-page {
+    width: 100%;
+    align-self: stretch;
+    box-sizing: border-box;
+}
+
+.running-container {
+    width: 100%;
+    height: 500px;
+}

@@ -18,6 +18,7 @@ function Navbar() {
                     <NavItem to="/home">Home</NavItem>
                     <NavItem to="/quote">Quote</NavItem>
                     <NavItem to="/restaurant-tracker">Restaurant</NavItem>
+                    <NavItem to="workout-tracker">Workouts</NavItem>
                 </div>
                 <div className="nav-right">
                     <ProfileDropdown />

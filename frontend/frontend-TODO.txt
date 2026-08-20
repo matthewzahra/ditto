@@ -26,6 +26,8 @@ on restaurant map, fix white lines appearing when viewing on a bigger screen
 
 fix websockets (doesn't connect if first joining session and then logging in, stop websocket attempting connection when logged out, re-attempt connection post login)
 
+restructure components (should have another layer of folders splitting them by feature)
+
 Current todos:
 
 show error when relevant

@@ -21,6 +21,7 @@ import Profile from "./pages/LoggedInPages/Profile/Profile"
 import Quote from "./pages/LoggedInPages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
+import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"
 
 
 import Tempwebcomp from "./components/tempwebcomp/Tempwebcomp"
@@ -50,7 +51,8 @@ function App() {
         <Route path="/profile" element={<Profile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/quote" element={<Quote />} />
-        <Route path="restaurant-tracker" element={<RestaurantTracker />} />
+        <Route path="/restaurant-tracker" element={<RestaurantTracker />} />
+        <Route path="/workout-tracker" element={<WorkoutTracker />} />
         <Route path="/temp" element={<Tempwebcomp />} />
       </Route>
       
