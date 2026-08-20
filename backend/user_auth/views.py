@@ -7,7 +7,7 @@ from django.utils import timezone
 from datetime import timedelta
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer, disable_endpoint_prod
 from drf_spectacular.utils import extend_schema
-from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer, RequestUserDataSeralizer, GetPublicUserSerializer, ProfilePhotoSerializer
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer, RequestUserDataSeralizer, GetPublicUserSerializer, ProfilePictureSerializer
 from rest_framework.decorators import api_view, parser_classes
 from rest_framework.parsers import MultiPartParser
 from django.db.utils import IntegrityError
@@ -140,12 +140,12 @@ def logout_user(request):
 @extend_schema(
     tags=['user_auth'],
     responses=FileResponse,
-    summary="get profile photo of a user"
+    summary="get profile picture of a user"
 )
 @api_view(['GET'])
-def get_profile_photo(request, user_id):
+def get_profile_picture(request, user_id):
     user = CustomUser.objects.filter(id=user_id)
-    if not user.profile_photo:
+    if not user.profile_picture:
         return None
 
     content_type, _ = mimetypes.guess_type(user.profile_picture.name)
@@ -169,20 +169,20 @@ def get_users(request):
     serializer = GetPublicUserSerializer(users, many=True, context={"request":request})
     return api_response(True,data=serializer.data)
 
-# update a users' profile photo
+# update a users' profile picture
 @extend_schema(
     tags=['user_auth'],
-    request=ProfilePhotoSerializer,
+    request=ProfilePictureSerializer,
     responses=ApiResponseSerializer,
-    summary="update a user's profile photo"
+    summary="update a user's profile picture"
 )
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def update_profile_picture(request):
-    data = validate(ProfilePhotoSerializer)
+    data = validate(ProfilePictureSerializer)
     user = request.user
-    user.profile_photo = data.profile_photo
-    user.save(update_fields=['profile_photo'])
+    user.profile_picture = data.profile_picture
+    user.save(update_fields=['profile_picture'])
     return api_response(True)
 
 @extend_schema(

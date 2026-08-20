@@ -35,8 +35,8 @@ class UpdatePasswordSerializer(serializers.Serializer):
 class RequestUserDataSeralizer(serializers.Serializer):
 	user_ids = serializers.PrimaryKeyRelatedField(many=True,queryset=CustomUser.objects.all())
 
-class ProfilePhotoSerializer(serializers.SerializerMethodField):
-	profile_photo = serializers.ImageField(allow_empty_file=False)
+class ProfilePictureSerializer(serializers.SerializerMethodField):
+	profile_picture = serializers.ImageField(allow_empty_file=False)
 
 ########
 # OUTPUT
@@ -60,5 +60,5 @@ class GetPublicUserSerializer(serializers.ModelSerializer):
 		request = self.context["request"]
 
 		return request.build_absolute_uri(
-			f"/api/user_auth/{obj.id}/profile-photo/"
+			f"/api/user_auth/{obj.id}/profile-picture/"
 		)
