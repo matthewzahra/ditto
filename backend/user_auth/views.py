@@ -144,7 +144,7 @@ def logout_user(request):
 )
 @api_view(['GET'])
 def get_profile_photo(request, user_id):
-    user = CustomUser.objects.fitler(id=user_id)
+    user = CustomUser.objects.filter(id=user_id)
     if not user.profile_photo:
         return None
 

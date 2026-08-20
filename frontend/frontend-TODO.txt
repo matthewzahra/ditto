@@ -28,6 +28,8 @@ fix websockets (doesn't connect if first joining session and then logging in, st
 
 fix pop ups closing when clicking off by accident (specifically clicking on it, moving mouse off of it, and then releasing - makes it disappear)
 
+do comment overhaul (add comments to all files)
+
 Current todos:
 
 show error when relevant

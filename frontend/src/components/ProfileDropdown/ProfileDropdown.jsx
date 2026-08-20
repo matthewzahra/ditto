@@ -7,7 +7,7 @@ import { useUnreadMessages } from "../../context/UnreadMessagesContext"
 
 import NavItem from "../NavItem/NavItem"
 
-import userPic from "../../assets/userPic.svg"
+import defaultUserPic from "../../assets/userPic.svg"
 import userIcon from "../../assets/userIcon.svg"
 import logoutIcon from "../../assets/logoutIcon.svg"
 import inboxIcon from "../../assets/inboxIcon.svg"
@@ -39,11 +39,16 @@ function ProfileDropdown() {
         }
     }, [profileMenuOpen])
 
+    // fetch user profile picture
+    useEffect(() => {
+        
+    }, [])
+
     return (
         <div className="profile-menu" ref={profileMenuRef}>
             <button className={`profile-picture ${unreadInboxCount > 0 ? "has-notification" : ""}`} onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
                 <span className="profile-picture-image">
-                    <img src={userPic} alt="Profile" />
+                    <img src={defaultUserPic} alt="Profile" />
                 </span>
 
                 {unreadInboxCount > 0 && (
