@@ -61,7 +61,7 @@ class Cardio(models.Model):
 	user = models.ForeignKey(
 		to=settings.AUTH_USER_MODEL,
 		on_delete=models.CASCADE,
-		related_name="workout"
+		related_name="cardio"
 	)
 	exercise_type = models.CharField(
 		max_length=20,
