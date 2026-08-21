@@ -13,6 +13,10 @@ WORKOUT_TYPES = [
 # GYM WORKOUTS
 ##############
 
+'''
+Workout 1 <-> m Reps m <-> m Exercise
+'''
+
 class Workout(models.Model):
 	# user that workout corresponds to
 	user = models.ForeignKey(
@@ -21,7 +25,7 @@ class Workout(models.Model):
 		related_name="workout"
 	)
 
-	date = models.DateField(auto_now_add=True)
+	date = models.DateField()
 	num_rounds = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
 # for Gym workouts

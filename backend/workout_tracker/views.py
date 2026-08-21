@@ -1,8 +1,10 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
-from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutTypeSerializer, WorkoutSerializer
-from workout_tracker.models import Exericse, Workout
+from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer
+from workout_tracker.models import Exericse, Workout, Reps
+from django.db.models import Prefetch
+from django.db import transaction
 
 ##############
 # GYM SESSIONS
@@ -42,23 +44,48 @@ def get_exercises(request):
 
 @extend_schema(
 	tags=['workout_tracker'],
-	request=WorkoutTypeSerializer,
 	responses=ApiResponseSerializer,
-	description="should provide workout type - will default to GYM."
+	description="Get all the gym workouts for the current user."
 )
 @api_view(['GET'])
 def get_workouts(request):
-	raise NotImplemented
+	user = request.user
+	# below does a database optimisation by utilising a JOIN
+	workouts = Workout.objects.filter(user=user).prefetch_related(
+		Prefetch(
+			"reps",
+			queryset=Reps.objects.select_related("exercise")
+		)
+	)
+
+	serializer = WorkoutOutputSerializer(workouts, many=True)
+	return api_response(True,data=serializer.data)
 
 @extend_schema(
 	tags=['workout_tracker'],
 	request=WorkoutSerializer,
 	responses=ApiResponseSerializer,
-	description="should provide workout type - will default to GYM."
 )
 @api_view(['POST'])
 def add_workout(request):
-	raise NotImplemented
+	class BadExercise(Exception):
+		pass
+
+	data = validate(WorkoutSerializer,request.data)
+	try:
+		# if any bad exercise, we want to roll back the whole operation
+		with transaction.atomic():
+			workout = Workout.objects.create(user=request.user, date=data['date'], num_rounds=data['num_rounds'])
+			for (exercise_id,reps) in data['exercises']:
+				if not Exericse.objects.filter(user=request.user,id=exercise_id).exists():
+					raise BaseException
+				rep = Reps.objects.create(workout=workout.id, exercise=exercise_id)
+
+	except BadExercise as e:
+		return api_response(False,error="Bad exercise ids passed.",status=400)
+
+	serializer = WorkoutOutputSerializer(workout)
+	return api_response(True,data=serializer.data)
 
 @extend_schema(
 	tags=["workout_tracker"],

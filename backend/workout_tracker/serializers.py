@@ -6,10 +6,19 @@ from datetime import timedelta
 # INPUT
 #######
 
-# receive a single workout to add 
+# receive a single workout to add, including a list of exercises and the number of reps to perform each exercise
 class WorkoutSerializer(serializers.Serializer):
 	date = serializers.DateField(required=False)
 	num_rounds = serializers.IntegerField(required=False, default=1)
+
+	# a list of 2 pairs, where the first is the exercise id and the second is the number of reps
+	exercises = serializers.ListField(
+		child=serializers.ListField(
+			child=serializers.IntegerField(),
+			min_length=2,
+			max_length=2
+		)
+	)
 	
 # receive a single exercise to be added
 class ExerciseSerializer(serializers.Serializer):
@@ -20,12 +29,6 @@ class RepsSerializer(serializers.Serializer):
 	workout_id = serializers.IntegerField()
 	exercise_id = serializers.IntegerField()
 
-	# validate that we only add reps to GYM workouts
-	def validate_workout_id(self, value):
-		if not Workout.objects.filter(id=value, workout_type="GYM").exists():
-			raise serializers.ValidationError("Can only add reps of exercises to a GYM session.")
-		return value
-
 class EnduranceSerializer(serializers.Serializer):
 	exercise_type = serializers.CharField(max_length=20)
 	kms = serializers.FloatField(min_value=0.0)
@@ -35,12 +38,6 @@ class EnduranceSerializer(serializers.Serializer):
 class IDSerializer(serializers.Serializer):
 	id = serializers.IntegerField()
 
-# for selecting all workouts of a certain type
-class WorkoutTypeSerializer(serializers.Serializer):
-	workout_type = serializers.ChoiceField(
-		max_length=20,
-		choices=Workout.WorkoutTypes.choices
-	)
 
 ########
 # OUTPUT
@@ -56,7 +53,7 @@ class RepsOutputSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Reps
-		fields = ("rep_count")
+		fields = ("exercise","rep_count")
 
 # for returning workouts, including exercises and reps
 class WorkoutOutputSerializer(serializers.ModelSerializer):
@@ -64,4 +61,4 @@ class WorkoutOutputSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Workout
-		fields = ("name")
+		fields = ("name","reps")
