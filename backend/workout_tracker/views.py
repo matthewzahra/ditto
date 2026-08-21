@@ -1,8 +1,8 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
-from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer
-from workout_tracker.models import Exericse, Workout, Reps
+from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer, CardioOutputSerializer, CardioSerializer, CardioSingleOutputSerializer
+from workout_tracker.models import Exericse, Workout, Reps, Cardio
 from django.db.models import Prefetch
 from django.db import transaction
 
@@ -101,11 +101,35 @@ def delete_workout(request):
 #################
 # CARDIO SESSIONS
 #################
+@extend_schema(
+	tags=['workout_tracker'],
+	responses=ApiResponseSerializer
+)
+@api_view(['GET'])
 def get_cardio(request):
-	pass
+	sessions = Cardio.objects.filter(user=request.user)
+	serializer = CardioOutputSerializer(sessions,many=True)
+	return api_response(True,data=serializer.data)
 
+@extend_schema(
+	tags=['workout_tracker'],
+	request=CardioSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['POST'])
 def add_cardio(request):
-	pass
+	data = validate(CardioSerializer,request.data)
+	cardio = Cardio.objects.create(user=request.user, exercise_type=data['exercise_type'],kms=data['kms'],time=data['time'],date=data['date'])
+	serializer = CardioSingleOutputSerializer(cardio)
+	return api_response(True,data=serializer.data)
 
+@extend_schema(
+	tags=['workout_tracker'],
+	request=IDSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['DELETE'])
 def delete_cardio(request):
-	pass
+	data = validate(IDSerializer,request.data)
+	deleted_count,_ = Cardio.objects.filter(user=request.user,id=data['id']).delete()
+	return api_response(True,status=204)

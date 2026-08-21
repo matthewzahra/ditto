@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from workout_tracker.models import Workout, Exericse, Reps
+from workout_tracker.models import Workout, Exericse, Reps, Cardio
 from datetime import timedelta
 
 #######
@@ -29,10 +29,11 @@ class RepsSerializer(serializers.Serializer):
 	workout_id = serializers.IntegerField()
 	exercise_id = serializers.IntegerField()
 
-class EnduranceSerializer(serializers.Serializer):
-	exercise_type = serializers.CharField(max_length=20)
+class CardioSerializer(serializers.Serializer):
+	exercise_type = serializers.ChoiceField(choices=Cardio.ExerciseTypes.choices)
 	kms = serializers.FloatField(min_value=0.0)
 	time = serializers.DurationField(min_value=timedelta(seconds=1))
+	date = serializers.DateField()
 
 # receive an ID as an input
 class IDSerializer(serializers.Serializer):
@@ -62,3 +63,28 @@ class WorkoutOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Workout
 		fields = ("name","reps")
+
+# for a single cardio session
+class CardioSingleOutputSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Cardio
+		fields = ("exercise_type","time","kms","date")
+
+
+# for returning cardio sessions, grouped by the type of cardio
+class CardioOutputSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Cardio
+		fields = ("exercise_type","time","kms","date")
+
+	# used to turn the object into its datarepresentation (JSON format)
+	def to_representation(self, instances):
+		result = {}
+
+		for inst in instances:
+			if inst.type not in result:
+				result[inst.type] = []
+
+			result[inst.type].append(CardioSingleOutputSerializer(inst).data)
+
+		return result

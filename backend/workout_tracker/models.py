@@ -52,7 +52,7 @@ class Reps(models.Model):
 # CARDIO SESSIONS
 #################
 
-class Endurance(models.Model):
+class Cardio(models.Model):
 	class ExerciseTypes(models.TextChoices):
 		RUN = "RUN","Run"
 		CYCLE = "CYCLE","Cycle"
@@ -70,3 +70,4 @@ class Endurance(models.Model):
 	)
 	kms = models.FloatField(validators=[MinValueValidator(1)])
 	time = models.DurationField()
+	date = models.DateField()
