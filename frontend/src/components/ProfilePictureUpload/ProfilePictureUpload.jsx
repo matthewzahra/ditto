@@ -20,7 +20,7 @@ function ProfilePictureUpload({ profilePicture, setProfilePicture }) {
         try {
             setUploading(true)
 
-            const data = await apiRequest(
+            const response = await apiRequest(
                 "/api/user_auth/update_profile_picture/",
                 {
                     method: "POST",
@@ -28,7 +28,9 @@ function ProfilePictureUpload({ profilePicture, setProfilePicture }) {
                 }
             )
 
-            setProfilePicture(data.profile_picture)
+            const data = await response.json()
+
+            setProfilePicture(data.data.profile_picture)
         } catch (error) {
             console.error("Failed to upload profile picture:", error)
         } finally {

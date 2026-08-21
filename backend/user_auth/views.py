@@ -144,7 +144,7 @@ def logout_user(request):
 )
 @api_view(['GET'])
 def get_profile_picture(request, user_id):
-    user = CustomUser.objects.filter(id=user_id)
+    user = CustomUser.objects.filter(id=user_id).get()
     if not user.profile_picture:
         return None
 
@@ -162,7 +162,7 @@ def get_profile_picture(request, user_id):
 )
 @api_view(['GET'])
 def get_current_user(request):
-    serializer = GetPublicUserSerializer(request.user)
+    serializer = GetPublicUserSerializer(request.user, context={"request":request})
     return api_response(True,data=serializer.data)
 
 # this gets non-confidential user-information
@@ -191,9 +191,11 @@ def get_users(request):
 def update_profile_picture(request):
     data = validate(ProfilePictureSerializer, request.data)
     user = request.user
+    user.profile_picture.delete(save=True)
     user.profile_picture = data["profile_picture"]
     user.save(update_fields=['profile_picture'])
-    return api_response(True)
+    serializer = GetPublicUserSerializer(user, context={"request":request})
+    return api_response(True, data=serializer.data)
 
 @extend_schema(
     tags=['user_auth'],
