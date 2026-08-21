@@ -31,7 +31,7 @@ urlpatterns = [
     path('api/inbox/', include('inbox.urls')),
     path('api/quotes/', include('quotes.urls')),
     path('api/restaurant/', include('restaurant.urls')),
-    path('api/workout_tracker/', include('workout_racker.urls')),
+    path('api/workout_tracker/', include('workout_tracker.urls')),
 ]
 
 # add any DEV only paths 

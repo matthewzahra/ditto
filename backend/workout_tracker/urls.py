@@ -2,9 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-	path("generate_daily_quote/", views.generate_daily_quote, name='generate_daily_quote'),
-    path("record_quote/", views.record_quote, name="arecord_quote"),
-    path("get_user_quotes/", views.get_user_quotes, name="get_user_quotes"),
     path("add_exercise/", views.add_exercise, name="add_exercise"),
     path("delete_exercise/", views.delete_exercise, name="delete_exercise"),
     path("get_exercises", views.get_exercises, name="get_exercises"),
