@@ -78,7 +78,7 @@ def add_workout(request):
 			workout = Workout.objects.create(user=request.user, date=data['date'], num_rounds=data['num_rounds'])
 			for (exercise_id,reps) in data['exercises']:
 				if not Exericse.objects.filter(user=request.user,id=exercise_id).exists():
-					raise BaseException
+					raise BadExercise
 				rep = Reps.objects.create(workout=workout.id, exercise=exercise_id)
 
 	except BadExercise as e:
