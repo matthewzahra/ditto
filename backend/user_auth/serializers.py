@@ -35,7 +35,7 @@ class UpdatePasswordSerializer(serializers.Serializer):
 class RequestUserDataSeralizer(serializers.Serializer):
 	user_ids = serializers.PrimaryKeyRelatedField(many=True,queryset=CustomUser.objects.all())
 
-class ProfilePictureSerializer(serializers.SerializerMethodField):
+class ProfilePictureSerializer(serializers.Serializer):
 	profile_picture = serializers.ImageField(allow_empty_file=False)
 
 ########

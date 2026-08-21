@@ -189,9 +189,9 @@ def get_users(request):
 @api_view(['POST'])
 @parser_classes([MultiPartParser])
 def update_profile_picture(request):
-    data = validate(ProfilePictureSerializer)
+    data = validate(ProfilePictureSerializer, request.data)
     user = request.user
-    user.profile_picture = data.profile_picture
+    user.profile_picture = data["profile_picture"]
     user.save(update_fields=['profile_picture'])
     return api_response(True)
 

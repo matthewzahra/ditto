@@ -24,8 +24,12 @@ async function apiRequest(endpoint, options = {}) {
         }
 
         if (body !== null) {
-            requestOptions.headers["Content-Type"] = "application/json"
-            requestOptions.body = JSON.stringify(body)
+            if (body instanceof FormData) {
+                requestOptions.body = body
+            } else {
+                requestOptions.headers["Content-Type"] = "application/json"
+                requestOptions.body = JSON.stringify(body)
+            }
         }
 
         const response = await fetch(`${API}${endpoint}`, requestOptions)

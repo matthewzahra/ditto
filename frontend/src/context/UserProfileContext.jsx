@@ -5,6 +5,9 @@ import apiRequest from "../core/apiRequest"
 const UserProfileContext = createContext(null)
 
 export function UserProfileProvider({children}) {
+    const [userId, setUserId] = useState(null)
+    const [userEmail, setUserEmail] = useState(null)
+    const [userProfilePicture, setUserProfilePicture] = useState(null)
 
     const { loggedIn } = useAuth()
 
@@ -15,7 +18,10 @@ export function UserProfileProvider({children}) {
                     const response = await apiRequest("/api/user_auth/get_current_user/")
 
                     const data = await response.json()
-                    console.log(data)
+
+                    setUserId(data.data.id)
+                    setUserEmail(data.data.email)
+                    setUserProfilePicture(data.data.profile_picture)
                 } catch (err) {
                     console.error(err)
                 }
@@ -27,7 +33,12 @@ export function UserProfileProvider({children}) {
     return (
         <UserProfileContext.Provider
             value={{
-                
+                userId,
+                setUserId,
+                userEmail,
+                setUserEmail,
+                userProfilePicture,
+                setUserProfilePicture
             }}
         >
             {children}
