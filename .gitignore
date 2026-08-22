@@ -46,3 +46,6 @@ dist-ssr
 
 # media
 backend/media/*
+
+# folder for the backups
+backups/*
