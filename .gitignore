@@ -11,7 +11,7 @@ wheels/
 
 # environment variables
 .env
-config.env
+frontend.env
 
 # database
 db.sqlite3
