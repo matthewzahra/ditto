@@ -92,7 +92,7 @@ if ENV == "DEV":
         "http://localhost:5173",
     ]
 else:
-    CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS",None)
+    CSRF_TRUSTED_ORIGINS = [os.getenv("CSRF_TRUSTED_ORIGINS",None)]
 
 ROOT_URLCONF = 'ditto.urls'
 
