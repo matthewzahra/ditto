@@ -27,6 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY =  os.getenv('SECRET_KEY')
 ENV = os.getenv("ENV","PROD")
+APP_URL = os.getenv("APP_URL",None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 if ENV == "DEV":
@@ -35,8 +36,8 @@ else:
     DEBUG = False
 
 ALLOWED_HOSTS = []
-if ENV == "PROD" and os.getenv("APP_URL",None):
-    ALLOWED_HOSTS.append(os.getenv("APP_URL"))
+if ENV == "PROD" and APP_URL:
+    ALLOWED_HOSTS.append(APP_URL)
 
 # Application definition
 
@@ -86,9 +87,14 @@ CORS_ALLOW_CREDENTIALS = True
 
 # TODO - update
 # allows us to use CSRF with CORS so that we can make use of POST requests safely
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-]
+if ENV == "DEV":
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:5173",
+    ]
+else:
+    CSRF_TRUSTED_ORIGINS = [
+        APP_URL
+    ]
 
 ROOT_URLCONF = 'ditto.urls'
 
