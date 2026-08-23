@@ -5,8 +5,8 @@ services:
     env_file:
       - .env
     volumes:
-    - ./backend/media:/app/media
-    - ./backend/db.sqlite3:/app/db.sqlite3
+      - ./backend/media:/app/media
+      - ./backend/db.sqlite3:/app/db.sqlite3
 
   frontend:
     build: ./frontend

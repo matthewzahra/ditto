@@ -1,3 +1,0 @@
-in API.js - fix the hard coding
-
-currently websockets still always point at localhost - fix this too 
