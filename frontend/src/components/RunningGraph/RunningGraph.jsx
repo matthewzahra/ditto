@@ -59,17 +59,17 @@ function RunningGraph({ runs }) {
                     enableArea={true}
                     areaOpacity={0.15}
 
-                    pointSize={6}
+                    pointSize={0}
                     pointColor="var(--card-background)"
-                    pointBorderWidth={2}
+                    pointBorderWidth={0}
                     pointBorderColor={{ from: "serieColor" }}
 
-                    enableGridX={false}
+                    enableGridX={true}
                     gridYValues={5}
 
                     axisBottom={{
-                        tickSize: 0,
-                        tickPadding: 10,
+                        tickSize: 8,
+                        tickPadding: 4,
                         format: "%d %b"
                     }}
 
