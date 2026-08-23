@@ -3,6 +3,19 @@ import { ResponsiveLine } from "@nivo/line"
 import "./RunningGraph.css"
 
 function RunningGraph({ runs }) {
+
+    const earliestYear = Math.min(...runs.map(run => new Date(run.date).getFullYear()))
+
+    const latestYear = Math.max(...runs.map(run => new Date(run.date).getFullYear()))
+
+    const yearlyData = []
+
+    for (let year = earliestYear; year <= latestYear; year++) {
+        const totalDistance = runs.filter(run => new Date(run.date).getFullYear() === year).reduce((total, run) => total + run.route.kms, 0)
+
+        yearlyData.push({year, distance: totalDistance})
+    }
+
     const data = [
         {
             id: "Distance",
