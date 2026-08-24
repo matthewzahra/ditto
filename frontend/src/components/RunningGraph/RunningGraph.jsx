@@ -4,27 +4,117 @@ import "./RunningGraph.css"
 
 function RunningGraph({ runs }) {
 
-    const earliestYear = Math.min(...runs.map(run => new Date(run.date).getFullYear()))
-
-    const latestYear = Math.max(...runs.map(run => new Date(run.date).getFullYear()))
-
-    const yearlyData = []
-
-    for (let year = earliestYear; year <= latestYear; year++) {
-        const totalDistance = runs.filter(run => new Date(run.date).getFullYear() === year).reduce((total, run) => total + run.route.kms, 0)
-
-        yearlyData.push({year, distance: totalDistance})
+    if (runs.length === 0) {
+        return null
     }
+
+    const sortedRuns = [...runs].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+    )
+
+    const earliestDate = new Date(sortedRuns[0].date)
+    const latestDate = new Date(
+        sortedRuns[sortedRuns.length - 1].date
+    )
+
+    const weeks = []
+    const months = []
+
+    // ----------------
+    // WEEKS
+    // ----------------
+
+    let currentWeek = new Date(earliestDate)
+
+    // Move to Monday of the week containing the earliest run
+    const day = currentWeek.getDay()
+    const difference = day === 0 ? -6 : 1 - day
+
+    currentWeek.setDate(currentWeek.getDate() + difference)
+
+    while (currentWeek <= latestDate) {
+
+        const weekStart = new Date(currentWeek)
+
+        const weekEnd = new Date(currentWeek)
+        weekEnd.setDate(weekEnd.getDate() + 6)
+
+        const distance = sortedRuns
+            .filter(run => {
+                const date = new Date(run.date)
+
+                return date >= weekStart && date <= weekEnd
+            })
+            .reduce(
+                (total, run) => total + run.route.kms,
+                0
+            )
+
+        weeks.push({
+            start: weekStart,
+            end: weekEnd,
+            distance
+        })
+
+        currentWeek.setDate(currentWeek.getDate() + 7)
+    }
+
+    // ----------------
+    // MONTHS
+    // ----------------
+
+    let currentMonth = new Date(
+        earliestDate.getFullYear(),
+        earliestDate.getMonth(),
+        1
+    )
+
+    while (currentMonth <= latestDate) {
+
+        const year = currentMonth.getFullYear()
+        const month = currentMonth.getMonth()
+
+        const distance = sortedRuns
+            .filter(run => {
+                const date = new Date(run.date)
+
+                return (
+                    date.getFullYear() === year &&
+                    date.getMonth() === month
+                )
+            })
+            .reduce(
+                (total, run) => total + run.route.kms,
+                0
+            )
+
+        months.push({
+            year,
+            month: month + 1,
+            distance
+        })
+
+        currentMonth.setMonth(currentMonth.getMonth() + 1)
+    }
+
+    const runningData = {
+        weeks,
+        months
+    }
+
+    console.log(runningData)
+
+    // ----------------
+    // RUNNING GRAPH
+    // ----------------
 
     const data = [
         {
             id: "Distance",
-            data: [...runs]
-                .sort((a, b) => new Date(a.date) - new Date(b.date))
-                .map(run => ({
-                    x: run.date,
-                    y: run.route.kms
-                }))
+            data: sortedRuns.map(run => ({
+                x: run.date,
+                y: run.route.kms
+            }))
         }
     ]
 
