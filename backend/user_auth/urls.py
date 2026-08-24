@@ -22,5 +22,6 @@ urlpatterns = [
 ]
 
 # endpoints only intended for DEV work
-if ENV == "DEV":
+# if ENV == "DEV":
+if True: # currently want registration to be in PROD
 	urlpatterns += [path("register/", views.register, name="register")]

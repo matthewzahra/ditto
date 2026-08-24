@@ -31,7 +31,7 @@ def login_status(request):
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @extend_schema(tags=['user_auth'], request=RegisterSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
-@disable_endpoint_prod
+# @disable_endpoint_prod
 def register(request):  
     data = validate(RegisterSerializer,request.data)
 
