@@ -64,7 +64,7 @@ function VerificationForm() {
                 setVerificationError("Server unavailable")
             }
         } catch (err) {
-            Console.error(err)
+            console.error(err)
             setVerificationError("Unable to connect to the server")
         } finally {
             setLoading(false)
