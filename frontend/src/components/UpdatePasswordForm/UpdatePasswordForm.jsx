@@ -54,7 +54,7 @@ function UpdatePasswordForm() {
             // request register from backend
             const response = await apiRequest("/api/user_auth/update_password/", {
                 method: "POST",
-                body: fordData
+                body: formData
             })
             
             // register response data

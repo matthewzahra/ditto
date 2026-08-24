@@ -50,7 +50,7 @@ function VerificationForm() {
             // request verification from backend
             const response = await apiRequest("/api/user_auth/verify_user/", {
                 method: "POST",
-                body: fordData
+                body: formData
             })
             
             // verification response data
