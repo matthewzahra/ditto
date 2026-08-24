@@ -9,7 +9,11 @@ services:
       - ./backend/db.sqlite3:/app/db.sqlite3
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_API: ${VITE_API}
+        VITE_WEBSOCKETAPI: ${VITE_WEBSOCKETAPI}
     restart: unless-stopped
     ports:
       - "80:80"

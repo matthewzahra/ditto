@@ -4,6 +4,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
+ARG VITE_API
+ARG VITE_WEBSOCKETAPI
+ENV VITE_API=$VITE_API
+ENV VITE_WEBSOCKETAPI=$VITE_WEBSOCKETAPI
 RUN npm run build
 
 # NGINX
