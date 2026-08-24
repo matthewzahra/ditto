@@ -1,8 +1,27 @@
+import { useState, useRef, useEffect } from "react"
 import { ResponsiveLine } from "@nivo/line"
 
 import "./RunningGraph.css"
 
 function RunningGraph({ runs }) {
+    const [timeSpan, setTimeSpan] = useState("weekly")
+    const [timeSpanOpen, setTimeSpanOpen] = useState(false)
+
+    const timeSpanRef = useRef(null)
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (timeSpanRef.current && !timeSpanRef.current.contains(event.target)) {
+                setTimeSpanOpen(false)
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
 
     if (runs.length === 0) {
         return null
@@ -71,17 +90,19 @@ function RunningGraph({ runs }) {
 
     while (currentMonth <= latestDate) {
 
-        const year = currentMonth.getFullYear()
-        const month = currentMonth.getMonth()
+        const monthStart = new Date(currentMonth)
+
+        const monthEnd = new Date(
+            currentMonth.getFullYear(),
+            currentMonth.getMonth() + 1,
+            0
+        )
 
         const distance = sortedRuns
             .filter(run => {
                 const date = new Date(run.date)
 
-                return (
-                    date.getFullYear() === year &&
-                    date.getMonth() === month
-                )
+                return date >= monthStart && date <= monthEnd
             })
             .reduce(
                 (total, run) => total + run.route.kms,
@@ -89,20 +110,13 @@ function RunningGraph({ runs }) {
             )
 
         months.push({
-            year,
-            month: month + 1,
+            start: monthStart,
+            end: monthEnd,
             distance
         })
 
         currentMonth.setMonth(currentMonth.getMonth() + 1)
     }
-
-    const runningData = {
-        weeks,
-        months
-    }
-
-    console.log(runningData)
 
     // ----------------
     // RUNNING GRAPH
@@ -111,10 +125,9 @@ function RunningGraph({ runs }) {
     const data = [
         {
             id: "Distance",
-            data: sortedRuns.map(run => ({
-                x: run.date,
-                y: run.route.kms
-            }))
+            data: timeSpan === "weekly" 
+            ? weeks.map(run => ({x: run.start, y: run.distance})) 
+            : months.map(run => ({x: run.start, y: run.distance}))
         }
     ]
 
@@ -124,6 +137,14 @@ function RunningGraph({ runs }) {
                 <div>
                     <h2>Running</h2>
                     <p>Distance over time</p>
+                </div>
+                <div className="time-span-container" ref={timeSpanRef}>
+                    <button className="time-span-button" onClick={() => setTimeSpanOpen(prev => !prev)}>{timeSpan}</button>
+                    {timeSpanOpen && (
+                        <div className="time-span-dropdown">
+                            <button onClick={() => {setTimeSpan(timeSpan === "weekly" ? "monthly" : "weekly"); setTimeSpanOpen(false)}}>{timeSpan === "weekly" ? "monthly" : "weekly"}</button>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -140,7 +161,7 @@ function RunningGraph({ runs }) {
 
                     xScale={{
                         type: "time",
-                        format: "%Y-%m-%d",
+                        format: "native",
                         precision: "day"
                     }}
 
