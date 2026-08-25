@@ -34,6 +34,28 @@ async function apiRequest(endpoint, options = {}) {
 
         const response = await fetch(`${API}${endpoint}`, requestOptions)
 
+        // TODO - Nick have a look
+        if (!response.ok) {
+            let errorData
+
+            try {
+                errorData = await response.json()
+            } catch {
+                errorData = null
+            }
+
+            const error = new Error(
+                errorData?.detail ||
+                errorData?.error ||
+                "API request failed"
+            )
+
+            error.status = response.status
+            error.data = errorData
+
+            throw error
+        }
+
         return response
 
     } catch (err) {
