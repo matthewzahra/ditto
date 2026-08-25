@@ -30,6 +30,12 @@ class Workout(models.Model):
 
 # for Gym workouts
 class Exericse(models.Model):
+	# user that exercise corresponds to
+	user = models.ForeignKey(
+		to=settings.AUTH_USER_MODEL,
+		on_delete=models.CASCADE,
+		related_name="exercise"
+	)
 	name = models.CharField(max_length=128)
 
 # intermediate table that links the an exercise to a workout and notes the number of reps

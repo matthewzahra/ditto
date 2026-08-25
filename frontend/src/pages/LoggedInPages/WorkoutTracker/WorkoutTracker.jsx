@@ -1,9 +1,13 @@
+import { useState } from "react"
+
 import "./WorkoutTracker.css"
 
 import RunningGraph from "../../../components/RunningGraph/RunningGraph"
+import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
+import RecordExercise from "../../../components/RecordExercise/RecordExercise"
 
 function WorkoutTracker() {
-    // get workouts, display recent running, cycling and workouts in graph form
+    const [recordExerciseOpen, setRecordExerciseOpen] = useState(false)
 
     // TODO remove below
     // temp data
@@ -315,6 +319,9 @@ function WorkoutTracker() {
             <h1>Workout tracker page</h1>
             <div className="running-container">
                 <RunningGraph runs={runs} />
+                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} />
+                {/* record exercise pop up, only displayed when recordExerciseOpen */}
+                <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen}/>
             </div>
         </div>
     )

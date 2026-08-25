@@ -6,6 +6,7 @@
 echo "Reading environment variables"
 source ../.env
 
+echo "$ENV"
 if [ "$ENV" = "DEV" ]; then 
 	# delete the current databse
 	echo "Deleting Database"
