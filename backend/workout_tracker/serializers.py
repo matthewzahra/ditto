@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from workout_tracker.models import Workout, Exericse, Reps, Cardio
+from workout_tracker.models import Workout, Exercise, Reps, Cardio
 from datetime import timedelta
 
 #######
@@ -46,7 +46,7 @@ class IDSerializer(serializers.Serializer):
 # for returning an exercise
 class ExerciseOutputSerializer(serializers.ModelSerializer):
 	class Meta:
-		model = Exericse
+		model = Exercise
 		fields = ("id","name")
 
 class RepsOutputSerializer(serializers.ModelSerializer):
@@ -62,7 +62,7 @@ class WorkoutOutputSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Workout
-		fields = ("name","reps")
+		fields = ("id","date","num_rounds","reps")
 
 # for a single cardio session
 class CardioSingleOutputSerializer(serializers.ModelSerializer):

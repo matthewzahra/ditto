@@ -12,36 +12,42 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
 
     // effect to initialise workout exercises
     useEffect(() => {
-        for (let exercise of exercises) {
-            setWorkoutExercises([exercises.map(exercise => [exercise, 0])])
-        }
+        setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
     }, [exercises])
 
     async function onRecordWorkout() {
-        const name = WorkoutName.trim()
-        if (!name) {
+        if (workoutExercises.reduce((total, exercise) => (total + exercise.reps), 0) === 0) {
             return
         }
 
+        const recordedExercises = workoutExercises.filter(exercise => exercise.reps !== 0)
+
         try {
             const response = await apiRequest(
-                "/api/restaurant/add_Workout",
+                "/api/workout_tracker/add_workout/",
                 {
                     method: "POST",
-                    body: { name }
+                    body: {
+                        date: workoutDate,
+                        num_rounds: numRounds,
+                        exercises: recordedExercises.map(exercise => [exercise.id, exercise.reps])
+                    }
                 }
             )
 
             const data = await response.json()
 
+            // TODO update below to set new workout
             if (data.success) {
                 setWorkouts(prev => [
                     ...prev,
-                    { name }
+                    {}
                 ])
 
-                setWorkoutName("")
-                setRecordWorkoutOpen(fales)
+                setWorkoutDate(new Date().toISOString().split("T")[0])
+                setNumRounds(1)
+                setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
+                setRecordWorkoutOpen(false)
             }
         } catch (err) {
             console.error("Failed to record Workout: ", err)
@@ -49,7 +55,9 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
     }
 
     function onDiscard() {
-        setWorkoutName("")
+        setWorkoutDate(new Date().toISOString().split("T")[0])
+        setNumRounds(1)
+        setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
         setRecordWorkoutOpen(false)
     }
 
@@ -67,7 +75,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                     <input 
                         type="number"
                         value={numRounds}
-                        onChange={event => setNumRounds(event.target.value)}
+                        onChange={event => setNumRounds(Number(event.target.value))}
                         min={1}
                     />
                     <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} />

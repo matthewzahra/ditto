@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Exericse',
+            name='Exercise',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=128)),
@@ -48,7 +48,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('rep_count', models.IntegerField(validators=[django.core.validators.MinValueValidator(1)])),
-                ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reps', to='workout_tracker.exericse')),
+                ('exercise', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reps', to='workout_tracker.exercise')),
                 ('workout', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reps', to='workout_tracker.workout')),
             ],
         ),

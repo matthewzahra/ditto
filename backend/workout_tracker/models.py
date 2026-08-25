@@ -29,7 +29,7 @@ class Workout(models.Model):
 	num_rounds = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
 # for Gym workouts
-class Exericse(models.Model):
+class Exercise(models.Model):
 	# user that exercise corresponds to
 	user = models.ForeignKey(
 		to=settings.AUTH_USER_MODEL,
@@ -47,7 +47,7 @@ class Reps(models.Model):
 	)
 
 	exercise = models.ForeignKey(
-		to=Exericse,
+		to=Exercise,
 		on_delete=models.CASCADE,
 		related_name="reps",
 	)

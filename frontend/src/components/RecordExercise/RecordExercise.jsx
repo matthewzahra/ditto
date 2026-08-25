@@ -7,6 +7,7 @@ import "./RecordExercise.css"
 function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercises }) {
     const [exerciseName, setExerciseName] = useState("")
 
+    // function to add exercise to database
     async function onRecordExercise() {
         const name = exerciseName.trim()
         if (!name) {
@@ -15,7 +16,7 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
 
         try {
             const response = await apiRequest(
-                "/api/restaurant/add_exercise",
+                "/api/workout_tracker/add_exercise/",
                 {
                     method: "POST",
                     body: { name }
@@ -24,6 +25,7 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
 
             const data = await response.json()
 
+            // TODO fix below so that new exercises are stored properly (more than just a name, includes unique id)
             if (data.success) {
                 setExercises(prev => [
                     ...prev,
@@ -31,13 +33,14 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
                 ])
 
                 setExerciseName("")
-                setRecordExerciseOpen(fales)
+                setRecordExerciseOpen(false)
             }
         } catch (err) {
             console.error("Failed to record exercise: ", err)
         }
     }
 
+    // function to discard currently typed exercise and close pop up
     function onDiscard() {
         setExerciseName("")
         setRecordExerciseOpen(false)

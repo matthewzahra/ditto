@@ -4,20 +4,10 @@ import apiRequest from "../../core/apiRequest"
 
 import "./WorkoutComponent.css"
 
-function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setRecordWorkoutOpen }) {
-    // fetching stored exercises
-    useEffect(() => {
-        async function fetchExercises() {
-            const exercisesResponse = await apiRequest("/api/workout_tracker/get_exercises/")
-            const exercisesData = await exercisesResponse.json()
-
-            setExercises(exercisesData.data)
-        }
-
-        fetchExercises()
-    }, [])
-
-
+function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setRecordWorkoutOpen, workouts, setWorkouts }) {
+    // TODO check below sorts it correctly
+    const sortedWorkouts = [...workouts].sort((a, b) => new Date(a.date) - new Date(b.date))
+    
     return (
         <div className="workout-component">
             <div className="workout-component-header">

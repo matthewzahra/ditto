@@ -2,7 +2,7 @@ from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
 from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer, CardioOutputSerializer, CardioSerializer, CardioSingleOutputSerializer
-from workout_tracker.models import Exericse, Workout, Reps, Cardio
+from workout_tracker.models import Exercise, Workout, Reps, Cardio
 from django.db.models import Prefetch
 from django.db import transaction
 
@@ -17,10 +17,11 @@ from django.db import transaction
 @api_view(['POST'])
 def add_exercise(request):
 	data = validate(ExerciseSerializer,request.data)
-	exercise = Exericse.objects.create(user=request.user,name=data['name'])
+	exercise = Exercise.objects.create(user=request.user,name=data['name'])
 	serializer = ExerciseOutputSerializer(exercise)
 	return api_response(True, data=serializer.data)
 
+# TODO what happens if I delete an exercise that is in an existing workout
 @extend_schema(
 	tags=["workout_tracker"],
 	request=IDSerializer,
@@ -29,7 +30,7 @@ def add_exercise(request):
 @api_view(["DELETE"])
 def delete_exercise(request):
 	data = validate(IDSerializer,request.data)
-	deleted_count,_ = Exericse.objects.filter(user=request.user, id=data['id'])
+	deleted_count,_ = Exercise.objects.filter(user=request.user, id=data['id']).delete()
 	return api_response(True,status=204)
 
 @extend_schema(
@@ -38,7 +39,7 @@ def delete_exercise(request):
 )
 @api_view(["GET"])
 def get_exercises(request):
-	exercises = Exericse.objects.filter(user=request.user)
+	exercises = Exercise.objects.filter(user=request.user)
 	serializer = ExerciseOutputSerializer(exercises, many=True)
 	return api_response(True, data=serializer.data)
 
@@ -68,20 +69,16 @@ def get_workouts(request):
 )
 @api_view(['POST'])
 def add_workout(request):
-	class BadExercise(Exception):
-		pass
-
 	data = validate(WorkoutSerializer,request.data)
 	try:
 		# if any bad exercise, we want to roll back the whole operation
 		with transaction.atomic():
 			workout = Workout.objects.create(user=request.user, date=data['date'], num_rounds=data['num_rounds'])
 			for (exercise_id,reps) in data['exercises']:
-				if not Exericse.objects.filter(user=request.user,id=exercise_id).exists():
-					raise BadExercise()
-				rep = Reps.objects.create(workout=workout.id, exercise=exercise_id)
+				exercise = Exercise.objects.filter(user=request.user,id=exercise_id).get()
+				rep = Reps.objects.create(workout=workout, exercise=exercise, rep_count=reps)
 
-	except BadExercise as e:
+	except Exercise.DoesNotExist as e:
 		return api_response(False,error="Bad exercise ids passed.",status=400)
 
 	serializer = WorkoutOutputSerializer(workout)
@@ -95,7 +92,7 @@ def add_workout(request):
 @api_view(["DELETE"])
 def delete_workout(request):
 	data = validate(IDSerializer,request.data)
-	deleted_count,_ = Workout.objects.filter(user=request.user, id=data['id'])
+	deleted_count,_ = Workout.objects.filter(user=request.user, id=data['id']).delete()
 	return api_response(True,status=204)
 
 #################

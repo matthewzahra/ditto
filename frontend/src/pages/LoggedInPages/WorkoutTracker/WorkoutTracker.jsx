@@ -6,6 +6,7 @@ import RunningGraph from "../../../components/RunningGraph/RunningGraph"
 import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
 import RecordExercise from "../../../components/RecordExercise/RecordExercise"
 import RecordWorkout from "../../../components/RecordWorkout/RecordWorkout"
+import apiRequest from "../../../core/apiRequest"
 
 function WorkoutTracker() {
     const [exercises, setExercises] = useState([])
@@ -318,8 +319,24 @@ function WorkoutTracker() {
         },
     ]
 
+    // fetching saved exercises
     useEffect(() => {
-        setExercises(["A", "B", "C", "D"])
+        async function fetchExercises() {
+            const response = await apiRequest("/api/workout_tracker/get_exercises/")
+            const data = await response.json()
+            setExercises(data.data)
+        }
+        fetchExercises()
+    }, [])
+
+    // fetching saved workouts
+    useEffect(() => {
+        async function fetchWorkouts() {
+            const response = await apiRequest("/api/workout_tracker/get_workouts/")
+            const data = await response.json()
+            setWorkouts(data.data)
+        }
+        fetchWorkouts()
     }, [])
     
     return (
@@ -327,7 +344,7 @@ function WorkoutTracker() {
             <h1>Workout tracker page</h1>
             <div className="running-container">
                 <RunningGraph runs={runs} />
-                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} />
+                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
                 <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
                 <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
