@@ -1,0 +1,155 @@
+.record-workout-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+
+    z-index: 1000;
+}
+
+.record-workout-form {
+    width: 400px;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    border: 2px solid var(--border);
+    border-radius: 12px;
+
+    background-color: var(--card-background);
+}
+
+.record-workout-form h2 {
+    margin: 0;
+    align-self: center;
+}
+
+/* Form inputs */
+
+.record-workout-form input {
+    width: 100%;
+
+    padding: 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background-color: var(--surface);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.record-workout-form input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+/* Record workout button */
+
+.record-workout-button {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--primary);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-workout-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.record-workout-button:active {
+    transform: scale(0.97);
+}
+
+/* Modal button layout */
+
+.record-workout-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+/* Modal buttons */
+
+.record-workout-buttons button {
+    height: 40px;
+
+    padding: 0 18px;
+
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    flex: 0 0 auto;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-workout-buttons button:active {
+    transform: scale(0.97);
+}
+
+/* Save button */
+
+.record-workout-buttons .record-workout-save-button {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.record-workout-buttons .record-workout-save-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Discard button */
+
+.record-workout-buttons .record-workout-discard-button {
+    background-color: transparent;
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.record-workout-buttons .record-workout-discard-button:hover {
+    background-color: var(--error);
+    color: white;
+}

@@ -1,13 +1,17 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import "./WorkoutTracker.css"
 
 import RunningGraph from "../../../components/RunningGraph/RunningGraph"
 import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
 import RecordExercise from "../../../components/RecordExercise/RecordExercise"
+import RecordWorkout from "../../../components/RecordWorkout/RecordWorkout"
 
 function WorkoutTracker() {
+    const [exercises, setExercises] = useState([])
     const [recordExerciseOpen, setRecordExerciseOpen] = useState(false)
+    const [workouts, setWorkouts] = useState([])
+    const [recordWorkoutOpen, setRecordWorkoutOpen] = useState(false)
 
     // TODO remove below
     // temp data
@@ -314,14 +318,20 @@ function WorkoutTracker() {
         },
     ]
 
+    useEffect(() => {
+        setExercises(["A", "B", "C", "D"])
+    }, [])
+    
     return (
         <div className="workout-tracker-page">
             <h1>Workout tracker page</h1>
             <div className="running-container">
                 <RunningGraph runs={runs} />
-                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} />
+                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} />
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
-                <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen}/>
+                <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
+                <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
+
             </div>
         </div>
     )

@@ -4,9 +4,7 @@ import apiRequest from "../../core/apiRequest"
 
 import "./WorkoutComponent.css"
 
-function WorkoutComponent({ setRecordExerciseOpen }) {
-    const [exercises, setExercises] = useState([])
-
+function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setRecordWorkoutOpen }) {
     // fetching stored exercises
     useEffect(() => {
         async function fetchExercises() {
@@ -26,6 +24,7 @@ function WorkoutComponent({ setRecordExerciseOpen }) {
                 <div>
                     <h2>Workouts</h2>
                     <button className="record-exercise-button" onClick={() => setRecordExerciseOpen(true)}>Record Exercise</button>
+                    <button className="record-workout-button" onClick={() => setRecordWorkoutOpen(true)}>Record Workout</button>
                 </div>
             </div>
         </div>
