@@ -175,3 +175,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 # use a custom user model
 AUTH_USER_MODEL = "user_auth.CustomUser" # found in user_auth/models.py
+
+# define the max size for profile pictures
+PROFILE_PICTURE_MAX_SIZE = 10 * 1024 * 1024 # 10 MB

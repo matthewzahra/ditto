@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from user_auth.models import CustomUser
+from django.conf import settings
 
 #######
 # INPUT
@@ -38,6 +39,11 @@ class RequestUserDataSeralizer(serializers.Serializer):
 class ProfilePictureSerializer(serializers.Serializer):
 	profile_picture = serializers.ImageField(allow_empty_file=False)
 
+	def validate_profile_picture(self, image):
+		if image.size > settings.PROFILE_PICTURE_MAX_SIZE:
+			raise serializers.ValidationError("Profile pictures must be 10 MB or smaller.")
+		return image
+	
 ########
 # OUTPUT
 ########
