@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
-
-import apiRequest from "../../core/apiRequest"
+import WorkoutsList from "../WorkoutsList/WorkoutsList"
 
 import "./WorkoutComponent.css"
 
@@ -15,6 +13,7 @@ function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setR
                     <h2>Workouts</h2>
                     <button className="record-exercise-button" onClick={() => setRecordExerciseOpen(true)}>Record Exercise</button>
                     <button className="record-workout-button" onClick={() => setRecordWorkoutOpen(true)}>Record Workout</button>
+                    <WorkoutsList workouts={sortedWorkouts} />
                 </div>
             </div>
         </div>
