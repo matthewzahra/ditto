@@ -34,7 +34,7 @@ class RepsSerializer(serializers.Serializer):
 class CardioSerializer(serializers.Serializer):
 	exercise_type = serializers.ChoiceField(choices=Cardio.ExerciseTypes.choices)
 	title = serializers.CharField(max_length=64)
-	kms = serializers.FloatField(min_value=0.0)
+	kms = serializers.FloatField(min_value=0.01)
 	time = serializers.DurationField(min_value=timedelta(seconds=1))
 	date = serializers.DateField()
 

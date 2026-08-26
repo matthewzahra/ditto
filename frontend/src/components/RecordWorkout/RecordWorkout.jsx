@@ -41,9 +41,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
             )
 
             const data = await response.json()
-            console.log(data)
 
-            // TODO update below to set new workout
             if (data.success) {
                 setWorkouts(prev => [
                     ...prev,
@@ -58,7 +56,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                 setRecordWorkoutOpen(false)
             }
         } catch (err) {
-            console.error("Failed to record Workout: ", err)
+            console.error("Failed to record workout: ", err)
         }
     }
 

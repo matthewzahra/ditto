@@ -46,9 +46,7 @@ function WorkoutTracker() {
             console.log(data.data)
             console.log(data.data.RUN)
             setRuns(data.data.RUN.map((run, index) => ({
-                ...run,
-                id: index + 1
-
+                ...run
             })))
         }
         fetchCardio()
@@ -81,14 +79,14 @@ function WorkoutTracker() {
                 </button>
             </div>
             <div className="activity-container">
-                {selectedActivity === "running" && (<RunningComponent runs={runs} setRecordRunOpen={setRecordRunOpen} />)}
+                {selectedActivity === "running" && (<RunningComponent runs={runs} setRuns={setRuns} setRecordRunOpen={setRecordRunOpen} />)}
 
                 {selectedActivity === "workouts" && (<WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />)}
                 
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
                 <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
                 <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
-                <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} runs={runs} setRuns={setRuns} />
+                <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} setRuns={setRuns} />
 
             </div>
         </div>

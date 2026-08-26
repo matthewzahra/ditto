@@ -27,13 +27,9 @@ function RunningGraph({ runs }) {
         return null
     }
 
-    const sortedRuns = [...runs].sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
-    )
-
-    const earliestDate = new Date(sortedRuns[0].date)
+    const earliestDate = new Date(runs[runs.length - 1].date)
     const latestDate = new Date(
-        sortedRuns[sortedRuns.length - 1].date
+        runs[0].date
     )
 
     const weeks = []
@@ -58,14 +54,14 @@ function RunningGraph({ runs }) {
         const weekEnd = new Date(currentWeek)
         weekEnd.setDate(weekEnd.getDate() + 6)
 
-        const distance = sortedRuns
+        const distance = runs
             .filter(run => {
                 const date = new Date(run.date)
 
                 return date >= weekStart && date <= weekEnd
             })
             .reduce(
-                (total, run) => total + run.kms,
+                (total, run) => total + Number(run.kms),
                 0
             )
 
@@ -98,14 +94,14 @@ function RunningGraph({ runs }) {
             0
         )
 
-        const distance = sortedRuns
+        const distance = runs
             .filter(run => {
                 const date = new Date(run.date)
 
                 return date >= monthStart && date <= monthEnd
             })
             .reduce(
-                (total, run) => total + run.kms,
+                (total, run) => total + Number(run.kms),
                 0
             )
 

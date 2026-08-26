@@ -4,7 +4,7 @@ import WorkoutListItem from "../WorkoutListItem/WorkoutListItem"
 import "./WorkoutsList.css"
 
 function WorkoutsList({ workouts, setWorkouts }) {
-    // TODO add confirm delete, liuke for quotes
+    // TODO add confirm delete, as is done for quotes
     async function onDelete(id) {
         const response = await apiRequest("/api/workout_tracker/delete_workout/",{
             method: "DELETE",

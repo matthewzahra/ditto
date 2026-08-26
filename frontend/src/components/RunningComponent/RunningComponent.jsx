@@ -1,8 +1,11 @@
 import RunningGraph from "../RunningGraph/RunningGraph"
+import RunningList from "../RunningList/RunningList"
 
 import "./RunningComponent.css"
 
-function RunningComponent({ runs, setRecordRunOpen }) {
+function RunningComponent({ runs, setRuns, setRecordRunOpen }) {
+    const sortedRuns = [...runs].sort((a, b) => new Date(b.date) - new Date(a.date))
+
     return (
         <div className="running-component">
             <div className="running-component-header">
@@ -11,7 +14,8 @@ function RunningComponent({ runs, setRecordRunOpen }) {
                     <button className="record-run-button" onClick={() => setRecordRunOpen(true)}>Record Run</button>
                 </div>
             </div>
-            <RunningGraph runs={runs} />
+            <RunningGraph runs={sortedRuns} />
+            <RunningList runs={sortedRuns} setRuns={setRuns} />
         </div>
     )
 }
