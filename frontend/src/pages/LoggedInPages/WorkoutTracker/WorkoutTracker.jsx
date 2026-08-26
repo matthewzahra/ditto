@@ -345,13 +345,20 @@ function WorkoutTracker() {
 
     // fetching saved cardio
     useEffect(() => {
-        async function fetchRuns() {
+        async function fetchCardio() {
             const response = await apiRequest("/api/workout_tracker/get_cardio")
             const data = await response.json()
-            console.log(data)
+            console.log(data.data)
+            console.log(data.data.RUN)
+            setRuns(data.data.RUN.map((run, index) => ({
+                ...run,
+                id: index + 1
+
+            })))
         }
-        fetchRuns()
+        fetchCardio()
     }, [])
+
     
     return (
         <div className="workout-tracker-page">

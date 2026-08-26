@@ -65,7 +65,7 @@ function RunningGraph({ runs }) {
                 return date >= weekStart && date <= weekEnd
             })
             .reduce(
-                (total, run) => total + run.route.kms,
+                (total, run) => total + run.kms,
                 0
             )
 
@@ -105,7 +105,7 @@ function RunningGraph({ runs }) {
                 return date >= monthStart && date <= monthEnd
             })
             .reduce(
-                (total, run) => total + run.route.kms,
+                (total, run) => total + run.kms,
                 0
             )
 
@@ -126,8 +126,8 @@ function RunningGraph({ runs }) {
         {
             id: "Distance",
             data: timeSpan === "weekly" 
-            ? weeks.map(run => ({x: run.start, y: run.distance})) 
-            : months.map(run => ({x: run.start, y: run.distance}))
+            ? weeks.map(week => ({x: week.start, y: week.distance})) 
+            : months.map(month => ({x: month.start, y: month.distance}))
         }
     ]
 
