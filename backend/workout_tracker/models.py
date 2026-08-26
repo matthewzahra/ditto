@@ -24,7 +24,8 @@ class Workout(models.Model):
 		on_delete=models.CASCADE,
 		related_name="workout"
 	)
-
+	title = models.CharField(max_length=64)
+	info = models.TextField(max_length=512,blank=True,null=True)
 	date = models.DateField()
 	num_rounds = models.IntegerField(validators=[MinValueValidator(1)], default=1)
 
@@ -74,6 +75,7 @@ class Cardio(models.Model):
 		choices=ExerciseTypes.choices,
 		default=ExerciseTypes.RUN
 	)
+	title = models.CharField(max_lenght=64)
 	kms = models.FloatField(validators=[MinValueValidator(1)])
 	time = models.DurationField()
 	date = models.DateField()

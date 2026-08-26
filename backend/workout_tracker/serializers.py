@@ -8,6 +8,8 @@ from datetime import timedelta
 
 # receive a single workout to add, including a list of exercises and the number of reps to perform each exercise
 class WorkoutSerializer(serializers.Serializer):
+	title = serializers.CharField(max_length=64)
+	info = serializers.CharField(max_length=512)
 	date = serializers.DateField(required=False)
 	num_rounds = serializers.IntegerField(required=False, default=1)
 
@@ -31,6 +33,7 @@ class RepsSerializer(serializers.Serializer):
 
 class CardioSerializer(serializers.Serializer):
 	exercise_type = serializers.ChoiceField(choices=Cardio.ExerciseTypes.choices)
+	title = serializers.CharField(max_length=64)
 	kms = serializers.FloatField(min_value=0.0)
 	time = serializers.DurationField(min_value=timedelta(seconds=1))
 	date = serializers.DateField()
@@ -62,20 +65,20 @@ class WorkoutOutputSerializer(serializers.ModelSerializer):
 
 	class Meta:
 		model = Workout
-		fields = ("id","date","num_rounds","reps")
+		fields = ("id","title","info","date","num_rounds","reps")
 
 # for a single cardio session
 class CardioSingleOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Cardio
-		fields = ("exercise_type","time","kms","date")
+		fields = ("exercise_type","title","time","kms","date")
 
 
 # for returning cardio sessions, grouped by the type of cardio
 class CardioOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Cardio
-		fields = ("exercise_type","time","kms","date")
+		fields = ("exercise_type","title","time","kms","date")
 
 	# used to turn the object into its datarepresentation (JSON format)
 	def to_representation(self, instances):
