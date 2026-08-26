@@ -73,21 +73,26 @@ class CardioSingleOutputSerializer(serializers.ModelSerializer):
 		model = Cardio
 		fields = ("exercise_type","title","time","kms","date")
 
+# used to separate 
+class CardioListSerializer(serializers.ListSerializer):
+    def to_representation(self, instances):
+        result = {}
 
+        for instance in instances:
+            exercise_type = instance.exercise_type
+
+            if exercise_type not in result:
+                result[exercise_type] = []
+
+            result[exercise_type].append(
+                CardioSingleOutputSerializer(instance).data
+            )
+
+        return result
+	
 # for returning cardio sessions, grouped by the type of cardio
 class CardioOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Cardio
 		fields = ("exercise_type","title","time","kms","date")
-
-	# used to turn the object into its datarepresentation (JSON format)
-	def to_representation(self, instances):
-		result = {}
-
-		for inst in instances:
-			if inst.type not in result:
-				result[inst.type] = []
-
-			result[inst.type].append(CardioSingleOutputSerializer(inst).data)
-
-		return result
+		list_serializer_class = CardioListSerializer # many=True tells DRF to use this to wrap our normal serializer
