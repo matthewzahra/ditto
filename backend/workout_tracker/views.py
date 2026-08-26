@@ -1,7 +1,7 @@
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import api_view
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer
-from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer, CardioOutputSerializer, CardioSerializer, CardioSingleOutputSerializer
+from workout_tracker.serializers import ExerciseSerializer, ExerciseOutputSerializer, IDSerializer, WorkoutSerializer, WorkoutOutputSerializer, CardioSerializer, CardioSingleOutputSerializer
 from workout_tracker.models import Exercise, Workout, Reps, Cardio
 from django.db.models import Prefetch
 from django.db import transaction
@@ -105,8 +105,17 @@ def delete_workout(request):
 @api_view(['GET'])
 def get_cardio(request):
 	sessions = Cardio.objects.filter(user=request.user)
-	serializer = CardioOutputSerializer(sessions,many=True)
-	return api_response(True,data=serializer.data)
+	serializer = CardioSingleOutputSerializer(sessions,many=True)
+
+	# split into different types of CARDIO
+	result = {}
+	for inst in serializer.data:
+		if inst['exercise_type'] not in result:
+			result[inst['exercise_type']] = []
+
+		result[inst['exercise_type']].append(inst)
+
+	return api_response(True,data=result)
 
 @extend_schema(
 	tags=['workout_tracker'],

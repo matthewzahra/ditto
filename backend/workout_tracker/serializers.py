@@ -72,27 +72,3 @@ class CardioSingleOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Cardio
 		fields = ("exercise_type","title","time","kms","date")
-
-# used to separate 
-class CardioListSerializer(serializers.ListSerializer):
-    def to_representation(self, instances):
-        result = {}
-
-        for instance in instances:
-            exercise_type = instance.exercise_type
-
-            if exercise_type not in result:
-                result[exercise_type] = []
-
-            result[exercise_type].append(
-                CardioSingleOutputSerializer(instance).data
-            )
-
-        return result
-	
-# for returning cardio sessions, grouped by the type of cardio
-class CardioOutputSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Cardio
-		fields = ("exercise_type","title","time","kms","date")
-		list_serializer_class = CardioListSerializer # many=True tells DRF to use this to wrap our normal serializer

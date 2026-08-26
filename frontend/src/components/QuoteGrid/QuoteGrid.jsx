@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 import QuoteItem from "../QuoteItem/QuoteItem"
 
-import "./quoteGrid.css"
+import "./QuoteGrid.css"
 
 function QuoteGrid({ userQuotes, onDelete }) {
     const [displayedQuotes, setDisplayedQuotes] = useState([])
