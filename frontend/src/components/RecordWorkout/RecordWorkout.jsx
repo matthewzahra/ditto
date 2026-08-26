@@ -6,7 +6,6 @@ import RecordWorkoutExercises from "../RecordWorkoutExercises/RecordWorkoutExerc
 import "./RecordWorkout.css"
 
 function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, exercises }) {
-    
     const [workoutTitle, setWorkoutTitle] = useState("")
     const [workoutDescription, setWorkoutDescription] = useState("")
     const [workoutDate, setWorkoutDate] = useState(new Date().toISOString().split("T")[0])

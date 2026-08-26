@@ -2,10 +2,11 @@ import { useState, useEffect } from "react"
 
 import "./WorkoutTracker.css"
 
-import RunningGraph from "../../../components/RunningGraph/RunningGraph"
+import RunningComponent from "../../../components/RunningComponent/RunningComponent"
 import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
 import RecordExercise from "../../../components/RecordExercise/RecordExercise"
 import RecordWorkout from "../../../components/RecordWorkout/RecordWorkout"
+import RecordRun from "../../../components/RecordRun/RecordRun"
 import apiRequest from "../../../core/apiRequest"
 
 function WorkoutTracker() {
@@ -13,10 +14,13 @@ function WorkoutTracker() {
     const [recordExerciseOpen, setRecordExerciseOpen] = useState(false)
     const [workouts, setWorkouts] = useState([])
     const [recordWorkoutOpen, setRecordWorkoutOpen] = useState(false)
+    const [runs, setRuns] = useState([])
+    const [recordRunOpen, setRecordRunOpen] = useState(false)
+    const [selectedActivity, setSelectedActivity] = useState("workouts")
 
     // TODO remove below
     // temp data
-    const runs = [
+    /*const runs = [
         {
             id: 1,
             workout_type: "RUN",
@@ -317,7 +321,7 @@ function WorkoutTracker() {
                 time: "00:29:12",
             },
         },
-    ]
+    ]*/
 
     // fetching saved exercises
     useEffect(() => {
@@ -338,16 +342,52 @@ function WorkoutTracker() {
         }
         fetchWorkouts()
     }, [])
+
+    // fetching saved cardio
+    useEffect(() => {
+        async function fetchRuns() {
+            const response = await apiRequest("/api/workout_tracker/get_cardio")
+            const data = await response.json()
+            console.log(data)
+        }
+        fetchRuns()
+    })
     
     return (
         <div className="workout-tracker-page">
             <h1>Workout tracker page</h1>
-            <div className="running-container">
-                <RunningGraph runs={runs} />
-                <WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />
+            <div className="workout-tracker-page-selector">
+                <div className={`selector-slider ${selectedActivity}`} />
+                <button
+                    className={selectedActivity === "workouts" ? "active" : ""}
+                    onClick={() => setSelectedActivity("workouts")}
+                >
+                    Workouts
+                </button>
+
+                <button
+                    className={selectedActivity === "running" ? "active" : ""}
+                    onClick={() => setSelectedActivity("running")}
+                >
+                    Running
+                </button>
+
+                <button
+                    className={selectedActivity === "cycling" ? "active" : ""}
+                    onClick={() => setSelectedActivity("cycling")}
+                >
+                    Cycling
+                </button>
+            </div>
+            <div className="activity-container">
+                {selectedActivity === "running" && (<RunningComponent runs={runs} setRecordRunOpen={setRecordRunOpen} />)}
+
+                {selectedActivity === "workouts" && (<WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />)}
+                
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
                 <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
                 <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
+                <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} runs={runs} setRuns={setRuns} />
 
             </div>
         </div>

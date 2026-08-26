@@ -135,7 +135,6 @@ function RunningGraph({ runs }) {
         <div className="running-graph">
             <div className="running-graph-header">
                 <div>
-                    <h2>Running</h2>
                     <p>Distance over time</p>
                 </div>
                 <div className="time-span-container" ref={timeSpanRef}>
