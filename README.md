@@ -5,7 +5,7 @@
 </div>
 
 <div align="center">
-	<img src="frontend/src/assets/Ditto_Logo.png">
+	<img src="./frontend/src/assets/Ditto_Logo.png">
 </div>
 
 ## About
