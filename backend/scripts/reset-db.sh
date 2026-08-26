@@ -31,6 +31,18 @@ if [ "$ENV" = "DEV" ]; then
 	# populate test restaurants
 	echo "Adding test restaurants to database"
 	uv run python -m scripts.restaurants
+
+	# populate test exercises
+	echo "Adding test exercises to database"
+	uv run python -m scripts.exercises
+
+	# populate test workouts
+	echo "Adding test workouts to database"
+	uv run python -m scripts.workouts
+
+	# populate test cardio
+	echo "Adding test cardio to database"
+	uv run python -m scripts.cardio
 else
 	echo "In PROD, cannot reset database"
 fi
