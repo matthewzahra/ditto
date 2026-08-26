@@ -53,7 +53,6 @@ function WorkoutTracker() {
         }
         fetchCardio()
     }, [])
-
     
     return (
         <div className="workout-tracker-page">
