@@ -351,7 +351,7 @@ function WorkoutTracker() {
             console.log(data)
         }
         fetchRuns()
-    })
+    }, [])
     
     return (
         <div className="workout-tracker-page">
