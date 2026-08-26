@@ -71,4 +71,4 @@ class WorkoutOutputSerializer(serializers.ModelSerializer):
 class CardioSingleOutputSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Cardio
-		fields = ("exercise_type","title","time","kms","date")
+		fields = ("id","exercise_type","title","time","kms","date")
