@@ -75,7 +75,7 @@ class Cardio(models.Model):
 		choices=ExerciseTypes.choices,
 		default=ExerciseTypes.RUN
 	)
-	title = models.CharField(max_lenght=64)
+	title = models.CharField(max_length=64)
 	kms = models.FloatField(validators=[MinValueValidator(1)])
 	time = models.DurationField()
 	date = models.DateField()

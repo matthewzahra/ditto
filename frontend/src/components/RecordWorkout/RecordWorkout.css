@@ -57,6 +57,32 @@
     outline-offset: 1px;
 }
 
+/* Workout description */
+
+.record-workout-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--surface);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.record-workout-form textarea::placeholder {
+    color: var(--muted);
+}
+
+.record-workout-form textarea:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
 /* Record workout button */
 
 .record-workout-button {

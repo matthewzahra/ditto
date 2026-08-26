@@ -6,6 +6,9 @@ import RecordWorkoutExercises from "../RecordWorkoutExercises/RecordWorkoutExerc
 import "./RecordWorkout.css"
 
 function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, exercises }) {
+    
+    const [workoutTitle, setWorkoutTitle] = useState("")
+    const [workoutDescription, setWorkoutDescription] = useState("")
     const [workoutDate, setWorkoutDate] = useState(new Date().toISOString().split("T")[0])
     const [numRounds, setNumRounds] = useState(1)
     const [workoutExercises, setWorkoutExercises] = useState([])
@@ -16,6 +19,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
     }, [exercises])
 
     async function onRecordWorkout() {
+        // TODO if workout title is blank add default workout title
         if (workoutExercises.reduce((total, exercise) => (total + exercise.reps), 0) === 0) {
             return
         }
@@ -28,7 +32,9 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                 {
                     method: "POST",
                     body: {
+                        title: workoutTitle,
                         date: workoutDate,
+                        info: workoutDescription,
                         num_rounds: numRounds,
                         exercises: recordedExercises.map(exercise => [exercise.id, exercise.reps])
                     }
@@ -36,14 +42,17 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
             )
 
             const data = await response.json()
+            console.log(data)
 
             // TODO update below to set new workout
             if (data.success) {
                 setWorkouts(prev => [
                     ...prev,
-                    {}
+                    data.data
                 ])
 
+                setWorkoutTitle("")
+                setWorkoutDescription("")
                 setWorkoutDate(new Date().toISOString().split("T")[0])
                 setNumRounds(1)
                 setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
@@ -55,12 +64,15 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
     }
 
     function onDiscard() {
+        setWorkoutTitle("")
+        setWorkoutDescription("")
         setWorkoutDate(new Date().toISOString().split("T")[0])
         setNumRounds(1)
         setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
         setRecordWorkoutOpen(false)
     }
 
+    // TODO remake form layout to look better
     return (
         <>
         {recordWorkoutOpen && (
@@ -68,9 +80,20 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                 <div className="record-workout-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Workout</h2>
                     <input 
+                        type="text"
+                        placeholder="Title..."
+                        value={workoutTitle}
+                        onChange={event => setWorkoutTitle(event.target.value)}
+                    />
+                    <input 
                         type="date"
                         value={workoutDate}
                         onChange={event => setWorkoutDate(event.target.value)}
+                    />
+                    <textarea 
+                        placeholder="Enter description..."
+                        value={workoutDescription}
+                        onChange={event => setWorkoutDescription(event.target.value)}
                     />
                     <input 
                         type="number"
