@@ -289,8 +289,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 1",
-        kms=20.0,
-        time=timedelta(minutes=52, seconds=14),
+        kms=18.5,
+        time=timedelta(minutes=48, seconds=26),
         date=date(2026, 8, 21)
     )
 
@@ -298,8 +298,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 2",
-        kms=32.5,
-        time=timedelta(hours=1, minutes=24, seconds=38),
+        kms=34.0,
+        time=timedelta(hours=1, minutes=32, seconds=14),
         date=date(2026, 8, 18)
     )
 
@@ -307,8 +307,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 3",
-        kms=45.0,
-        time=timedelta(hours=1, minutes=58, seconds=21),
+        kms=51.5,
+        time=timedelta(hours=2, minutes=18, seconds=47),
         date=date(2026, 8, 15)
     )
 
@@ -316,8 +316,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 4",
-        kms=25.0,
-        time=timedelta(hours=1, minutes=4, seconds=17),
+        kms=27.0,
+        time=timedelta(hours=1, minutes=8, seconds=35),
         date=date(2026, 8, 12)
     )
 
@@ -325,8 +325,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 5",
-        kms=38.0,
-        time=timedelta(hours=1, minutes=39, seconds=42),
+        kms=42.5,
+        time=timedelta(hours=1, minutes=47, seconds=21),
         date=date(2026, 8, 9)
     )
 
@@ -334,8 +334,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 6",
-        kms=28.5,
-        time=timedelta(hours=1, minutes=12, seconds=36),
+        kms=23.0,
+        time=timedelta(minutes=59, seconds=48),
         date=date(2026, 8, 6)
     )
 
@@ -343,8 +343,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 7",
-        kms=22.0,
-        time=timedelta(minutes=55, seconds=48),
+        kms=16.5,
+        time=timedelta(minutes=43, seconds=17),
         date=date(2026, 8, 3)
     )
 
@@ -352,8 +352,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 8",
-        kms=52.0,
-        time=timedelta(hours=2, minutes=15, seconds=31),
+        kms=68.0,
+        time=timedelta(hours=2, minutes=54, seconds=36),
         date=date(2026, 7, 30)
     )
 
@@ -361,8 +361,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 9",
-        kms=30.0,
-        time=timedelta(hours=1, minutes=18, seconds=44),
+        kms=31.5,
+        time=timedelta(hours=1, minutes=21, seconds=52),
         date=date(2026, 7, 27)
     )
 
@@ -370,8 +370,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 10",
-        kms=40.0,
-        time=timedelta(hours=1, minutes=43, seconds=12),
+        kms=46.0,
+        time=timedelta(hours=1, minutes=58, seconds=43),
         date=date(2026, 7, 23)
     )
 
@@ -379,8 +379,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 11",
-        kms=24.0,
-        time=timedelta(hours=1, minutes=2, seconds=27),
+        kms=21.0,
+        time=timedelta(minutes=54, seconds=31),
         date=date(2026, 7, 20)
     )
 
@@ -388,8 +388,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 12",
-        kms=47.5,
-        time=timedelta(hours=2, minutes=2, seconds=18),
+        kms=57.5,
+        time=timedelta(hours=2, minutes=31, seconds=18),
         date=date(2026, 7, 16)
     )
 
@@ -397,8 +397,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 13",
-        kms=35.0,
-        time=timedelta(hours=1, minutes=29, seconds=35),
+        kms=38.5,
+        time=timedelta(hours=1, minutes=41, seconds=27),
         date=date(2026, 7, 12)
     )
 
@@ -406,8 +406,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 14",
-        kms=21.5,
-        time=timedelta(minutes=56, seconds=41),
+        kms=19.0,
+        time=timedelta(minutes=50, seconds=42),
         date=date(2026, 7, 8)
     )
 
@@ -415,8 +415,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 15",
-        kms=42.0,
-        time=timedelta(hours=1, minutes=48, seconds=26),
+        kms=49.5,
+        time=timedelta(hours=2, minutes=7, seconds=54),
         date=date(2026, 7, 3)
     )
 
@@ -424,8 +424,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 16",
-        kms=55.0,
-        time=timedelta(hours=2, minutes=22, seconds=14),
+        kms=72.0,
+        time=timedelta(hours=3, minutes=8, seconds=22),
         date=date(2026, 6, 28)
     )
 
@@ -433,8 +433,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 17",
-        kms=27.0,
-        time=timedelta(hours=1, minutes=9, seconds=52),
+        kms=29.5,
+        time=timedelta(hours=1, minutes=15, seconds=39),
         date=date(2026, 6, 24)
     )
 
@@ -442,8 +442,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 18",
-        kms=23.5,
-        time=timedelta(minutes=59, seconds=18),
+        kms=17.0,
+        time=timedelta(minutes=46, seconds=53),
         date=date(2026, 6, 20)
     )
 
@@ -451,8 +451,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 19",
-        kms=36.0,
-        time=timedelta(hours=1, minutes=31, seconds=47),
+        kms=41.0,
+        time=timedelta(hours=1, minutes=46, seconds=28),
         date=date(2026, 6, 15)
     )
 
@@ -460,8 +460,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 20",
-        kms=31.5,
-        time=timedelta(hours=1, minutes=20, seconds=33),
+        kms=35.5,
+        time=timedelta(hours=1, minutes=29, seconds=16),
         date=date(2026, 6, 10)
     )
 
@@ -469,8 +469,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 21",
-        kms=20.0,
-        time=timedelta(minutes=51, seconds=42),
+        kms=24.5,
+        time=timedelta(hours=1, minutes=3, seconds=41),
         date=date(2026, 6, 5)
     )
 
@@ -478,8 +478,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 22",
-        kms=60.0,
-        time=timedelta(hours=2, minutes=37, seconds=18),
+        kms=78.5,
+        time=timedelta(hours=3, minutes=24, seconds=17),
         date=date(2026, 5, 31)
     )
 
@@ -487,8 +487,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 23",
-        kms=33.0,
-        time=timedelta(hours=1, minutes=24, seconds=51),
+        kms=36.0,
+        time=timedelta(hours=1, minutes=34, seconds=52),
         date=date(2026, 5, 25)
     )
 
@@ -496,8 +496,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 24",
-        kms=26.0,
-        time=timedelta(hours=1, minutes=6, seconds=24),
+        kms=28.5,
+        time=timedelta(hours=1, minutes=12, seconds=37),
         date=date(2026, 5, 18)
     )
 
@@ -505,8 +505,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 25",
-        kms=44.0,
-        time=timedelta(hours=1, minutes=52, seconds=36),
+        kms=53.0,
+        time=timedelta(hours=2, minutes=19, seconds=44),
         date=date(2026, 5, 10)
     )
 
@@ -514,8 +514,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 26",
-        kms=22.5,
-        time=timedelta(minutes=58, seconds=12),
+        kms=20.5,
+        time=timedelta(minutes=52, seconds=28),
         date=date(2026, 5, 3)
     )
 
@@ -523,8 +523,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 27",
-        kms=37.0,
-        time=timedelta(hours=1, minutes=34, seconds=18),
+        kms=44.5,
+        time=timedelta(hours=1, minutes=53, seconds=11),
         date=date(2026, 4, 26)
     )
 
@@ -532,8 +532,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 28",
-        kms=29.0,
-        time=timedelta(hours=1, minutes=14, seconds=46),
+        kms=32.0,
+        time=timedelta(hours=1, minutes=24, seconds=35),
         date=date(2026, 4, 18)
     )
 
@@ -541,8 +541,8 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 29",
-        kms=48.0,
-        time=timedelta(hours=2, minutes=4, seconds=27),
+        kms=61.5,
+        time=timedelta(hours=2, minutes=42, seconds=49),
         date=date(2026, 4, 10)
     )
 
@@ -550,10 +550,12 @@ def add_cardio():
         user=user,
         exercise_type="CYCLE",
         title="Test cycle 30",
-        kms=20.0,
-        time=timedelta(minutes=53, seconds=16),
+        kms=15.5,
+        time=timedelta(minutes=41, seconds=56),
         date=date(2026, 4, 2)
     )
+
+
 
 
 add_cardio()

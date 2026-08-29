@@ -1,0 +1,120 @@
+.cycling-graph {
+    width: 100%;
+
+    padding: 24px;
+
+    background: var(--card-background);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.cycling-graph-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 12px;
+}
+
+.cycling-graph-header h2 {
+    margin: 0;
+
+    color: var(--text);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.cycling-graph-header p {
+    margin: 4px 0 0;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+/* Time span dropdown */
+
+.time-span-container {
+    position: relative;
+}
+
+.time-span-button {
+    padding: 8px 16px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--primary);
+    color: var(--text);
+
+    cursor: pointer;
+}
+
+.time-span-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.time-span-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+
+    margin-top: 8px;
+    padding: 12px;
+
+    width: 180px;
+
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+
+    z-index: 100;
+}
+
+.time-span-dropdown button {
+    width: 100%;
+    padding: 8px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: var(--primary);
+    color: var(--text);
+
+    cursor: pointer;
+}
+
+.time-span-dropdown button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Graph */
+
+.cycling-graph-chart {
+    width: 100%;
+    height: 350px;
+}
+
+.cycling-graph-tooltip {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    padding: 10px 12px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    color: var(--text);
+    font-size: 14px;
+}
+
+.cycling-graph-tooltip strong {
+    font-weight: 600;
+}
+
+.cycling-graph-tooltip span {
+    color: var(--muted);
+}

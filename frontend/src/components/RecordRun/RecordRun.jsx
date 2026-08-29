@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 import apiRequest from "../../core/apiRequest"
 
@@ -33,7 +33,6 @@ function RecordRun({ recordRunOpen, setRecordRunOpen, setRuns }) {
             )
 
             const data = await response.json()
-            console.log(data)
 
             // TODO update below to set new run
             if (data.success) {
@@ -44,7 +43,7 @@ function RecordRun({ recordRunOpen, setRecordRunOpen, setRuns }) {
 
                 setRunTitle("")
                 setRunDate(new Date().toISOString().split("T")[0])
-                runDistance(0)
+                setRunDistance(0)
                 setRunTime("00:00:00")
                 setRecordRunOpen(false)
             }
@@ -82,10 +81,11 @@ function RecordRun({ recordRunOpen, setRecordRunOpen, setRuns }) {
                     <input 
                         type="number"
                         value={runDistance}
-                        onChange={event => setRunDistance(event.target.value)}
+                        onChange={event => setRunDistance(Number(event.target.value))}
                     />
                     <input
                         type="time"
+                        step="1"
                         value={runTime}
                         onChange={event => setRunTime(event.target.value)}
                     />

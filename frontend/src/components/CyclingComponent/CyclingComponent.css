@@ -1,0 +1,50 @@
+/* cycling header */
+
+.cycling-component-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+/* Header actions */
+
+.cycling-component-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Record cycle button */
+
+.record-cycle-button {
+    height: 40px;
+    padding: 0 16px;
+    box-sizing: border-box;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--primary);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+
+    cursor: pointer;
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-cycle-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.record-cycle-button:active {
+    transform: scale(0.97);
+}

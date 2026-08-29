@@ -4,9 +4,11 @@ import "./WorkoutTracker.css"
 
 import RunningComponent from "../../../components/RunningComponent/RunningComponent"
 import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
+import CyclingComponent from "../../../components/CyclingComponent/CyclingComponent"
 import RecordExercise from "../../../components/RecordExercise/RecordExercise"
 import RecordWorkout from "../../../components/RecordWorkout/RecordWorkout"
 import RecordRun from "../../../components/RecordRun/RecordRun"
+import RecordCycle from "../../../components/RecordCycle/RecordCycle"
 import apiRequest from "../../../core/apiRequest"
 
 function WorkoutTracker() {
@@ -16,6 +18,8 @@ function WorkoutTracker() {
     const [recordWorkoutOpen, setRecordWorkoutOpen] = useState(false)
     const [runs, setRuns] = useState([])
     const [recordRunOpen, setRecordRunOpen] = useState(false)
+    const [cycles, setCycles] = useState([])
+    const [recordCycleOpen, setRecordCycleOpen] = useState(false)
     const [selectedActivity, setSelectedActivity] = useState("workouts")
 
     // fetching saved exercises
@@ -43,11 +47,8 @@ function WorkoutTracker() {
         async function fetchCardio() {
             const response = await apiRequest("/api/workout_tracker/get_cardio")
             const data = await response.json()
-            console.log(data.data)
-            console.log(data.data.RUN)
-            setRuns(data.data.RUN.map((run, index) => ({
-                ...run
-            })))
+            setRuns(data.data.RUN)
+            setCycles(data.data.CYCLE)
         }
         fetchCardio()
     }, [])
@@ -83,10 +84,13 @@ function WorkoutTracker() {
 
                 {selectedActivity === "workouts" && (<WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />)}
                 
+                {selectedActivity === "cycling" && (<CyclingComponent cycles={cycles} setCycles={setCycles} setRecordCyclesOpen={setRecordCycleOpen} />)}
+
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
                 <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
                 <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
                 <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} setRuns={setRuns} />
+                <RecordCycle recordCycleOpen={recordCycleOpen} setRecordCycleOpen={setRecordCycleOpen} setCycles={setCycles} />
 
             </div>
         </div>

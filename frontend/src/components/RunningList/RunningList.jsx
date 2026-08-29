@@ -6,7 +6,7 @@ import "./RunningList.css"
 function RunningList({ runs, setRuns }) {
     // TODO add confirm delete, as is done for quotes
     async function onDelete(id) {
-        const response = await apiRequest("/api/workout_tracjer/delete_cardio", {
+        const response = await apiRequest("/api/workout_tracker/delete_cardio/", {
             method: "DELETE",
             body: {
                 id: id
