@@ -55,7 +55,7 @@ function LoginForm() {
             // request register from backend
             const response = await apiRequest("/api/user_auth/register/", {
                 method: "POST",
-                body: fordData
+                body: formData
             })
             
             // register response data

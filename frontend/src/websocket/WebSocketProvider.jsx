@@ -11,8 +11,8 @@ function WebSocketProvider({ children }) {
     const { incrementUnreadInboxCount } = useUnreadMessages()
 
     useEffect(() => {
-        // TODO un-hard code this
-        const socket = new WebSocket("ws://localhost:8000/ws/")
+        
+        const socket = new WebSocket(import.meta.env.VITE_WEBSOCKETAPI)
 
         socketRef.current = socket
         socket.onopen = () => {

@@ -7,10 +7,17 @@ from django.utils import timezone
 from datetime import timedelta
 from ditto.core.http_handling import api_response, validate, ApiResponseSerializer, disable_endpoint_prod
 from drf_spectacular.utils import extend_schema
-from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer
-from rest_framework.decorators import api_view
+from .serializers import LoginSerializer, RegisterSerializer, VerifyUserSerializer, RequestPasswordChange, UpdatePasswordSerializer, LoginStatusSerializer, LogoutSerializer, RequestUserDataSeralizer, GetPublicUserSerializer, ProfilePictureSerializer
+from rest_framework.decorators import api_view, parser_classes
+from rest_framework.parsers import MultiPartParser
 from django.db.utils import IntegrityError
 from django.db import transaction
+from django.http import FileResponse
+import mimetypes
+
+################
+# AUTHENTICATION
+################
 
 # return if a user is authenticated or not
 @extend_schema(tags=['user_auth'], request=LoginStatusSerializer, responses=ApiResponseSerializer)
@@ -24,7 +31,7 @@ def login_status(request):
 # when we create users, we give them a default password that they must reset with the auth code sent to their email
 @extend_schema(tags=['user_auth'], request=RegisterSerializer, responses=ApiResponseSerializer)
 @api_view(['POST'])
-@disable_endpoint_prod
+# @disable_endpoint_prod
 def register(request):  
     data = validate(RegisterSerializer,request.data)
 
@@ -126,3 +133,77 @@ def update_password(request):
 def logout_user(request):
     logout(request)
     return api_response(True,status=200)
+
+###############
+# USER PROFILES
+###############
+@extend_schema(
+    tags=['user_auth'],
+    responses=FileResponse,
+    summary="get profile picture of a user"
+)
+@api_view(['GET'])
+def get_profile_picture(request, user_id):
+    user = CustomUser.objects.filter(id=user_id).get()
+    if not user.profile_picture:
+        return None
+
+    content_type, _ = mimetypes.guess_type(user.profile_picture.name)
+
+    return FileResponse(
+        user.profile_picture.open("rb"),
+        content_type=content_type
+    )
+
+@extend_schema(
+    tags=['user_auth'],
+    responses=ApiResponseSerializer,
+    summary="get data about the current logged in user"
+)
+@api_view(['GET'])
+def get_current_user(request):
+    serializer = GetPublicUserSerializer(request.user, context={"request":request})
+    return api_response(True,data=serializer.data)
+
+# this gets non-confidential user-information
+@extend_schema(
+    tags=['user_auth'],
+    request=RequestUserDataSeralizer,
+    responses=ApiResponseSerializer,
+    summary="get non-confidential user information provided a list of their user ids"
+)
+@api_view(['GET'])
+def get_users(request):
+    data = validate(RequestUserDataSeralizer, request.query_params)
+    users = CustomUser.objects.filter(id__in=data.user_ids)
+    serializer = GetPublicUserSerializer(users, many=True, context={"request":request})
+    return api_response(True,data=serializer.data)
+
+# update a users' profile picture
+@extend_schema(
+    tags=['user_auth'],
+    request=ProfilePictureSerializer,
+    responses=ApiResponseSerializer,
+    summary="update a user's profile picture"
+)
+@api_view(['POST'])
+@parser_classes([MultiPartParser])
+def update_profile_picture(request):
+    data = validate(ProfilePictureSerializer, request.data)
+    user = request.user
+    user.profile_picture.delete(save=True)
+    user.profile_picture = data["profile_picture"]
+    user.save(update_fields=['profile_picture'])
+    serializer = GetPublicUserSerializer(user, context={"request":request})
+    return api_response(True, data=serializer.data)
+
+@extend_schema(
+    tags=['user_auth'],
+    responses=ApiResponseSerializer,
+    summary="delete a user's profile picture"
+)
+@api_view(['DELETE'])
+def delete_profile_picture(request):
+    user = request.user
+    user.profile_picture.delete(save=True)
+    return api_response(True,status=204)

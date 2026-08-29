@@ -35,6 +35,6 @@ def get_coordinates(location:str):
 		result['confidence'] = data['features'][0]['properties']['rank']['confidence']
 
 	else:
-		result['error'] = f"CANNOT DEDUCE LOCATION FROM {location}"
+		result['user_error'] = f"CANNOT DEDUCE LOCATION FROM {location}"
 
 	return result

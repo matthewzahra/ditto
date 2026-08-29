@@ -1,0 +1,21 @@
+services:
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./backend/media:/app/media
+      - ./backend/db.sqlite3:/app/db.sqlite3
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API: ${VITE_API}
+        VITE_WEBSOCKETAPI: ${VITE_WEBSOCKETAPI}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

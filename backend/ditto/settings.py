@@ -15,6 +15,7 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
+load_dotenv("config.env")
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,12 +26,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY =  os.getenv('SECRET_KEY')
+ENV = os.getenv("ENV","PROD")
+APP_URL = os.getenv("APP_URL",None)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if ENV == "DEV":
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = []
-
+if ENV == "PROD" and APP_URL:
+    ALLOWED_HOSTS.append(APP_URL)
 
 # Application definition
 
@@ -70,19 +77,23 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# TODO - update this. This is to allow the front end to talk to the backend, intended only for dev mode
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-]
+# we don't need this in prod as the front end and backend come from the same origin
+if ENV =="DEV":
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",
+    ]
 
 # allows us to use authentication cookies with CORS
 CORS_ALLOW_CREDENTIALS = True
 
 # TODO - update
 # allows us to use CSRF with CORS so that we can make use of POST requests safely
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",
-]
+if ENV == "DEV":
+    CSRF_TRUSTED_ORIGINS = [
+        "http://localhost:5173",
+    ]
+else:
+    CSRF_TRUSTED_ORIGINS = [os.getenv("CSRF_TRUSTED_ORIGINS",None)]
 
 ROOT_URLCONF = 'ditto.urls'
 
@@ -159,5 +170,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# save user uploaded files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
 # use a custom user model
 AUTH_USER_MODEL = "user_auth.CustomUser" # found in user_auth/models.py
+
+# define the max size for profile pictures
+PROFILE_PICTURE_MAX_SIZE = 10 * 1024 * 1024 # 10 MB

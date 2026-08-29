@@ -50,7 +50,7 @@ function VerificationForm() {
             // request verification from backend
             const response = await apiRequest("/api/user_auth/verify_user/", {
                 method: "POST",
-                body: fordData
+                body: formData
             })
             
             // verification response data
@@ -64,6 +64,7 @@ function VerificationForm() {
                 setVerificationError("Server unavailable")
             }
         } catch (err) {
+            console.error(err)
             setVerificationError("Unable to connect to the server")
         } finally {
             setLoading(false)

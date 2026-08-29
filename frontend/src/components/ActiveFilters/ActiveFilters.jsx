@@ -1,29 +1,37 @@
 import "./ActiveFilters.css"
 
 function ActiveFilters({ filters, setFilters }) {
-    const filterLabels = {
-        fiveStars: "5 stars"
-    }
-
     return (
         <div className="active-filters">
-            {Object.entries(filters)
-                .filter(([_, value]) => value)
-                .map(([key]) => (
-                    <div className="active-filter" key={key}>
-                        <span>{filterLabels[key]}</span>
+            {filters.minRating !== null && (
+                <div className="active-filter">
+                    <span>{filters.minRating}+ stars</span>
 
-                        <button
-                            onClick={() => setFilters(prev => ({
-                                ...prev,
-                                [key]: false
-                            }))}
-                        >
-                            ×
-                        </button>
-                    </div>
-                ))
-            }
+                    <button
+                        onClick={() => setFilters(prev => ({
+                            ...prev,
+                            minRating: null
+                        }))}
+                    >
+                        ×
+                    </button>
+                </div>
+            )}
+
+            {filters.cuisine !== null && (
+                <div className="active-filter">
+                    <span>{filters.cuisine}</span>
+
+                    <button
+                        onClick={() => setFilters(prev => ({
+                            ...prev,
+                            cuisine: null
+                        }))}
+                    >
+                        ×
+                    </button>
+                </div>
+            )}
         </div>
     )
 }

@@ -30,6 +30,10 @@ restructure components (should have another layer of folders splitting them by f
 
 add media queries etc so pages are viewable on phone and such
 
+fix pop ups closing when clicking off by accident (specifically clicking on it, moving mouse off of it, and then releasing - makes it disappear)
+
+do comment overhaul (add comments to all files)
+
 Current todos:
 
 show error when relevant
@@ -37,11 +41,3 @@ show error when relevant
 make it so websocket doesn't try to connect if user is not logged in
 
 deal with websocket error always appearing
-
-Restaurant todos:
-
-add saving new restaurants
-
-fix filters
-
-restyle filtering to be more obvious

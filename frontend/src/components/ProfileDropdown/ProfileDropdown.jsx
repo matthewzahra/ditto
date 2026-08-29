@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from "react"
 
 import { useAuth } from "../../context/AuthContext"
 import { useUnreadMessages } from "../../context/UnreadMessagesContext"
+import { useUserProfile } from "../../context/UserProfileContext"
 
 import NavItem from "../NavItem/NavItem"
 
-import userPic from "../../assets/userPic.svg"
+import defaultUserPicture from "../../assets/defaultUserPicture.svg"
 import userIcon from "../../assets/userIcon.svg"
 import logoutIcon from "../../assets/logoutIcon.svg"
 import inboxIcon from "../../assets/inboxIcon.svg"
@@ -17,6 +18,7 @@ function ProfileDropdown() {
 
     const { logout } = useAuth()
     const { unreadInboxCount } = useUnreadMessages()
+    const { userProfilePicture } = useUserProfile()
 
     const profileMenuRef = useRef(null)
 
@@ -39,11 +41,16 @@ function ProfileDropdown() {
         }
     }, [profileMenuOpen])
 
+    // fetch user profile picture
+    useEffect(() => {
+        
+    }, [])
+
     return (
         <div className="profile-menu" ref={profileMenuRef}>
             <button className={`profile-picture ${unreadInboxCount > 0 ? "has-notification" : ""}`} onClick={() => setProfileMenuOpen(!profileMenuOpen)}>
                 <span className="profile-picture-image">
-                    <img src={userPic} alt="Profile" />
+                    <img src={userProfilePicture ? userProfilePicture : defaultUserPicture} alt="Profile" />
                 </span>
 
                 {unreadInboxCount > 0 && (

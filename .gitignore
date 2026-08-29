@@ -11,6 +11,7 @@ wheels/
 
 # environment variables
 .env
+frontend.env
 
 # database
 db.sqlite3
@@ -42,3 +43,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# media
+backend/media/*
+
+# folder for the backups
+backups/*

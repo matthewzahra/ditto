@@ -21,7 +21,8 @@ function RestaurantTracker() {
     const [restaurantRating, setRestaurantRating] = useState("")
     const [restaurantInfo, setRestaurantInfo] = useState("")
     const [filters, setFilters] = useState({
-            fiveStars: false,
+            minRating: null,
+            cuisine: null
         })
 
     // fetching user restaurants
@@ -52,7 +53,11 @@ function RestaurantTracker() {
 
     useEffect(() => {
         setFilteredRestaurants(restaurants.filter((restaurant) => {
-            if (filters.fiveStars && restaurant.rating !== 5) {
+            if (filters.minRating !== null && restaurant.rating < filters.minRating) {
+                return false
+            }
+
+            if (filters.cuisine !== null && restaurant.cuisine !== filters.cuisine) {
                 return false
             }
 
@@ -86,7 +91,7 @@ function RestaurantTracker() {
         <div className="restaurant-tracker-page">
             <h1>Restaurant tracker page</h1>
             <RestaurantMap selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filteredRestaurants={filteredRestaurants}/>
-            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} setRecordRestaurantOpen={setRecordRestaurantOpen} />
+            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurants={restaurants} />
             {/* request delete popup, only displayed when deletion is requested */}
             <ConfirmRestaurantDelete restaurantToDelete={restaurantToDelete} confirmDeleteOpen={confirmDeleteOpen} setConfirmDeleteOpen={setConfirmDeleteOpen} onConfirm={() => onDelete(restaurantToDelete.id)} />
             <RecordRestaurant recordRestaurantOpen={recordRestaurantOpen} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurantName={restaurantName} setRestaurantName={setRestaurantName} restaurantAddress={restaurantAddress} setRestaurantAddress={setRestaurantAddress} restaurantCuisine={restaurantCuisine} setRestaurantCuisine={setRestaurantCuisine} restaurantRating={restaurantRating} setRestaurantRating={setRestaurantRating} restaurantInfo={restaurantInfo} setRestaurantInfo={setRestaurantInfo} setRestaurants={setRestaurants} />

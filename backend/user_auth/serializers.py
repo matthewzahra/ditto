@@ -1,4 +1,10 @@
 from rest_framework import serializers
+from user_auth.models import CustomUser
+from django.conf import settings
+
+#######
+# INPUT
+#######
 
 class LoginStatusSerializer(serializers.Serializer):
 	pass
@@ -26,3 +32,40 @@ class UpdatePasswordSerializer(serializers.Serializer):
 	code = serializers.CharField()
 	pass1 = serializers.CharField()
 	pass2 = serializers.CharField()
+
+class RequestUserDataSeralizer(serializers.Serializer):
+	user_ids = serializers.PrimaryKeyRelatedField(many=True,queryset=CustomUser.objects.all())
+
+class ProfilePictureSerializer(serializers.Serializer):
+	profile_picture = serializers.ImageField(allow_empty_file=False)
+
+	def validate_profile_picture(self, image):
+		if image.size > settings.PROFILE_PICTURE_MAX_SIZE:
+			raise serializers.ValidationError("Profile pictures must be 10 MB or smaller.")
+		return image
+	
+########
+# OUTPUT
+########
+
+# NOTE - this is sent to the front end, so do NOT expose confidential information
+class GetPublicUserSerializer(serializers.ModelSerializer):
+	profile_picture = serializers.SerializerMethodField() # this calls the method `get_profile_picture`
+
+	class Meta:
+		model = CustomUser
+		fields = [
+			"id",
+			"email",
+			"profile_picture"
+		]
+
+	def get_profile_picture(self,obj):
+		if not obj.profile_picture:
+			return None
+
+		request = self.context["request"]
+
+		return request.build_absolute_uri(
+			f"/api/user_auth/{obj.id}/profile-picture/"
+		)
