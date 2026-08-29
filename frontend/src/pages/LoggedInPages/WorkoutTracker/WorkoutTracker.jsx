@@ -12,6 +12,7 @@ import RecordCycle from "../../../components/RecordCycle/RecordCycle"
 import apiRequest from "../../../core/apiRequest"
 
 function WorkoutTracker() {
+    // TODO add someway to delete exercises, add more functionality to do with exercises (including sorting out how they appear in the form)
     const [exercises, setExercises] = useState([])
     const [recordExerciseOpen, setRecordExerciseOpen] = useState(false)
     const [workouts, setWorkouts] = useState([])

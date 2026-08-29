@@ -19,11 +19,11 @@ function RunningList({ runs, setRuns }) {
     }
 
     return  (
-        <>
+        <div className="running-list">
         {runs.map((run) => (
             <RunningListItem key={run.id} run={run} onDelete={onDelete} />
         ))}
-        </>
+        </div>
     )
 }
 

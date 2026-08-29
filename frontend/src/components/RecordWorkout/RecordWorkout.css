@@ -6,6 +6,10 @@
     justify-content: center;
     align-items: center;
 
+    padding: 24px;
+
+    box-sizing: border-box;
+
     background-color: rgba(0, 0, 0, 0.5);
 
     z-index: 1000;
@@ -13,6 +17,7 @@
 
 .record-workout-form {
     width: 400px;
+    max-height: calc(100vh - 48px);
 
     padding: 24px;
 
@@ -26,6 +31,8 @@
     border-radius: 12px;
 
     background-color: var(--card-background);
+
+    overflow: hidden;
 }
 
 .record-workout-form h2 {
@@ -178,4 +185,16 @@
 .record-workout-buttons .record-workout-discard-button:hover {
     background-color: var(--error);
     color: white;
+}
+
+.record-workout-exercises {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    padding-right: 8px;
+
 }

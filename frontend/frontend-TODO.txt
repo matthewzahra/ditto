@@ -28,6 +28,8 @@ fix websockets (doesn't connect if first joining session and then logging in, st
 
 restructure components (should have another layer of folders splitting them by feature)
 
+add media queries etc so pages are viewable on phone and such
+
 Current todos:
 
 show error when relevant

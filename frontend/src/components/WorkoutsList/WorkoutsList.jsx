@@ -19,11 +19,11 @@ function WorkoutsList({ workouts, setWorkouts }) {
     }
 
     return (
-        <>
+        <div className="workouts-list">
         {workouts.map((workout) => (
             <WorkoutListItem key={workout.id} workout={workout} onDelete={onDelete} />
         ))}
-        </>
+        </div>
     )
 }
 

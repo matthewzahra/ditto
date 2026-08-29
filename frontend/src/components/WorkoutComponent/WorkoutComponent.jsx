@@ -2,8 +2,8 @@ import WorkoutsList from "../WorkoutsList/WorkoutsList"
 
 import "./WorkoutComponent.css"
 
+// TODO consider turning workout list into a grid
 function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setRecordWorkoutOpen, workouts, setWorkouts }) {
-    // TODO check below sorts it correctly
     const sortedWorkouts = [...workouts].sort((a, b) => new Date(b.date) - new Date(a.date))
     
     return (

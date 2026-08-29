@@ -1,11 +1,9 @@
 .running-list-item {
-
     position: relative;
 
-    width: calc(100% - 2rem);
+    width: 100%;
     min-width: 0;
 
-    margin: 1rem;
     padding: 1.5rem 2rem;
 
     box-sizing: border-box;

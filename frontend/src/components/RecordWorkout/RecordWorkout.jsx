@@ -112,7 +112,9 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                         min={1}
                     />
                     {/* TODO fix what happens when there are too many exercises (limit area given to exercises and add scrollbar) */}
-                    <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} />
+                    <div className="record-workout-exercises">
+                        <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} />
+                    </div>
                     <div className="record-workout-buttons">
                         <button
                             className="record-workout-save-button"

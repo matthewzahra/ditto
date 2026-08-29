@@ -1,8 +1,8 @@
 .workout-list-item {
-    width: calc(100% - 2rem);
+    width: 100%;
     min-width: 0;
     padding: 1.5rem 2rem;
-    margin: 1rem;
+
     box-sizing: border-box;
 
     background-color: var(--surface);

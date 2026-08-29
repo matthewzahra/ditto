@@ -19,11 +19,11 @@ function CyclingList({ cycles, setCycles }) {
     }
 
     return  (
-        <>
+        <div className="cycling-list">
         {cycles.map((cycle) => (
             <CyclingListItem key={cycle.id} cycle={cycle} onDelete={onDelete} />
         ))}
-        </>
+        </div>
     )
 }
 
