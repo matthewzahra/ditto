@@ -7,7 +7,7 @@ import "./RecordCycle.css"
 function RecordCycle({ recordCycleOpen, setRecordCycleOpen, setCycles }) {
     const [cycleTitle, setCycleTitle] = useState("")
     const [cycleDate, setCycleDate] = useState(new Date().toISOString().split("T")[0])
-    const [cycleDistance, setCycleDistance] = useState(0)
+    const [cycleDistance, setCycleDistance] = useState("")
     const [cycleTime, setCycleTime] = useState("00:00:00")
 
     async function onRecordCycle() {
@@ -67,23 +67,40 @@ function RecordCycle({ recordCycleOpen, setRecordCycleOpen, setCycles }) {
             <div className="record-cycle-overlay" onClick={() => setRecordCycleOpen(false)}>
                 <div className="record-cycle-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Cycle</h2>
+                    <label htmlFor="cycle-title">
+                        Title
+                    </label>
                     <input 
+                        id="cycle-title"
                         type="text"
                         placeholder="Title..."
                         value={cycleTitle}
                         onChange={event => setCycleTitle(event.target.value)}
                     />
+                    <label htmlFor="cycle-date">
+                        Date
+                    </label>
                     <input 
+                        id="cycle-date"
                         type="date"
                         value={cycleDate}
                         onChange={event => setCycleDate(event.target.value)}
                     />
+                    <label htmlFor="cycle-distance">
+                        Distance (km)
+                    </label>
                     <input 
+                        id="cycle-distance"
                         type="number"
+                        min="0"
                         value={cycleDistance}
                         onChange={event => setCycleDistance(Number(event.target.value))}
                     />
+                    <label htmlFor="cycle-time">
+                        Time
+                    </label>
                     <input
+                        id="cycle-time"
                         type="time"
                         step="1"
                         value={cycleTime}
@@ -94,7 +111,7 @@ function RecordCycle({ recordCycleOpen, setRecordCycleOpen, setCycles }) {
                             className="record-cycle-save-button"
                             onClick={onRecordCycle}
                         >
-                            Save Workout
+                            Save Cycle
                         </button>
 
                         <button

@@ -76,28 +76,42 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
             <div className="record-workout-overlay" onClick={() => setRecordWorkoutOpen(false)}>
                 <div className="record-workout-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Workout</h2>
+                    <label htmlFor="workout-title">
+                        Title
+                    </label>
                     <input 
+                        id="workout-title"
                         type="text"
                         placeholder="Title..."
                         value={workoutTitle}
                         onChange={event => setWorkoutTitle(event.target.value)}
                     />
+                    <label htmlFor="workout-date">
+                        Date
+                    </label>
                     <input 
                         type="date"
                         value={workoutDate}
                         onChange={event => setWorkoutDate(event.target.value)}
                     />
+                    <label htmlFor="workout-description">
+                        Description
+                    </label>
                     <textarea 
                         placeholder="Enter description..."
                         value={workoutDescription}
                         onChange={event => setWorkoutDescription(event.target.value)}
                     />
+                    <label htmlFor="workout-num-rounds">
+                        Sets
+                    </label>
                     <input 
                         type="number"
                         value={numRounds}
                         onChange={event => setNumRounds(Number(event.target.value))}
                         min={1}
                     />
+                    {/* TODO fix what happens when there are too many exercises (limit area given to exercises and add scrollbar) */}
                     <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} />
                     <div className="record-workout-buttons">
                         <button
