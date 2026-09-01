@@ -1,9 +1,9 @@
 import apiRequest from "../../core/apiRequest"
-import CyclingListItem from "../CyclingListItem/CyclingListItem"
+import CardioListItem from "../CardioListItem/CardioListItem"
 
-import "./CyclingList.css"
+import "./CardioList.css"
 
-function CyclingList({ cycles, setCycles }) {
+function CardioList({ type, cardios, setCardios }) {
     // TODO add confirm delete, as is done for quotes
     async function onDelete(id) {
         const response = await apiRequest("/api/workout_tracker/delete_cardio/", {
@@ -14,17 +14,17 @@ function CyclingList({ cycles, setCycles }) {
         })
 
         if (response.ok) {
-            setCycles(prev => prev.filter(cycle => cycle.id !== id))
+            setCardios(prev => prev.filter(cardio => cardio.id !== id))
         }
     }
 
     return  (
-        <div className="cycling-list">
-        {cycles.map((cycle) => (
-            <CyclingListItem key={cycle.id} cycle={cycle} onDelete={onDelete} />
+        <div className="cardio-list">
+        {cardios.map((cardio) => (
+            <CardioListItem key={cardio.id} cardio={cardio} onDelete={onDelete} />
         ))}
         </div>
     )
 }
 
-export default CyclingList
+export default CardioList
