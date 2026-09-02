@@ -1,0 +1,115 @@
+.record-cardio-overlay {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.record-cardio-form {
+    width: 400px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    border: 2px solid var(--border);
+    border-radius: 12px;
+
+    background-color: var(--card-background);
+}
+
+.record-cardio-form h2 {
+    margin: 0;
+    align-self: center;
+}
+
+/* Form inputs */
+
+.record-cardio-form input {
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    background-color: var(--surface);
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.record-cardio-form input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+/* Modal button layout */
+
+.record-cardio-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+/* Modal buttons */
+
+.record-cardio-buttons button {
+    height: 40px;
+    padding: 0 18px;
+    box-sizing: border-box;
+
+    border: 1px solid transparent;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1;
+
+    cursor: pointer;
+    white-space: nowrap;
+    flex: 0 0 auto;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.record-cardio-buttons button:active {
+    transform: scale(0.97);
+}
+
+/* Save button */
+
+.record-cardio-buttons .record-cardio-save-button {
+    background-color: var(--primary);
+    color: var(--text);
+}
+
+.record-cardio-buttons .record-cardio-save-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Discard button */
+
+.record-cardio-buttons .record-cardio-discard-button {
+    background-color: transparent;
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.record-cardio-buttons .record-cardio-discard-button:hover {
+    background-color: var(--error);
+    color: white;
+}

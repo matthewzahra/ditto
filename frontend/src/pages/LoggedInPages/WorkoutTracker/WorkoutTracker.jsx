@@ -2,13 +2,11 @@ import { useState, useEffect } from "react"
 
 import "./WorkoutTracker.css"
 
-import RunningComponent from "../../../components/RunningComponent/RunningComponent"
+import CardioComponent from "../../../components/CardioComponent/CardioComponent"
 import WorkoutComponent from "../../../components/WorkoutComponent/WorkoutComponent"
-import CyclingComponent from "../../../components/CyclingComponent/CyclingComponent"
 import RecordExercise from "../../../components/RecordExercise/RecordExercise"
 import RecordWorkout from "../../../components/RecordWorkout/RecordWorkout"
-import RecordRun from "../../../components/RecordRun/RecordRun"
-import RecordCycle from "../../../components/RecordCycle/RecordCycle"
+import RecordCardio from "../../../components/RecordCardio/RecordCardio"
 import apiRequest from "../../../core/apiRequest"
 
 function WorkoutTracker() {
@@ -17,10 +15,11 @@ function WorkoutTracker() {
     const [recordExerciseOpen, setRecordExerciseOpen] = useState(false)
     const [workouts, setWorkouts] = useState([])
     const [recordWorkoutOpen, setRecordWorkoutOpen] = useState(false)
-    const [runs, setRuns] = useState([])
-    const [recordRunOpen, setRecordRunOpen] = useState(false)
-    const [cycles, setCycles] = useState([])
-    const [recordCycleOpen, setRecordCycleOpen] = useState(false)
+    const [cardios, setCardios] = useState({
+        RUN: [],
+        CYCLE: []
+    })
+    const [recordCardioOpen, setRecordCardioOpen] = useState(false)
     const [selectedActivity, setSelectedActivity] = useState("workouts")
 
     // fetching saved exercises
@@ -48,8 +47,7 @@ function WorkoutTracker() {
         async function fetchCardio() {
             const response = await apiRequest("/api/workout_tracker/get_cardio")
             const data = await response.json()
-            setRuns(data.data.RUN)
-            setCycles(data.data.CYCLE)
+            setCardios(data.data)
         }
         fetchCardio()
     }, [])
@@ -81,18 +79,27 @@ function WorkoutTracker() {
                 </button>
             </div>
             <div className="activity-container">
-                {selectedActivity === "running" && (<RunningComponent runs={runs} setRuns={setRuns} setRecordRunOpen={setRecordRunOpen} />)}
+                {/* {selectedActivity === "running" && (<RunningComponent runs={runs} setRuns={setRuns} setRecordRunOpen={setRecordRunOpen} />)} */}
 
                 {selectedActivity === "workouts" && (<WorkoutComponent setRecordExerciseOpen={setRecordExerciseOpen} exercises={exercises} setExercises={setExercises} setRecordWorkoutOpen={setRecordWorkoutOpen} workouts={workouts} setWorkouts={setWorkouts} />)}
                 
-                {selectedActivity === "cycling" && (<CyclingComponent cycles={cycles} setCycles={setCycles} setRecordCyclesOpen={setRecordCycleOpen} />)}
+                {/* {selectedActivity === "cycling" && (<CyclingComponent cycles={cycles} setCycles={setCycles} setRecordCyclesOpen={setRecordCycleOpen} />)} */}
+
+                {(selectedActivity === "running" || selectedActivity === "cycling") && (
+                    <CardioComponent
+                        type={selectedActivity === "running" ? "RUN" : "CYCLE"}
+                        cardios={cardios}
+                        setCardios={setCardios}
+                        setRecordCardioOpen={setRecordCardioOpen}
+                    />
+                )}
 
                 {/* record exercise pop up, only displayed when recordExerciseOpen */}
                 <RecordExercise recordExerciseOpen={recordExerciseOpen} setRecordExerciseOpen={setRecordExerciseOpen} setExercises={setExercises} />
                 <RecordWorkout recordWorkoutOpen={recordWorkoutOpen} setRecordWorkoutOpen={setRecordWorkoutOpen} setWorkouts={setWorkouts} exercises={exercises} />
-                <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} setRuns={setRuns} />
-                <RecordCycle recordCycleOpen={recordCycleOpen} setRecordCycleOpen={setRecordCycleOpen} setCycles={setCycles} />
-
+                {/* <RecordRun recordRunOpen={recordRunOpen} setRecordRunOpen={setRecordRunOpen} setRuns={setRuns} /> */}
+                {/* <RecordCycle recordCycleOpen={recordCycleOpen} setRecordCycleOpen={setRecordCycleOpen} setCycles={setCycles} /> */}
+                <RecordCardio type={selectedActivity === "running" ? "RUN" : "CYCLE"} recordCardioOpen={recordCardioOpen} setRecordCardioOpen={setRecordCardioOpen} setCardios={setCardios} />
             </div>
         </div>
     )
