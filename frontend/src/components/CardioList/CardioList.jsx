@@ -14,7 +14,10 @@ function CardioList({ type, cardios, setCardios }) {
         })
 
         if (response.ok) {
-            setCardios(prev => prev.filter(cardio => cardio.id !== id))
+            setCardios(prev => ({
+                ...prev,
+                [type]: prev[type].filter(cardio => cardio.id !== id)
+            }))
         }
     }
 
