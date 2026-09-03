@@ -5,6 +5,7 @@ import API from "./core/API"
 // layouts
 import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
 import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
+import AboutLayout from "./layouts/AboutLayout/AboutLayout"
 
 // logged-out pages
 import Login from "./pages/LoggedOutPages/Login/Login"
@@ -22,6 +23,9 @@ import Quote from "./pages/LoggedInPages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
 import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"
+
+// shared pages
+import About from "./pages/SharedPages/About/About"
 
 
 import Tempwebcomp from "./components/tempwebcomp/Tempwebcomp"
@@ -54,6 +58,10 @@ function App() {
         <Route path="/restaurant-tracker" element={<RestaurantTracker />} />
         <Route path="/workout-tracker" element={<WorkoutTracker />} />
         <Route path="/temp" element={<Tempwebcomp />} />
+      </Route>
+
+      <Route element={<AboutLayout />}>
+        <Route path="/about" element={<About />} />
       </Route>
       
     </Routes>

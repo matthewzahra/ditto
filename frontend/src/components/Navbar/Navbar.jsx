@@ -21,6 +21,7 @@ function Navbar() {
                     <NavItem to="workout-tracker">Workouts</NavItem>
                 </div>
                 <div className="nav-right">
+                    <NavItem to="/about">About</NavItem>
                     <ProfileDropdown />
                 </div>
             </nav>
@@ -35,6 +36,7 @@ function Navbar() {
                     <NavItem to="/">Home</NavItem>
                 </div>
                 <div className="nav-right">
+                    <NavItem to="/about">About</NavItem>
                     <NavItem to="/login">Login</NavItem>
                     <NavItem to="/register">Register</NavItem>
                 </div>

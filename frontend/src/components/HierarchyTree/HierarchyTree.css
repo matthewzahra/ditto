@@ -1,0 +1,91 @@
+.hierarchy-tree {
+    width: 100%;
+    padding: 60px 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    color: var(--text);
+}
+
+.hierarchy-container {
+    width: 100%;
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px 0;
+}
+
+.hierarchy-container h2 {
+    margin: 0 0 30px;
+
+    font-size: 24px;
+    font-weight: 600;
+
+    color: var(--text);
+}
+
+.hierarchy-level {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 30px;
+}
+
+.founders-level {
+    gap: 50px;
+}
+
+/* Separator between hierarchy levels */
+
+.hierarchy-container:not(:last-child)::after {
+    content: "";
+
+    width: min(80%, 500px);
+    height: 2px;
+
+    margin-top: 30px;
+
+    border-radius: 2px;
+
+    background-color: var(--border);
+}
+
+/* Tablet */
+
+@media (max-width: 800px) {
+
+    .hierarchy-level {
+        gap: 20px;
+    }
+
+    .founders-level {
+        gap: 25px;
+    }
+
+}
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+    .hierarchy-tree {
+        padding: 40px 15px;
+    }
+
+    .hierarchy-container {
+        padding: 30px 0;
+    }
+
+    .hierarchy-container h2 {
+        font-size: 21px;
+    }
+
+}
