@@ -15,9 +15,10 @@ function WorkoutComponent({ setRecordExerciseOpen, exercises, setExercises, setR
                         <button className="record-exercise-button" onClick={() => setRecordExerciseOpen(true)}>Record Exercise</button>
                         <button className="record-workout-button" onClick={() => setRecordWorkoutOpen(true)}>Record Workout</button>
                     </div>
-                    <WorkoutsList workouts={sortedWorkouts} setWorkouts={setWorkouts} />
+                    
                 </div>
             </div>
+            <WorkoutsList workouts={sortedWorkouts} setWorkouts={setWorkouts} />
         </div>
     )
 }
