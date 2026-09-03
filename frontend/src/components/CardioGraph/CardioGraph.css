@@ -1,120 +1,173 @@
 .cardio-graph {
     width: 100%;
-
     padding: 24px;
 
     background: var(--card-background);
+
     border: 1px solid var(--border);
     border-radius: 12px;
+
+    box-sizing: border-box;
 }
+
+
+/* ---------------- */
+/* Header */
+/* ---------------- */
 
 .cardio-graph-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
-.cardio-graph-header h2 {
+.cardio-graph-header h3 {
     margin: 0;
 
     color: var(--text);
-    font-size: 20px;
+
+    font-size: 18px;
     font-weight: 600;
 }
 
-.cardio-graph-header p {
-    margin: 4px 0 0;
+.cardio-graph-header span {
+    display: block;
+
+    margin-top: 4px;
 
     color: var(--muted);
-    font-size: 14px;
+
+    font-size: 13px;
 }
 
+
+/* ---------------- */
 /* Time span dropdown */
+/* ---------------- */
 
 .time-span-container {
     position: relative;
 }
 
 .time-span-button {
-    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 
-    border: none;
+    padding: 7px 12px;
+
+    border: 1px solid var(--border);
     border-radius: 8px;
 
-    background-color: var(--primary);
+    background-color: var(--surface);
     color: var(--text);
 
+    font-size: 13px;
+    font-weight: 500;
+
     cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        border-color 0.15s ease;
 }
 
 .time-span-button:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--card-background);
+    border-color: var(--primary);
 }
+
+
+/* Dropdown */
 
 .time-span-dropdown {
     position: absolute;
-    top: 100%;
+
+    top: calc(100% + 6px);
     right: 0;
 
-    margin-top: 8px;
-    padding: 12px;
+    width: 120px;
 
-    width: 180px;
+    padding: 5px;
 
     background-color: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 
     z-index: 100;
 }
 
 .time-span-dropdown button {
     width: 100%;
-    padding: 8px;
+
+    padding: 8px 10px;
 
     border: none;
     border-radius: 6px;
 
-    background-color: var(--primary);
+    background: transparent;
     color: var(--text);
 
+    text-align: left;
+
+    font-size: 13px;
+
     cursor: pointer;
+
+    transition: background-color 0.15s ease;
 }
 
 .time-span-dropdown button:hover {
-    background-color: var(--primary-hover);
+    background-color: var(--card-background);
 }
 
+
+/* ---------------- */
 /* Graph */
+/* ---------------- */
 
 .cardio-graph-chart {
     width: 100%;
     height: 350px;
 }
 
+
+/* ---------------- */
+/* Tooltip */
+/* ---------------- */
+
 .cardio-graph-tooltip {
     display: flex;
     flex-direction: column;
     gap: 4px;
 
-    padding: 10px 12px;
+    min-width: 90px;
+
+    padding: 9px 11px;
 
     background: var(--surface);
+
     border: 1px solid var(--border);
     border-radius: 8px;
 
     color: var(--text);
-    font-size: 14px;
+
+    font-size: 13px;
+}
+
+.cardio-graph-tooltip-date {
+    color: var(--muted);
+    font-size: 12px;
 }
 
 .cardio-graph-tooltip strong {
-    font-weight: 600;
-}
+    color: var(--text);
 
-.cardio-graph-tooltip span {
-    color: var(--muted);
+    font-size: 14px;
+    font-weight: 600;
 }
