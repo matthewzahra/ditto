@@ -1,0 +1,126 @@
+.workout-list-item {
+    width: 100%;
+    min-width: 0;
+    padding: 1.5rem 2rem;
+
+    box-sizing: border-box;
+
+    background-color: var(--surface);
+    border: 1px solid var(--secondary);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+}
+
+.workout-list-item h3,
+.workout-list-item p {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.workout-list-item p {
+    line-height: 1.5;
+}
+
+.workout-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.workout-header h3 {
+    margin: 0;
+    min-width: 0;
+    flex: 1;
+}
+
+.workout-header p {
+    margin: 0;
+    flex-shrink: 0;
+    color: var(--muted);
+}
+
+.workout-info {
+    margin: 0.75rem 0;
+    color: var(--muted);
+}
+
+.workout-rounds {
+    margin: 0.75rem 0;
+}
+
+.workout-exercises {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.workout-exercise {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+
+    background-color: var(--card-background);
+    border-radius: 0.5rem;
+}
+
+.workout-exercise p {
+    margin: 0;
+}
+
+.workout-exercise p:last-child {
+    flex-shrink: 0;
+    color: var(--muted);
+}
+
+
+/* Delete button */
+
+.workout-list-item-delete-button {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 1.5rem 0 0 auto;
+    padding: 0;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--error);
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.workout-list-item-delete-button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
+.workout-list-item-delete-button:active {
+    transform: scale(0.95);
+}
+
+.workout-list-item-delete-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+
+/* Trash icon */
+
+.workout-list-item-delete-button img {
+    width: 18px;
+    height: 18px;
+}

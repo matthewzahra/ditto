@@ -56,7 +56,8 @@ INSTALLED_APPS = [
 	'user_auth',
 	'inbox',
     'quotes',
-	'restaurant'
+	'restaurant',
+	'workout_tracker'
 ]
 
 # help to enforce and document the REST API
