@@ -5,7 +5,7 @@ import "./About.css"
 function About() {
     return (
         <div className="about-page">
-            <h3>About page info text here</h3>
+            <h3 className="about-text">Ditto was created as a platform to host a variety of tools that solve everyday problems. It is currently in active development by our <strong>incredibly talented</strong> team below!</h3>
             <HierarchyTree />
         </div>
     )
