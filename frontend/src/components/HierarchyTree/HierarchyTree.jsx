@@ -1,10 +1,25 @@
 import PersonCard from "../PersonCard/PersonCard"
 
 import defaultUserPicture from "../../assets/defaultUserPicture.svg"
+
+// Founders
 import CEO1 from "../../assets/CEO1.jpeg"
+import CEO2 from "../../assets/CEO2.jpg"
+
+// Leadership
 import CTO from "../../assets/CTO.jpg"
+import CFO from "../../assets/CFO.jpg"
+import CVC from "../../assets/CVC.jpeg"
+
+// Team
 import BACKEND from "../../assets/BACKEND.jpg"
+import FRONTEND from "../../assets/FRONTEND.jpeg"
 import FINGER from "../../assets/FINGER.webp"
+
+//Honourable mentions
+import Lebron from "../../assets/Lebron.png"
+import Wailord from "../../assets/Wailord.png"
+import Accountant from "../../assets/Accountant.jpg"
 
 
 import "./HierarchyTree.css"
@@ -32,7 +47,7 @@ function HierarchyTree() {
                     <PersonCard
                         name="Nicholas Zahra"
                         role="CEO"
-                        picture={defaultUserPicture}
+                        picture={CEO2}
                     />
 
                 </div>
@@ -51,7 +66,7 @@ function HierarchyTree() {
                     <PersonCard
                         name="Nicholas Zahra"
                         role="CFO"
-                        picture={defaultUserPicture}
+                        picture={CFO}
                     />
 
                     <PersonCard
@@ -63,7 +78,7 @@ function HierarchyTree() {
                     <PersonCard
                         name="Nicholas Zahra"
                         role="Chief Vibe-Coder (CVC)"
-                        picture={defaultUserPicture}
+                        picture={CVC}
                     />
 
                 </div>
@@ -88,13 +103,49 @@ function HierarchyTree() {
                     <PersonCard
                         name="Nicholas Zahra"
                         role="Frontend"
-                        picture={defaultUserPicture}
+                        picture={FRONTEND}
                     />
 
                     <PersonCard
                         name="You"
                         role="Funding"
                         picture={FINGER}
+                    />
+
+                    <PersonCard
+                        name="n/a"
+                        role="Testing"
+                        picture={defaultUserPicture}
+                    />
+
+                </div>
+
+            </div>
+
+            {/* Fourth layer */}
+
+            <div className="hierarchy-container">
+
+                <h2>Honorable mentions</h2>
+
+                <div className="hierarchy-level">
+
+                    <PersonCard
+                        name="Lebron James"
+                        role="GOAT"
+                        picture={Lebron}
+                    />
+
+                    <PersonCard
+                        name="Wailord"
+                        role="Defense"
+                        picture={Wailord}
+                    />
+
+                    <PersonCard
+                        name="Christian Wolff"
+                        role="Accounting"
+                        picture={Accountant}
                     />
 
                     <PersonCard
