@@ -10,7 +10,6 @@ import "./Home.css"
 function Home() {
     return (
         <div className="home-page">
-            <h1>Home page</h1>
             <div className="home-page-grid">
                 <HomeGridItem name="Inbox" image={evenlopePurple} to={"/inbox"} />
                 <HomeGridItem name="Quote" image={quote} to={"/quote"} />

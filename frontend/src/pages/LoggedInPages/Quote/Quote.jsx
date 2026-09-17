@@ -124,7 +124,6 @@ function Quote() {
     // the actual page
     return (
         <div className="quote-page">
-            <h1>Quote page</h1>
             <div className="quote-of-the-day-container">
                 <QuoteItem quoteText={quoteOfTheDay.quoteText} author={quoteOfTheDay.author} title={quoteOfTheDay.title} saved={quoteOfTheDay.saved} onSave={onSave} id={quoteOfTheDay.id} />
             </div>

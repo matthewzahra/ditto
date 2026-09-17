@@ -3,11 +3,12 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    /* padding: 20px; */
 }
 
 .home-page-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 
     width: 100%;

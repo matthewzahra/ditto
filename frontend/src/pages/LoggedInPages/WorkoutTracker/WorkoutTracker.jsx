@@ -54,7 +54,6 @@ function WorkoutTracker() {
     
     return (
         <div className="workout-tracker-page">
-            <h1>Workout tracker page</h1>
             <div className="workout-tracker-page-selector">
                 <div className={`selector-slider ${selectedActivity}`} />
                 <button

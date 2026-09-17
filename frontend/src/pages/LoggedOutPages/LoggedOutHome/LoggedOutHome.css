@@ -3,3 +3,11 @@
     flex-direction: column;
     align-items: center;
 }
+
+.loggedout-home-page img {
+    width: 40%;
+}
+
+.loggedout-home-page p{
+    font-size: 2rem;
+}

@@ -1,10 +1,11 @@
 import "./LoggedOutHome.css"
+import dittoLogo from "../../../assets/Ditto_Logo.png"
 
 function LoggedOutHome() {
     return (
         <div className="loggedout-home-page">
-            <h1>Home</h1>
-            <h2>Login to access features</h2>
+            <img src={dittoLogo}></img>
+            <p><i>Online Swiss Army Knife - tools for problems you didn't know you had.</i></p>
         </div>
     )
 }
