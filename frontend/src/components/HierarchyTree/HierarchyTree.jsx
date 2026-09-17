@@ -1,6 +1,11 @@
 import PersonCard from "../PersonCard/PersonCard"
 
 import defaultUserPicture from "../../assets/defaultUserPicture.svg"
+import CEO1 from "../../assets/CEO1.jpeg"
+import CTO from "../../assets/CTO.jpg"
+import BACKEND from "../../assets/BACKEND.jpg"
+import FINGER from "../../assets/FINGER.webp"
+
 
 import "./HierarchyTree.css"
 
@@ -19,14 +24,14 @@ function HierarchyTree() {
                 <div className="hierarchy-level founders-level">
 
                     <PersonCard
-                        name="Founder One"
-                        role="Co-Founder"
-                        picture={defaultUserPicture}
+                        name="Matthew Zahra"
+                        role="CEO"
+                        picture={CEO1}
                     />
 
                     <PersonCard
-                        name="Founder Two"
-                        role="Co-Founder"
+                        name="Nicholas Zahra"
+                        role="CEO"
                         picture={defaultUserPicture}
                     />
 
@@ -44,20 +49,20 @@ function HierarchyTree() {
                 <div className="hierarchy-level">
 
                     <PersonCard
-                        name="Project Lead"
-                        role="Leadership"
+                        name="Nicholas Zahra"
+                        role="CFO"
                         picture={defaultUserPicture}
                     />
 
                     <PersonCard
-                        name="Technical Lead"
-                        role="Development"
-                        picture={defaultUserPicture}
+                        name="Matthew Zahra"
+                        role="CTO"
+                        picture={CTO}
                     />
 
                     <PersonCard
-                        name="Design Lead"
-                        role="Creative"
+                        name="Nicholas Zahra"
+                        role="Chief Vibe-Coder (CVC)"
                         picture={defaultUserPicture}
                     />
 
@@ -75,26 +80,26 @@ function HierarchyTree() {
                 <div className="hierarchy-level">
 
                     <PersonCard
-                        name="Frontend"
-                        role="Development"
+                        name="Matthew Zahra"
+                        role="Backend"
+                        picture={BACKEND}
+                    />
+
+                    <PersonCard
+                        name="Nicholas Zahra"
+                        role="Frontend"
                         picture={defaultUserPicture}
                     />
 
                     <PersonCard
-                        name="Backend"
-                        role="Development"
-                        picture={defaultUserPicture}
+                        name="You"
+                        role="Funding"
+                        picture={FINGER}
                     />
 
                     <PersonCard
-                        name="Design"
-                        role="Creative"
-                        picture={defaultUserPicture}
-                    />
-
-                    <PersonCard
-                        name="Testing"
-                        role="Quality Assurance"
+                        name="n/a"
+                        role="Testing"
                         picture={defaultUserPicture}
                     />
 
