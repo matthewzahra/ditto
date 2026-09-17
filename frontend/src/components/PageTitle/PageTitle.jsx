@@ -45,6 +45,18 @@ function PageTitle() {
             case "/quote":
                 document.title = "Quote | Ditto"
                 break
+            
+            case "/restaurant-tracker":
+                document.title = "Restaurants | Ditto"
+                break
+
+            case "/workout-tracker":
+                document.title = "Workouts | Ditto"
+                break
+
+            case "/about":
+                document.title = "About | Ditto"
+                break
 
             default:
                 document.title = "Ditto"

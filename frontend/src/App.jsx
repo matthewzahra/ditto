@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom"
 
-import API from "./core/API"
-
 // layouts
 import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
 import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
