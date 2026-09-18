@@ -148,7 +148,7 @@ function HierarchyTree() {
                         picture={Accountant}
                     />
 
-                    <PersonCard
+                    {/* <PersonCard
                         name="n/a"
                         role="Testing"
                         picture={defaultUserPicture}
@@ -157,7 +157,7 @@ function HierarchyTree() {
                         name="n/a"
                         role="Testing"
                         picture={defaultUserPicture}
-                    />
+                    /> */}
                     
 
                 </div>
