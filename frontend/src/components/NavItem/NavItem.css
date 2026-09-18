@@ -4,4 +4,6 @@
     gap: 8px;
     padding: 8px;
     border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
 }
