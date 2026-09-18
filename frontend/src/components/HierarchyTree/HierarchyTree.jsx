@@ -153,6 +153,12 @@ function HierarchyTree() {
                         role="Testing"
                         picture={defaultUserPicture}
                     />
+                    <PersonCard
+                        name="n/a"
+                        role="Testing"
+                        picture={defaultUserPicture}
+                    />
+                    
 
                 </div>
 
