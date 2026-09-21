@@ -73,7 +73,7 @@ def add_workout(request):
 	try:
 		# if any bad exercise, we want to roll back the whole operation
 		with transaction.atomic():
-			workout = Workout.objects.create(user=request.user, title=data['title'], info=data['info'], date=data['date'], num_rounds=data['num_rounds'])
+			workout = Workout.objects.create(user=request.user, title=data['title'], info=data.get('info',''), date=data['date'], num_rounds=data['num_rounds'])
 			for (exercise_id,reps) in data['exercises']:
 				exercise = Exercise.objects.filter(user=request.user,id=exercise_id).get()
 				rep = Reps.objects.create(workout=workout, exercise=exercise, rep_count=reps)

@@ -9,8 +9,8 @@ from datetime import timedelta
 # receive a single workout to add, including a list of exercises and the number of reps to perform each exercise
 class WorkoutSerializer(serializers.Serializer):
 	title = serializers.CharField(max_length=64)
-	info = serializers.CharField(max_length=512)
-	date = serializers.DateField(required=False)
+	info = serializers.CharField(required=False,allow_blank=True,max_length=512)
+	date = serializers.DateField()
 	num_rounds = serializers.IntegerField(required=False, default=1)
 
 	# a list of 2 pairs, where the first is the exercise id and the second is the number of reps
