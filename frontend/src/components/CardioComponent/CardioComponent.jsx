@@ -4,7 +4,7 @@ import CardioList from "../CardioList/CardioList"
 import "./CardioComponent.css"
 
 function CardioComponent({ type, cardios, setCardios, setRecordCardioOpen }) {
-    const sortedCardios = [...cardios[type]].sort((a, b) => new Date(b.date) - new Date(a.date))
+    const sortedCardios = [...(cardios[type] ?? [])].sort((a, b) => new Date(b.date) - new Date(a.date))
 
     return (
         <div className="cardio-component">
