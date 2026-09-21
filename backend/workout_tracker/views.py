@@ -108,10 +108,7 @@ def get_cardio(request):
 	serializer = CardioSingleOutputSerializer(sessions,many=True)
 
 	# split into different types of CARDIO
-	result = {
-		"RUN": [],
-		"CYCLE": [],
-	}
+	result = {}
 	for inst in serializer.data:
 		if inst['exercise_type'] not in result:
 			result[inst['exercise_type']] = []
