@@ -1,6 +1,6 @@
 import "./ExerciseItem.css"
 
-function ExerciseItem({ exercise, setWorkoutExercises }) {
+function ExerciseItem({ exercise, setWorkoutExercises, setRecordWorkoutError }) {
     function onRepsChange(event) {
         const reps = Number(event.target.value)
 
@@ -18,7 +18,10 @@ function ExerciseItem({ exercise, setWorkoutExercises }) {
             <input 
                 type="number"
                 value={exercise.reps}
-                onChange={onRepsChange}
+                onChange={event => {
+                    onRepsChange(event)
+                    setRecordWorkoutError("")
+                }}
                 min={0}
             />
         </div>

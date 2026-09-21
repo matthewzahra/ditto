@@ -9,10 +9,22 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
     const [cardioDate, setCardioDate] = useState(new Date().toISOString().split("T")[0])
     const [cardioDistance, setCardioDistance] = useState("")
     const [cardioTime, setCardioTime] = useState("00:00:00")
+    const [recordCardioError, setRecordCardioError] = useState("")
 
     async function onRecordCardio() {
-        // TODO if cardio title is blank add default cardio title
+        // TODO add default cardio titles?
+        if (!cardioTitle.trim()) {
+            setRecordCardioError("Please enter a title")
+            return
+        }
+ 
         if (cardioDistance < 0.01) {
+            setRecordCardioError("Distance is too small")
+            return
+        }
+
+        if (!cardioTime || cardioTime === "00:00:00") {
+            setRecordCardioError("Please enter a time")
             return
         }
 
@@ -27,7 +39,6 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                         kms: cardioDistance,
                         time: cardioTime,
                         date: cardioDate,
-
                     }
                 }
             )
@@ -46,9 +57,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
 
                 setCardioTitle("")
                 setCardioDate(new Date().toISOString().split("T")[0])
-                setCardioDistance(0)
+                setCardioDistance("")
                 setCardioTime("00:00:00")
                 setRecordCardioOpen(false)
+                setRecordCardioError("")
             }
         } catch (err) {
             console.error("Failed to record cardio: ", err)
@@ -58,9 +70,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
     function onDiscard() {
         setCardioTitle("")
         setCardioDate(new Date().toISOString().split("T")[0])
-        setCardioDistance(0)
+        setCardioDistance("")
         setCardioTime("00:00:00")
         setRecordCardioOpen(false)
+        setRecordCardioError("")
     }
 
     // TODO remake form layout to look better
@@ -70,6 +83,9 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
             <div className="record-cardio-overlay" onClick={() => setRecordCardioOpen(false)}>
                 <div className="record-cardio-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Cardio</h2>
+                    {recordCardioError && (
+                        <p className="record-cardio-error">{recordCardioError}</p>
+                    )}
                     <label htmlFor="cardio-title">
                         Title
                     </label>
@@ -78,7 +94,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                         type="text"
                         placeholder="Title..."
                         value={cardioTitle}
-                        onChange={event => setCardioTitle(event.target.value)}
+                        onChange={event => {
+                            setCardioTitle(event.target.value)
+                            setRecordCardioError("")
+                        }}
                     />
                     <label htmlFor="cardio-date">
                         Date
@@ -87,7 +106,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                         id="cardio-date"
                         type="date"
                         value={cardioDate}
-                        onChange={event => setCardioDate(event.target.value)}
+                        onChange={event => {
+                            setCardioDate(event.target.value)
+                            setRecordCardioError("")
+                        }}
                     />
                     <label htmlFor="cardio-distance">
                         Distance (km)
@@ -97,7 +119,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                         type="number"
                         min="0"
                         value={cardioDistance}
-                        onChange={event => setCardioDistance(Number(event.target.value))}
+                        onChange={event => {
+                            setCardioDistance(Number(event.target.value))
+                            setRecordCardioError("")
+                        }}
                     />
                     <label htmlFor="cardio-time">
                         Time
@@ -107,7 +132,10 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                         type="time"
                         step="1"
                         value={cardioTime}
-                        onChange={event => setCardioTime(event.target.value)}
+                        onChange={event => {
+                            setCardioTime(event.target.value)
+                            setRecordCardioError("")
+                        }}
                     />
                     <div className="record-cardio-buttons">
                         <button

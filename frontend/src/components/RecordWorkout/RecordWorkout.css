@@ -198,3 +198,9 @@
     padding-right: 8px;
 
 }
+
+.record-workout-error {
+    color: var(--error);
+    margin: 4px 0 8px;
+    font-size: 0.9rem;
+}
