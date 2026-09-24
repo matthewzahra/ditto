@@ -16,9 +16,7 @@ function LoginForm() {
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
-
     const [loginError, setLoginError] = useState("")
-
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -34,6 +32,7 @@ function LoginForm() {
             ...prev,
             [name]: value
         }))
+        setLoginError("")
     }
 
     const handleSubmit = async (e) => {
@@ -55,20 +54,21 @@ function LoginForm() {
             const data = await response.json()
             if (response.ok) {
                 setLoggedIn(true)
-            } else if (response.status === 401) {
-                setLoginError("Email password combination not found")
-            } else if (response.status === 400) {
-                setLoginError(data.email?.[0] ?? "Please check your input.")
             } else {
-                setLoginError("Something went wrong. Please try again later")
+                setLoginError("Server error, try again later")
             }
         } catch (err) {
-            setLoginError("Unable to connect to the server")
+            if (err.status === 401) {
+                setLoginError("Email password combination not found")
+            } else if (err.status === 400) {
+                setLoginError(err.data?.email?.[0] ?? "Please check your input.")
+            } else {
+                setLoginError("Unable to connect to the server")
+            }
         } finally {
             setLoading(false)
         }
     }
-
     return (
         <form className="login-form" onSubmit={handleSubmit}>
 

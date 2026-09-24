@@ -16,11 +16,8 @@ function UpdatePasswordForm() {
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: sessionStorage.getItem("resetEmail"), code: "", pass1: "", pass2: ""})
-
     const [changed, setChanged] = useState(false)
-
     const [requestError, setRequestError] = useState("")
-    
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -62,15 +59,17 @@ function UpdatePasswordForm() {
             if (response.ok) {
                 sessionStorage.removeItem("resetEmail")
                 setChanged(true)
-            } else if (response.status === 400) {
-                setRequestError("Passwords must match")
-            } else if (response.status === 401) {
-                setRequestError("Code incorrect")
             } else {
-                setRequestError("Server unavailable")
+                setRequestError("Server error, try again later")
             }
         } catch (err) {
-            setRequestError("Unable to connect to the server")
+            if (err.status === 400) {
+                setRequestError("Passwords must match")
+            } else if (err.status === 401) {
+                setRequestError("Code incorrect")
+            } else {
+                setRequestError("Unable to connect to the server")
+            }
         } finally {
             setLoading(false)
         }

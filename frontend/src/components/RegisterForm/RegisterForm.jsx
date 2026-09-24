@@ -17,11 +17,8 @@ function LoginForm() {
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
-
     const [registered, setRegistered] = useState(false)
-
     const [registerError, setRegisterError] = useState("")
-
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -63,13 +60,15 @@ function LoginForm() {
             if (response.ok) {
                 sessionStorage.setItem("registerEmail", formData.email)
                 setRegistered(true)
-            } else if (response.status === 400) {
-                setRegisterError("Email already taken")
             } else {
-                setRegisterError("Server unavailable")
+                setRegisterError("Server error, try again later")
             }
         } catch (err) {
-            setRegisterError("Unable to connect to the server")
+            if (err.status === 400) {
+                setRegisterError("Email already taken")
+            } else {
+                setRegisterError("Unable to connect to the server")
+            }
         } finally {
             setLoading(false)
         }

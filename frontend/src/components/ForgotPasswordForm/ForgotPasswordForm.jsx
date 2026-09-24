@@ -16,11 +16,8 @@ function ForgotPasswordForm() {
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: ""})
-
     const [requested, setRequested] = useState(false)
-
     const [requestError, setRequestError] = useState("")
-
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -62,15 +59,15 @@ function ForgotPasswordForm() {
             if (response.ok) {
                 sessionStorage.setItem("resetEmail", formData.email)
                 setRequested(true)
-            } else if (response.status === 400) {
-                setRequestError("Invalid email")
-            } else if (response.status === 500) {
-                setRequestError("Server error. Please try again later")
-            } else {
-                setRequestError("Server unavailable")
             }
         } catch (err) {
-            setRequestError("Unable to connect to the server")
+            if (err.status === 400) {
+                setRequestError("Invalid email")
+            } else if (err.status === 500) {
+                setRequestError("Server error. Please try again later")
+            } else {
+                setRequestError("Unable to connect to the server")
+            }
         } finally {
             setLoading(false)
         }
