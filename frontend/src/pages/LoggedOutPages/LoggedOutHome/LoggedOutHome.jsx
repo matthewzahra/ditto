@@ -1,5 +1,5 @@
 import "./LoggedOutHome.css"
-import dittoLogo from "../../../assets/Ditto_Logo.png"
+import dittoLogo from "@/assets/Ditto_Logo.png"
 
 function LoggedOutHome() {
     return (

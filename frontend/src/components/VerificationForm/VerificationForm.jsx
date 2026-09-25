@@ -18,9 +18,7 @@ function VerificationForm() {
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: sessionStorage.getItem("registerEmail"), code: ""})
-
     const [verificationError, setVerificationError] = useState("")
-
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -58,13 +56,13 @@ function VerificationForm() {
             if (response.ok) {
                 sessionStorage.removeItem("registerEmail")
                 setLoggedIn(true)
-            } else if (response.status === 401) {
-                setVerificationError("Code incorrect")
             } else {
-                setVerificationError("Server unavailable")
+                setVerificationError("Server error, try again later")
             }
         } catch (err) {
-            console.error(err)
+            if (err.status === 401) {
+                setVerificationError("Code incorrect")
+            }
             setVerificationError("Unable to connect to the server")
         } finally {
             setLoading(false)

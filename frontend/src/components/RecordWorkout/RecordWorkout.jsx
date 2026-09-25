@@ -11,6 +11,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
     const [workoutDate, setWorkoutDate] = useState(new Date().toISOString().split("T")[0])
     const [numRounds, setNumRounds] = useState(1)
     const [workoutExercises, setWorkoutExercises] = useState([])
+    const [recordWorkoutError, setRecordWorkoutError] = useState("")
 
     // effect to initialise workout exercises
     useEffect(() => {
@@ -19,7 +20,18 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
 
     async function onRecordWorkout() {
         // TODO if workout title is blank add default workout title
+        if (!workoutTitle.trim()) {
+            setRecordWorkoutError("Please enter a title")
+            return
+        }
+
+        if (numRounds === 0) {
+            setRecordWorkoutError("Sets must be atleast 1")
+            return
+        }
+
         if (workoutExercises.reduce((total, exercise) => (total + exercise.reps), 0) === 0) {
+            setRecordWorkoutError("Atleast one exercise must be completed")
             return
         }
 
@@ -54,6 +66,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                 setNumRounds(1)
                 setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
                 setRecordWorkoutOpen(false)
+                setRecordWorkoutError("")
             }
         } catch (err) {
             console.error("Failed to record workout: ", err)
@@ -67,6 +80,7 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
         setNumRounds(1)
         setWorkoutExercises(exercises.map((exercise) => ({...exercise, reps: 0})))
         setRecordWorkoutOpen(false)
+        setRecordWorkoutError("")
     }
 
     // TODO remake form layout to look better
@@ -76,6 +90,9 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
             <div className="record-workout-overlay" onClick={() => setRecordWorkoutOpen(false)}>
                 <div className="record-workout-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Workout</h2>
+                    {recordWorkoutError && (
+                        <p className="record-workout-error">{recordWorkoutError}</p>
+                    )}
                     <label htmlFor="workout-title">
                         Title
                     </label>
@@ -84,7 +101,10 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                         type="text"
                         placeholder="Title..."
                         value={workoutTitle}
-                        onChange={event => setWorkoutTitle(event.target.value)}
+                        onChange={event => {
+                            setWorkoutTitle(event.target.value)
+                            setRecordWorkoutError("")
+                        }}
                     />
                     <label htmlFor="workout-date">
                         Date
@@ -92,7 +112,10 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                     <input 
                         type="date"
                         value={workoutDate}
-                        onChange={event => setWorkoutDate(event.target.value)}
+                        onChange={event => {
+                            setWorkoutDate(event.target.value)
+                            setRecordWorkoutError("")
+                        }}
                     />
                     <label htmlFor="workout-description">
                         Description
@@ -100,7 +123,10 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                     <textarea 
                         placeholder="Enter description..."
                         value={workoutDescription}
-                        onChange={event => setWorkoutDescription(event.target.value)}
+                        onChange={event => {
+                            setWorkoutDescription(event.target.value)
+                            setRecordWorkoutError("")
+                        }}
                     />
                     <label htmlFor="workout-num-rounds">
                         Sets
@@ -108,12 +134,15 @@ function RecordWorkout({ recordWorkoutOpen, setRecordWorkoutOpen, setWorkouts, e
                     <input 
                         type="number"
                         value={numRounds}
-                        onChange={event => setNumRounds(Number(event.target.value))}
+                        onChange={event => {
+                            setNumRounds(Number(event.target.value))
+                            setRecordWorkoutError("")
+                        }}
                         min={1}
                     />
                     {/* TODO fix what happens when there are too many exercises (limit area given to exercises and add scrollbar) */}
                     <div className="record-workout-exercises">
-                        <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} />
+                        <RecordWorkoutExercises exercises={exercises} workoutExercises={workoutExercises} setWorkoutExercises={setWorkoutExercises} setRecordWorkoutError={setRecordWorkoutError} />
                     </div>
                     <div className="record-workout-buttons">
                         <button

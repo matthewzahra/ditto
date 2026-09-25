@@ -24,7 +24,7 @@ export function UnreadMessagesProvider({children}) {
                     setUnreadInboxCount(data.data)
                     setUnreadInboxCountError("")
                 } catch (err) {
-                    setUnreadInboxCountError("failed to connect to server")
+                    setUnreadInboxCountError("Failed to connect to server")
                 }
             }
             fetchUnreadInboxCount()

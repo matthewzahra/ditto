@@ -34,7 +34,6 @@ async function apiRequest(endpoint, options = {}) {
 
         const response = await fetch(`${API}${endpoint}`, requestOptions)
 
-        // TODO - Nick have a look
         if (!response.ok) {
             let errorData
 

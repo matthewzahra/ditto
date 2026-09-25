@@ -6,11 +6,13 @@ import "./RecordExercise.css"
 
 function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercises }) {
     const [exerciseName, setExerciseName] = useState("")
+    const [recordExerciseError, setRecordExerciseError] = useState("")
 
     // function to add exercise to database
     async function onRecordExercise() {
         const name = exerciseName.trim()
         if (!name) {
+            setRecordExerciseError("Please enter an exercise")
             return
         }
 
@@ -34,6 +36,7 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
 
                 setExerciseName("")
                 setRecordExerciseOpen(false)
+                setRecordExerciseError("")
             }
         } catch (err) {
             console.error("Failed to record exercise: ", err)
@@ -44,6 +47,7 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
     function onDiscard() {
         setExerciseName("")
         setRecordExerciseOpen(false)
+        setRecordExerciseError("")
     }
 
     return (
@@ -52,11 +56,17 @@ function RecordExercise({ recordExerciseOpen, setRecordExerciseOpen, setExercise
             <div className="record-exercise-overlay" onClick={() => setRecordExerciseOpen(false)}>
                 <div className="record-exercise-form" onClick={event => event.stopPropagation()}>
                     <h2>Record Exercise</h2>
+                    {recordExerciseError && (
+                        <p className="record-exercise-error">{recordExerciseError}</p>
+                    )}
                     <input 
                         type="text"
                         placeholder="Exercise..."
                         value={exerciseName}
-                        onChange={event => setExerciseName(event.target.value)}
+                        onChange={event => {
+                            setExerciseName(event.target.value)
+                            setRecordExerciseError("")
+                        }}
                     />
                     <div className="record-exercise-buttons">
                         <button
