@@ -47,7 +47,10 @@ function WorkoutTracker() {
         async function fetchCardio() {
             const response = await apiRequest("/api/workout_tracker/get_cardio")
             const data = await response.json()
-            setCardios(data.data)
+            setCardios({
+                RUN: data.data.RUN ?? [],
+                CYCLE: data.data.CYCLE ?? []
+            })
         }
         fetchCardio()
     }, [])
