@@ -1,9 +1,9 @@
 import { Routes, Route } from "react-router-dom"
 
 // layouts
-import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
-import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
-import AboutLayout from "./layouts/AboutLayout/AboutLayout"
+import LoggedOutLayout from "@/layouts/LoggedOutLayout/LoggedOutLayout"
+import LoggedInLayout from "@/layouts/LoggedInLayout/LoggedInLayout"
+import AboutLayout from "@/layouts/AboutLayout/AboutLayout"
 
 // logged-out pages
 import Login from "./pages/LoggedOutPages/Login/Login"
@@ -17,7 +17,7 @@ import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword
 import Home from "./pages/LoggedInPages/Home/Home"
 import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
 import Profile from "./pages/LoggedInPages/Profile/Profile"
-import Quote from "./pages/LoggedInPages/Quote/Quote"
+import Quote from "@/features/quotes/pages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
 import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"

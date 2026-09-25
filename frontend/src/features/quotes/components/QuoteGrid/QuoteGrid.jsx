@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-import QuoteItem from "../QuoteItem/QuoteItem"
+import QuoteItem from "@/features/quotes/components/QuoteItem/QuoteItem"
 
 import "./QuoteGrid.css"
 
