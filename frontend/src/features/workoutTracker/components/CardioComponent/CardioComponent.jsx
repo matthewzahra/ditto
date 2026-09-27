@@ -1,5 +1,5 @@
-import CardioGraph from "../CardioGraph/CardioGraph"
-import CardioList from "../CardioList/CardioList"
+import CardioGraph from "@/features/workoutTracker/components/CardioGraph/CardioGraph"
+import CardioList from "@/features/workoutTracker/components/CardioList/CardioList"
 
 import "./CardioComponent.css"
 

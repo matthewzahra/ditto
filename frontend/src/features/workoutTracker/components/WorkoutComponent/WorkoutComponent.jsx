@@ -1,4 +1,4 @@
-import WorkoutsList from "../WorkoutsList/WorkoutsList"
+import WorkoutsList from "@/features/workoutTracker/components/WorkoutsList/WorkoutsList"
 
 import "./WorkoutComponent.css"
 

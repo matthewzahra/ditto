@@ -1,5 +1,5 @@
-import apiRequest from "../../core/apiRequest"
-import WorkoutListItem from "../WorkoutListItem/WorkoutListItem"
+import apiRequest from "@/core/apiRequest"
+import WorkoutListItem from "@/features/workoutTracker/components/WorkoutListItem/WorkoutListItem"
 
 import "./WorkoutsList.css"
 

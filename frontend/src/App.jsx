@@ -20,7 +20,7 @@ import Profile from "./pages/LoggedInPages/Profile/Profile"
 import Quote from "@/features/quotes/pages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTracker/RestaurantTracker"
-import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"
+import WorkoutTracker from "@/features/workoutTracker/pages/WorkoutTracker/WorkoutTracker"
 
 // shared pages
 import About from "./pages/SharedPages/About/About"
