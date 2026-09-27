@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import apiRequest from "../../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
 import "./RecordExercise.css"
 

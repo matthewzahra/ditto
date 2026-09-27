@@ -4,9 +4,9 @@ import "./WorkoutTracker.css"
 
 import CardioComponent from "@/features/workoutTracker/components/CardioComponent/CardioComponent"
 import WorkoutComponent from "@/features/workoutTracker/components/WorkoutComponent/WorkoutComponent"
-import RecordExercise from "@/components/RecordExercise/RecordExercise"
-import RecordWorkout from "@/components/RecordWorkout/RecordWorkout"
-import RecordCardio from "@/components/RecordCardio/RecordCardio"
+import RecordExercise from "@/features/workoutTracker/components/RecordExercise/RecordExercise"
+import RecordWorkout from "@/features/workoutTracker/components/RecordWorkout/RecordWorkout"
+import RecordCardio from "@/features/workoutTracker/components/RecordCardio/RecordCardio"
 import apiRequest from "@/core/apiRequest"
 
 function WorkoutTracker() {

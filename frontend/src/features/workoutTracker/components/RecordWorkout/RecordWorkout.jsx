@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
-import apiRequest from "../../core/apiRequest"
-import RecordWorkoutExercises from "../RecordWorkoutExercises/RecordWorkoutExercises"
+import apiRequest from "@/core/apiRequest"
+import RecordWorkoutExercises from "@/features/workoutTracker/components/RecordWorkoutExercises/RecordWorkoutExercises"
 
 import "./RecordWorkout.css"
 
