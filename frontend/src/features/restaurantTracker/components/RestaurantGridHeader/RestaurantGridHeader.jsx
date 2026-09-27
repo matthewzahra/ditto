@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react"
 
 import "./RestaurantGridHeader.css"
 
-import ActiveFilters from "../ActiveFilters/ActiveFilters"
+import ActiveFilters from "@/features/restaurantTracker/components/ActiveFilters/ActiveFilters"
 
 function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen, restaurants }) {
     const [filterOpen, setFilterOpen] = useState(false)

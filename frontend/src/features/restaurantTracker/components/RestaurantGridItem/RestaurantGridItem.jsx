@@ -1,6 +1,6 @@
 import "./RestaurantGridItem.css"
 
-import trashCan from "../../assets/trashCan.svg"
+import trashCan from "@/assets/trashCan.svg"
 
 function RestaurantGridItem({ restaurant, selected, onSelect, onRequestDelete }) {
 
