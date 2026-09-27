@@ -1,6 +1,6 @@
 import "./InboxNotification.css"
 
-import trashCan from "../../assets/trashCan.svg"
+import trashCan from "@/assets/trashCan.svg"
 
 function InboxNotification({ title, body, read, onRead, disabled, deleteMessage, expanded, onExpand }) {
     return (

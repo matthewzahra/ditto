@@ -1,6 +1,6 @@
 import "./Inbox.css"
 
-import InboxMessages from "../../../components/InboxMessages/InboxMessages"
+import InboxMessages from "@/features/inbox/components/InboxMessages/InboxMessages"
 
 function Inbox() {
         return (

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react"
 
-import { useUnreadMessages } from "../../context/UnreadMessagesContext"
-import { useWebSocket } from "../../context/WebSocketContext"
+import { useUnreadMessages } from "@/context/UnreadMessagesContext"
+import { useWebSocket } from "@/context/WebSocketContext"
 
-import apiRequest from "../../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
-import InboxNotification from "../InboxNotification/InboxNotification"
+import InboxNotification from "@/features/inbox/components/InboxNotification/InboxNotification"
 
 import "./InboxMessages.css"
 

@@ -15,7 +15,7 @@ import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword
 
 // logged-in pages
 import Home from "./pages/LoggedInPages/Home/Home"
-import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
+import Inbox from "@/features/inbox/pages/Inbox/Inbox"
 import Profile from "./pages/LoggedInPages/Profile/Profile"
 import Quote from "@/features/quotes/pages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
