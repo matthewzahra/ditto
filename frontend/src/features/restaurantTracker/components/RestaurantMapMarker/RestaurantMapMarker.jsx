@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react"
 import { Marker, Popup } from "react-leaflet"
 import L from "leaflet"
 
-import locationMarkerBlue from "../../assets/locationMarkerBlue.svg"
-import locationMarkerRed from "../../assets/locationMarkerRed.svg"
+import locationMarkerBlue from "@/assets/locationMarkerBlue.svg"
+import locationMarkerRed from "@/assets/locationMarkerRed.svg"
 
 import "./RestaurantMapMarker.css"
 

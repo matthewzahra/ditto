@@ -19,7 +19,7 @@ import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
 import Profile from "./pages/LoggedInPages/Profile/Profile"
 import Quote from "@/features/quotes/pages/Quote/Quote"
 import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
-import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
+import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTracker/RestaurantTracker"
 import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"
 
 // shared pages

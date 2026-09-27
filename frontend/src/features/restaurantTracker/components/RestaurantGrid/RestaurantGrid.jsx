@@ -1,5 +1,5 @@
-import RestaurantGridItem from "../RestaurantGridItem/RestaurantGridItem"
-import RestaurantGridHeader from "../RestaurantGridHeader/RestaurantGridHeader"
+import RestaurantGridItem from "@/components/RestaurantGridItem/RestaurantGridItem"
+import RestaurantGridHeader from "@/components/RestaurantGridHeader/RestaurantGridHeader"
 
 import "./RestaurantGrid.css"
 

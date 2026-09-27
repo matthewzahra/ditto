@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { MapContainer, TileLayer, useMap } from "react-leaflet"
 
-import RestaurantMapMarker from "../RestaurantMapMarker/RestaurantMapMarker"
+import RestaurantMapMarker from "@/components/RestaurantMapMarker/RestaurantMapMarker"
 
 import "leaflet/dist/leaflet.css"
 import "./RestaurantMap.css"

@@ -1,4 +1,4 @@
-import apiRequest from "../../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
 import "./RecordRestaurant.css"
 
