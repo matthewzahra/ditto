@@ -1,10 +1,10 @@
-import { useUserProfile } from "../../../context/UserProfileContext"
+import { useUserProfile } from "@/context/UserProfileContext"
 
-import NavItem from "../../../components/NavItem/NavItem"
+import NavItem from "@/components/NavItem/NavItem"
 
 import "./Profile.css"
 
-import defaultUserPicture from "../../../assets/defaultUserPicture.svg"
+import defaultUserPicture from "@/assets/defaultUserPicture.svg"
 
 function Profile() {
     const { userProfilePicture, userEmail } = useUserProfile()

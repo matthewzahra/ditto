@@ -1,4 +1,4 @@
-import HierarchyTree from "../../../components/HierarchyTree/HierarchyTree"
+import HierarchyTree from "@/components/HierarchyTree/HierarchyTree"
 
 import "./About.css"
 

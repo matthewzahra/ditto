@@ -1,12 +1,12 @@
-import { useUserProfile } from "../../../context/UserProfileContext"
+import { useUserProfile } from "@/context/UserProfileContext"
 
-import apiRequest from "../../../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
 import "./EditProfile.css"
 
-import ProfilePictureUpload from "../../../components/ProfilePictureUpload/ProfilePictureUpload"
+import ProfilePictureUpload from "@/components/ProfilePictureUpload/ProfilePictureUpload"
 
-import defaultUserPicture from "../../../assets/defaultUserPicture.svg"
+import defaultUserPicture from "@/assets/defaultUserPicture.svg"
 
 function EditProfile() {
 
