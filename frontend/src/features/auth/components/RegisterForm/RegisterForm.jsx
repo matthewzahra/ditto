@@ -1,23 +1,21 @@
-import "./ForgotPasswordForm.css"
-
-import { useAuth } from "../../context/AuthContext"
-
 import { useState } from "react"
-
 import { Navigate } from "react-router-dom"
 
-import apiRequest from "../../core/apiRequest"
+import { useAuth } from "@/context/AuthContext"
 
+import apiRequest from "@/core/apiRequest"
 
-function ForgotPasswordForm() {
+import "./RegisterForm.css"
+
+function RegisterForm() {
 
     //fetching current loggedIn status
     const { loggedIn } = useAuth()
 
     // initialising object for storing form data
-    const [formData, setFormData] = useState({email: ""})
-    const [requested, setRequested] = useState(false)
-    const [requestError, setRequestError] = useState("")
+    const [formData, setFormData] = useState({email: "", password: ""})
+    const [registered, setRegistered] = useState(false)
+    const [registerError, setRegisterError] = useState("")
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
@@ -25,8 +23,8 @@ function ForgotPasswordForm() {
         return <Navigate to="/home" />
     }
 
-    if (requested) {
-        return <Navigate to="/updatepassword" />
+    if (registered) {
+        return <Navigate to="/verify" />
     }
 
     // function for updating form data
@@ -43,13 +41,13 @@ function ForgotPasswordForm() {
         // stops browser from reloading
         e.preventDefault()
 
-        setRequestError("")
+        setRegisterError("")
         setLoading(true)
 
-        try {
+        try{
 
             // request register from backend
-            const response = await apiRequest("/api/user_auth/request_password_change/", {
+            const response = await apiRequest("/api/user_auth/register/", {
                 method: "POST",
                 body: formData
             })
@@ -57,16 +55,16 @@ function ForgotPasswordForm() {
             // register response data
             const data = await response.json()
             if (response.ok) {
-                sessionStorage.setItem("resetEmail", formData.email)
-                setRequested(true)
+                sessionStorage.setItem("registerEmail", formData.email)
+                setRegistered(true)
+            } else {
+                setRegisterError("Server error, try again later")
             }
         } catch (err) {
             if (err.status === 400) {
-                setRequestError("Invalid email")
-            } else if (err.status === 500) {
-                setRequestError("Server error. Please try again later")
+                setRegisterError("Email already taken")
             } else {
-                setRequestError("Unable to connect to the server")
+                setRegisterError("Unable to connect to the server")
             }
         } finally {
             setLoading(false)
@@ -74,17 +72,20 @@ function ForgotPasswordForm() {
     }
 
     return (
-        <form className="request-password-change-form" onSubmit={handleSubmit}>
+        <form className="register-form" onSubmit={handleSubmit}>
 
-            {requestError && <p className="request-error">{requestError}</p>}
+            {registerError && <p className="register-error">{registerError}</p>}
 
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
             </label>
-            <button type="submit" disabled={loading}>{loading ? "Requesting..." : "Request password change code"}</button>
+            <label>Password:
+                <input type="password" name="password" value={formData.password} onChange={handleChange}/>
+            </label>
+            <button type="submit" disabled={loading}>{loading ? "Registering" : "Register"}</button>
 
         </form>
     )
 }
 
-export default ForgotPasswordForm
+export default RegisterForm

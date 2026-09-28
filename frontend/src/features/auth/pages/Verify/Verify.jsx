@@ -1,4 +1,4 @@
-import VerificationForm from "@/components/VerificationForm/VerificationForm"
+import VerificationForm from "@/features/auth/components/VerificationForm/VerificationForm"
 
 import "./Verify.css"
 

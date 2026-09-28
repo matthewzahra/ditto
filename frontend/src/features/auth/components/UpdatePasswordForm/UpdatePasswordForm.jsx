@@ -1,13 +1,11 @@
-import "./UpdatePasswordForm.css"
-
-import { useAuth } from "../../context/AuthContext"
-
 import { useState } from "react"
-
 import { Navigate } from "react-router-dom"
 
-import apiRequest from "../../core/apiRequest"
+import { useAuth } from "@/context/AuthContext"
 
+import apiRequest from "@/core/apiRequest"
+
+import "./UpdatePasswordForm.css"
 
 function UpdatePasswordForm() {
 

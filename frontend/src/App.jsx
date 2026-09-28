@@ -6,12 +6,12 @@ import LoggedInLayout from "@/layouts/LoggedInLayout/LoggedInLayout"
 import AboutLayout from "@/layouts/AboutLayout/AboutLayout"
 
 // logged-out pages
-import Login from "@/pages/LoggedOutPages/Login/Login"
+import Login from "@/features/auth/pages/Login/Login"
 import LoggedOutHome from "@/pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
-import Register from "@/pages/LoggedOutPages/Register/Register"
-import Verify from "@/pages/LoggedOutPages/Verify/Verify"
-import ForgotPassword from "@/pages/LoggedOutPages/ForgotPassword/ForgotPassword"
-import UpdatePassword from "@/pages/LoggedOutPages/UpdatePassword/UpdatePassword"
+import Register from "@/features/auth/pages/Register/Register"
+import Verify from "@/features/auth/pages/Verify/Verify"
+import ForgotPassword from "@/features/auth/pages/ForgotPassword/ForgotPassword"
+import UpdatePassword from "@/features/auth/pages/UpdatePassword/UpdatePassword"
 
 // logged-in pages
 import Home from "@/pages/LoggedInPages/Home/Home"

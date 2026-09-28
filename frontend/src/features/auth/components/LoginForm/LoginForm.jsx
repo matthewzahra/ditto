@@ -1,33 +1,27 @@
-import { useAuth } from "../../context/AuthContext"
-
 import { useState } from "react"
+import { Navigate, Link } from "react-router-dom"
 
-import { Navigate } from "react-router-dom"
+import { useAuth } from "@/context/AuthContext"
 
-import apiRequest from "../../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
-import "./RegisterForm.css"
-
+import "./LoginForm.css"
 
 
 function LoginForm() {
 
     //fetching current loggedIn status
     const { loggedIn } = useAuth()
+    const { setLoggedIn } = useAuth()
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
-    const [registered, setRegistered] = useState(false)
-    const [registerError, setRegisterError] = useState("")
+    const [loginError, setLoginError] = useState("")
     const [loading, setLoading] = useState(false)
 
     // checking current logged-in status
     if (loggedIn) {
         return <Navigate to="/home" />
-    }
-
-    if (registered) {
-        return <Navigate to="/verify" />
     }
 
     // function for updating form data
@@ -38,46 +32,47 @@ function LoginForm() {
             ...prev,
             [name]: value
         }))
+        setLoginError("")
     }
 
     const handleSubmit = async (e) => {
         // stops browser from reloading
         e.preventDefault()
 
-        setRegisterError("")
+        setLoginError("")
         setLoading(true)
 
-        try{
+        try {
 
-            // request register from backend
-            const response = await apiRequest("/api/user_auth/register/", {
+            // request login from backend
+            const response = await apiRequest("/api/user_auth/login/", {
                 method: "POST",
                 body: formData
             })
             
-            // register response data
+            // login response data
             const data = await response.json()
             if (response.ok) {
-                sessionStorage.setItem("registerEmail", formData.email)
-                setRegistered(true)
+                setLoggedIn(true)
             } else {
-                setRegisterError("Server error, try again later")
+                setLoginError("Server error, try again later")
             }
         } catch (err) {
-            if (err.status === 400) {
-                setRegisterError("Email already taken")
+            if (err.status === 401) {
+                setLoginError("Email password combination not found")
+            } else if (err.status === 400) {
+                setLoginError(err.data?.email?.[0] ?? "Please check your input.")
             } else {
-                setRegisterError("Unable to connect to the server")
+                setLoginError("Unable to connect to the server")
             }
         } finally {
             setLoading(false)
         }
     }
-
     return (
-        <form className="register-form" onSubmit={handleSubmit}>
+        <form className="login-form" onSubmit={handleSubmit}>
 
-            {registerError && <p className="register-error">{registerError}</p>}
+            {loginError && <p className="login-error">{loginError}</p>}
 
             <label>Email:
                 <input type="text" name="email" value={formData.email} onChange={handleChange}/>
@@ -85,7 +80,11 @@ function LoginForm() {
             <label>Password:
                 <input type="password" name="password" value={formData.password} onChange={handleChange}/>
             </label>
-            <button type="submit" disabled={loading}>{loading ? "Registering" : "Register"}</button>
+            <button type="submit" disabled={loading}>{loading ? "Logging in" : "Login"}</button>
+
+            <Link to="/forgotpassword">
+                Forgot password?
+            </Link>
 
         </form>
     )

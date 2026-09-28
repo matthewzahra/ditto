@@ -1,4 +1,4 @@
-import UpdatePasswordForm from "@/components/UpdatePasswordForm/UpdatePasswordForm"
+import UpdatePasswordForm from "@/features/auth/components/UpdatePasswordForm/UpdatePasswordForm"
 
 import "./UpdatePassword.css"
 

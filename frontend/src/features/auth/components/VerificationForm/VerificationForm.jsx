@@ -1,13 +1,11 @@
-import { useAuth } from "../../context/AuthContext"
-
 import { useState } from "react"
 import { Navigate } from "react-router-dom"
 
-import "./VerificationForm.css"
+import { useAuth } from "@/context/AuthContext"
+
+import apiRequest from "@/core/apiRequest"
 
 import "./VerificationForm.css"
-
-import apiRequest from "../../core/apiRequest"
 
 
 function VerificationForm() {

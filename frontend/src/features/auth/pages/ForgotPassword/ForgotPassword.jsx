@@ -1,4 +1,4 @@
-import ForgotPasswordForm from "@/components/ForgotPasswordForm/ForgotPasswordForm"
+import ForgotPasswordForm from "@/features/auth/components/ForgotPasswordForm/ForgotPasswordForm"
 
 import "./ForgotPassword.css"
 
