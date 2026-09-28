@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react"
 
-import "./RestaurantTracker.css"
-
 import RestaurantMap from "@/features/restaurantTracker/components/RestaurantMap/RestaurantMap"
 import RestaurantGrid from "@/features/restaurantTracker/components/RestaurantGrid/RestaurantGrid"
 import ConfirmRestaurantDelete from "@/features/restaurantTracker/components/ConfirmRestaurantDelete/ConfirmRestaurantDelete"
 import RecordRestaurant from "@/features/restaurantTracker/components/RecordRestaurant/RecordRestaurant"
 import apiRequest from "@/core/apiRequest"
+
+import "./RestaurantTracker.css"
 
 function RestaurantTracker() {
     const [selectedRestaurant, setSelectedRestaurant] = useState(null)

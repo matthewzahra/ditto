@@ -1,6 +1,6 @@
-import "./WorkoutListItem.css"
-
 import trashCan from "@/assets/trashCan.svg"
+
+import "./WorkoutListItem.css"
 
 function WorkoutListItem({ workout, onDelete }) {
     return (

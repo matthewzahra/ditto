@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react"
 
-import "./WorkoutTracker.css"
-
 import CardioComponent from "@/features/workoutTracker/components/CardioComponent/CardioComponent"
 import WorkoutComponent from "@/features/workoutTracker/components/WorkoutComponent/WorkoutComponent"
 import RecordExercise from "@/features/workoutTracker/components/RecordExercise/RecordExercise"
 import RecordWorkout from "@/features/workoutTracker/components/RecordWorkout/RecordWorkout"
 import RecordCardio from "@/features/workoutTracker/components/RecordCardio/RecordCardio"
 import apiRequest from "@/core/apiRequest"
+
+import "./WorkoutTracker.css"
 
 function WorkoutTracker() {
     // TODO add someway to delete exercises, add more functionality to do with exercises (including sorting out how they appear in the form)

@@ -1,6 +1,6 @@
-import "./CardioListItem.css"
-
 import trashCan from "@/assets/trashCan.svg"
+
+import "./CardioListItem.css"
 
 function CardioListItem({ type, cardio, onDelete }) {
     return (

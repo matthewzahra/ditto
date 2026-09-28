@@ -11,8 +11,7 @@ import "./VerificationForm.css"
 function VerificationForm() {
 
     //fetching current loggedIn status
-    const { loggedIn } = useAuth()
-    const { setLoggedIn } = useAuth()
+    const { loggedIn, setLoggedIn } = useAuth()
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: sessionStorage.getItem("registerEmail"), code: ""})

@@ -1,4 +1,4 @@
-import { useWebSocket } from "../../context/WebSocketContext"
+import { useWebSocket } from "@/context/WebSocketContext"
 
 import { useEffect } from "react"
 

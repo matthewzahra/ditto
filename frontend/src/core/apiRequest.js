@@ -1,6 +1,6 @@
-import API from "./API"
+import API from "@/core/API"
 
-import getCookie from "./getCookie"
+import getCookie from "@/core/getCookie"
 
 async function apiRequest(endpoint, options = {}) {
     const {

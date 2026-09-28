@@ -11,8 +11,7 @@ import "./LoginForm.css"
 function LoginForm() {
 
     //fetching current loggedIn status
-    const { loggedIn } = useAuth()
-    const { setLoggedIn } = useAuth()
+    const { loggedIn, setLoggedIn } = useAuth()
 
     // initialising object for storing form data
     const [formData, setFormData] = useState({email: "", password: ""})
@@ -51,7 +50,6 @@ function LoginForm() {
             })
             
             // login response data
-            const data = await response.json()
             if (response.ok) {
                 setLoggedIn(true)
             } else {

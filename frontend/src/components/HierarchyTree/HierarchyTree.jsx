@@ -1,25 +1,25 @@
-import PersonCard from "../PersonCard/PersonCard"
+import PersonCard from "@/components/PersonCard/PersonCard"
 
-import defaultUserPicture from "../../assets/defaultUserPicture.svg"
+import defaultUserPicture from "@/assets/defaultUserPicture.svg"
 
 // Founders
-import CEO1 from "../../assets/CEO1.jpeg"
-import CEO2 from "../../assets/CEO2.jpg"
+import CEO1 from "@/assets/CEO1.jpeg"
+import CEO2 from "@/assets/CEO2.jpg"
 
 // Leadership
-import CTO from "../../assets/CTO.jpg"
-import CFO from "../../assets/CFO.jpg"
-import CVC from "../../assets/CVC.jpeg"
+import CTO from "@/assets/CTO.jpg"
+import CFO from "@/assets/CFO.jpg"
+import CVC from "@/assets/CVC.jpeg"
 
 // Team
-import BACKEND from "../../assets/BACKEND.jpg"
-import FRONTEND from "../../assets/FRONTEND.jpeg"
-import FINGER from "../../assets/FINGER.webp"
+import BACKEND from "@/assets/BACKEND.jpg"
+import FRONTEND from "@/assets/FRONTEND.jpeg"
+import FINGER from "@/assets/FINGER.webp"
 
 //Honourable mentions
-import Lebron from "../../assets/Lebron.png"
-import Wailord from "../../assets/Wailord.png"
-import Accountant from "../../assets/Accountant.jpg"
+import Lebron from "@/assets/Lebron.png"
+import Wailord from "@/assets/Wailord.png"
+import Accountant from "@/assets/Accountant.jpg"
 
 
 import "./HierarchyTree.css"

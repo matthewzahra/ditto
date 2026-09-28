@@ -1,7 +1,7 @@
-import { useAuth } from "../../context/AuthContext"
+import { useAuth } from "@/context/AuthContext"
 
-import NavItem from "../NavItem/NavItem"
-import ProfileDropdown from "../ProfileDropdown/ProfileDropdown"
+import NavItem from "@/components/NavItem/NavItem"
+import ProfileDropdown from "@/components/ProfileDropdown/ProfileDropdown"
 
 import "./Navbar.css"
 

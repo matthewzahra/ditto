@@ -2,12 +2,12 @@ import { useState, useEffect } from "react"
 
 import apiRequest from "@/core/apiRequest"
 
-import "./Quote.css"
-
 import QuoteItem from "@/features/quotes/components/QuoteItem/QuoteItem"
 import QuoteGrid from "@/features/quotes/components/QuoteGrid/QuoteGrid"
 import RecordQuote from "@/features/quotes/components/RecordQuote/RecordQuote"
 import ConfirmQuoteDelete from "@/features/quotes/components/ConfirmQuoteDelete/ConfirmQuoteDelete"
+
+import "./Quote.css"
 
 function Quote() {
     const [quoteOfTheDay, setQuoteOfTheDay] = useState({quoteText: "Lorem ipsum", author: "Nick", title: "Quote of the day", saved: false, id: null})

@@ -1,7 +1,7 @@
-import "./QuoteItem.css"
-
 import bookmark from "@/assets/bookmark.svg"
 import trashCan from "@/assets/trashCan.svg"
+
+import "./QuoteItem.css"
 
 function QuoteItem({ quoteText, author, title="", saved=false, onSave=null, id, onDelete=null }) {
 

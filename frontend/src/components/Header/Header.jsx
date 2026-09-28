@@ -1,9 +1,8 @@
-import { useAuth } from "../../context/AuthContext"
+import dittoLogo from "@/assets/Ditto_Logo.png"
 
-import dittoLogo from "../../assets/Ditto_Logo.png"
+import Navbar from "@/components/Navbar/Navbar"
 
 import "./Header.css"
-import Navbar from "../Navbar/Navbar"
 
 function Header() {    
     return (
