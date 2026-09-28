@@ -6,27 +6,27 @@ import LoggedInLayout from "@/layouts/LoggedInLayout/LoggedInLayout"
 import AboutLayout from "@/layouts/AboutLayout/AboutLayout"
 
 // logged-out pages
-import Login from "./pages/LoggedOutPages/Login/Login"
-import LoggedOutHome from "./pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
-import Register from "./pages/LoggedOutPages/Register/Register"
-import Verify from "./pages/LoggedOutPages/Verify/Verify"
-import ForgotPassword from "./pages/LoggedOutPages/ForgotPassword/ForgotPassword"
-import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword"
+import Login from "@/pages/LoggedOutPages/Login/Login"
+import LoggedOutHome from "@/pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
+import Register from "@/pages/LoggedOutPages/Register/Register"
+import Verify from "@/pages/LoggedOutPages/Verify/Verify"
+import ForgotPassword from "@/pages/LoggedOutPages/ForgotPassword/ForgotPassword"
+import UpdatePassword from "@/pages/LoggedOutPages/UpdatePassword/UpdatePassword"
 
 // logged-in pages
-import Home from "./pages/LoggedInPages/Home/Home"
+import Home from "@/pages/LoggedInPages/Home/Home"
 import Inbox from "@/features/inbox/pages/Inbox/Inbox"
-import Profile from "./pages/LoggedInPages/Profile/Profile"
+import Profile from "@/pages/LoggedInPages/Profile/Profile"
 import Quote from "@/features/quotes/pages/Quote/Quote"
-import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
+import EditProfile from "@/pages/LoggedInPages/EditProfile/EditProfile"
 import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTracker/RestaurantTracker"
 import WorkoutTracker from "@/features/workoutTracker/pages/WorkoutTracker/WorkoutTracker"
 
 // shared pages
-import About from "./pages/SharedPages/About/About"
+import About from "@/pages/SharedPages/About/About"
 
 
-import Tempwebcomp from "./components/tempwebcomp/Tempwebcomp"
+import Tempwebcomp from "@/components/tempwebcomp/Tempwebcomp"
 
 function App() {
   

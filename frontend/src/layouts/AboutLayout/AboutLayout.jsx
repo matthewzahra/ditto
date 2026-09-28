@@ -1,4 +1,4 @@
-import { useAuth } from "../../context/AuthContext"
+import { useAuth } from "@/context/AuthContext"
 
 import LoggedInLayout from "../LoggedInLayout/LoggedInLayout"
 import LoggedOutLayout from "../LoggedOutLayout/LoggedOutLayout"

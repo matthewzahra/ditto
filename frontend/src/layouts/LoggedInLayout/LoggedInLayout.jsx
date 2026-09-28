@@ -1,8 +1,7 @@
 import { Outlet, Navigate } from "react-router-dom"
-import { useAuth } from "../../context/AuthContext"
+import { useAuth } from "@/context/AuthContext"
 
-import Header from "../../components/Header/Header"
-import Navbar from "../../components/Navbar/Navbar"
+import Header from "@/components/Header/Header"
 
 import "./LoggedInLayout.css"
 
