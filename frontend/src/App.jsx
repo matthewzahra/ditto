@@ -16,9 +16,9 @@ import UpdatePassword from "@/features/auth/pages/UpdatePassword/UpdatePassword"
 // logged-in pages
 import Home from "@/pages/LoggedInPages/Home/Home"
 import Inbox from "@/features/inbox/pages/Inbox/Inbox"
-import Profile from "@/pages/LoggedInPages/Profile/Profile"
+import Profile from "@/features/profile/pages/Profile/Profile"
 import Quote from "@/features/quotes/pages/Quote/Quote"
-import EditProfile from "@/pages/LoggedInPages/EditProfile/EditProfile"
+import EditProfile from "@/features/profile/pages/EditProfile/EditProfile"
 import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTracker/RestaurantTracker"
 import WorkoutTracker from "@/features/workoutTracker/pages/WorkoutTracker/WorkoutTracker"
 

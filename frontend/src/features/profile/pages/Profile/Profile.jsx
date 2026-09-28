@@ -2,9 +2,9 @@ import { useUserProfile } from "@/context/UserProfileContext"
 
 import NavItem from "@/components/NavItem/NavItem"
 
-import "./Profile.css"
-
 import defaultUserPicture from "@/assets/defaultUserPicture.svg"
+
+import "./Profile.css"
 
 function Profile() {
     const { userProfilePicture, userEmail } = useUserProfile()
