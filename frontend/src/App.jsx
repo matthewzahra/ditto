@@ -23,14 +23,13 @@ import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTrac
 import WorkoutTracker from "@/features/workoutTracker/pages/WorkoutTracker/WorkoutTracker"
 
 // shared pages
-import About from "@/pages/SharedPages/About/About"
+import About from "@/features/about/pages/About/About"
 
 
 import Tempwebcomp from "@/components/tempwebcomp/Tempwebcomp"
 
 function App() {
   
-
   // Creating routes to each page based on current url
   return (
     <>

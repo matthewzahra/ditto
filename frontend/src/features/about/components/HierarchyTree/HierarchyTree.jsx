@@ -1,4 +1,4 @@
-import PersonCard from "@/components/PersonCard/PersonCard"
+import PersonCard from "@/features/about/components/PersonCard/PersonCard"
 
 import defaultUserPicture from "@/assets/defaultUserPicture.svg"
 
