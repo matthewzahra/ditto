@@ -1,5 +1,5 @@
 # Ditto 
-# V1.0
+# V1.0.1
 
 <div align="center">
 	<h2><i>The Online Swiss-Army Knife</i></h2>
