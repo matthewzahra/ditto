@@ -50,7 +50,7 @@ function RecordCardio({ type, recordCardioOpen, setRecordCardioOpen, setCardios 
                 setCardios(prev => ({
                     ...prev,
                     [type]: [
-                        ...prev[type],
+                        ...(prev[type] ?? []),
                         data.data
                     ]
                 }))
