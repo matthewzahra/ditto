@@ -132,3 +132,38 @@
     height: 20px;
     display: block;
 }
+
+/* Visit button */
+
+.restaurant-grid-item-visit-button {
+    position: absolute;
+    bottom: 16px;
+    right: 60px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-visit-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.restaurant-grid-item-visit-button:active {
+    transform: scale(0.9);
+}
+
+.restaurant-grid-item-visit-button img {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
