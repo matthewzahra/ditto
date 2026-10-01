@@ -22,7 +22,8 @@ def add_restaurants():
         longitude=-0.1248,
         cuisine="British",
         rating=8,
-        info="A relaxed restaurant serving modern British dishes made with seasonal ingredients."
+        info="A relaxed restaurant serving modern British dishes made with seasonal ingredients.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -33,7 +34,8 @@ def add_restaurants():
         longitude=-0.1420,
         cuisine="Indian",
         rating=7,
-        info="A lively Indian restaurant with a good selection of curries, naan and sharing dishes."
+        info="A lively Indian restaurant with a good selection of curries, naan and sharing dishes.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -44,7 +46,8 @@ def add_restaurants():
         longitude=-0.0754,
         cuisine="British",
         rating=9,
-        info="A stylish neighbourhood grill known for hearty portions and a relaxed evening atmosphere."
+        info="A stylish neighbourhood grill known for hearty portions and a relaxed evening atmosphere.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -55,7 +58,8 @@ def add_restaurants():
         longitude=-0.0235,
         cuisine="Italian",
         rating=8,
-        info="A modern Italian restaurant specialising in fresh pasta, risotto and classic desserts."
+        info="A modern Italian restaurant specialising in fresh pasta, risotto and classic desserts.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -66,7 +70,8 @@ def add_restaurants():
         longitude=-0.0077,
         cuisine="British",
         rating=7,
-        info="A cosy spot with a seasonal menu and a good selection of traditional British favourites."
+        info="A cosy spot with a seasonal menu and a good selection of traditional British favourites.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -77,7 +82,8 @@ def add_restaurants():
         longitude=-0.1967,
         cuisine="Italian",
         rating=9,
-        info="A popular Italian restaurant with fresh ingredients, generous portions and a lively atmosphere."
+        info="A popular Italian restaurant with fresh ingredients, generous portions and a lively atmosphere.",
+        visited=True
     )
 
     Restaurant.objects.create(
@@ -88,7 +94,8 @@ def add_restaurants():
         longitude=-0.1687,
         cuisine="British",
         rating=10,
-        info="An upmarket restaurant offering quality steaks, classic sides and an extensive drinks menu."
+        info="An upmarket restaurant offering quality steaks, classic sides and an extensive drinks menu.",
+        visited=True
     )
 
     Restaurant.objects.create(
