@@ -4,10 +4,18 @@ import L from "leaflet"
 
 import locationMarkerBlue from "@/assets/locationMarkerBlue.svg"
 import locationMarkerRed from "@/assets/locationMarkerRed.svg"
+import locationMarkerGreen from "@/assets/locationMarkerGreen.svg"
 
 import "./RestaurantMapMarker.css"
 
 const normalMarker = new L.icon({
+    iconUrl: locationMarkerGreen,
+    iconSize: [32, 45],
+    iconAnchor: [16, 35],
+    popupAnchor: [0, -25]
+})
+
+const unVisitedMarker = new L.icon({
     iconUrl: locationMarkerBlue,
     iconSize: [32, 45],
     iconAnchor: [16, 35],
@@ -32,7 +40,7 @@ function RestaurantMapMarker({ restaurant, selected, onSelect }) {
     }, [selected])
 
     return (
-        <Marker position={restaurant.location} icon={selected ? selectedMarker : normalMarker} eventHandlers={{click: () => onSelect(restaurant.id)}} ref={markerRef}>
+        <Marker position={restaurant.location} icon={selected ? selectedMarker : (restaurant.visited ? normalMarker : unVisitedMarker)} eventHandlers={{click: () => onSelect(restaurant.id)}} ref={markerRef}>
             <Popup autoPan={false}>
                 <h3>{restaurant.name}</h3>
                 <p>Rating: {restaurant.rating}/10</p>
