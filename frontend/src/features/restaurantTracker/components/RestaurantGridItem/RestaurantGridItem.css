@@ -20,7 +20,7 @@
 }
 
 .restaurant-grid-item-name {
-    margin: 0 0 8px;
+    margin: 0 45px 8px 0;
 
     font-size: 1.25rem;
     font-weight: 600;
@@ -95,5 +95,40 @@
     width: 20px;
     height: 20px;
 
+    display: block;
+}
+
+/* Favourite button */
+
+.restaurant-grid-item-favourite-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-favourite-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.restaurant-grid-item-favourite-button:active {
+    transform: scale(0.9);
+}
+
+.restaurant-grid-item-favourite-button img {
+    width: 20px;
+    height: 20px;
     display: block;
 }

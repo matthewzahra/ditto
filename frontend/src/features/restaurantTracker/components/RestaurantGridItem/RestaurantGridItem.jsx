@@ -1,12 +1,14 @@
 import trashCan from "@/assets/trashCan.svg"
+import heartEmpty from "@/assets/heartEmpty.svg"
+import heartFilled from "@/assets/heartFilled.svg"
 
 import "./RestaurantGridItem.css"
 
 function RestaurantGridItem({ restaurant, selected, onSelect, onRequestDelete }) {
-
     return (
-        <div className={`restaurant-grid-item ${selected ? "restaurant-grid-item-selected" : ""}`} onClick={() => onSelect(restaurant.id)}>
+        <div className={`restaurant-grid-item ${restaurant.visited ? "restaurant-grid-item-visited" : ""} ${restaurant.favourited ? "restaurant-grid-item-favourited" : ""} ${selected ? "restaurant-grid-item-selected" : ""}`} onClick={() => onSelect(restaurant.id)}>
             <h3 className="restaurant-grid-item-name">{restaurant.name}</h3>
+            <button className="restaurant-grid-item-favourite-button"><img src={restaurant.favourited ? heartFilled : heartEmpty} /></button>
             <p className="restaurant-grid-item-cuisine">{restaurant.cuisine}</p>
             <p className="restaurant-grid-item-info">{restaurant.info}</p>
             <p className="restaurant-grid-item-rating">Rating: {restaurant.rating}/10</p>
