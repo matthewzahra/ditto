@@ -22,3 +22,4 @@ class Restaurant(models.Model):
 	info = models.TextField(blank=True,null=True)
 
 	visited = models.BooleanField(default=False)
+	favourited = models.BooleanField(default=False)

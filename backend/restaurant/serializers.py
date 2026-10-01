@@ -13,6 +13,7 @@ class SingleRestaurantSerializer(serializers.Serializer):
 	rating = serializers.FloatField(min_value=0.0, max_value=10.0)
 	info = serializers.CharField()
 	visited = serializers.BooleanField(default=False)
+	favourited = serializers.BooleanField(default=False)
 
 # for receiving the id of a single restaurant
 class SingleRestaurantIDSerializer(serializers.Serializer):
@@ -34,5 +35,6 @@ class RestaurantSerializer(serializers.ModelSerializer):
 			"cuisine",
 			"rating",
 			"info",
-			"visited"
+			"visited",
+			"favourited"
 		]
