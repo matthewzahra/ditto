@@ -22,7 +22,9 @@ function RestaurantTracker() {
     const [restaurantInfo, setRestaurantInfo] = useState("")
     const [filters, setFilters] = useState({
             minRating: null,
-            cuisine: null
+            cuisine: null,
+            visited: false,
+            unvisited: false
         })
 
     // fetching user restaurants

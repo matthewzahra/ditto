@@ -13,9 +13,11 @@ function RestaurantGridItem({ restaurant, selected, onSelect, onRequestDelete, o
             <button className="restaurant-grid-item-favourite-button" onClick={restaurant.favourited ? () => onUnfavourite(restaurant.id) : () => onFavourite(restaurant.id)}><img src={restaurant.favourited ? heartFilled : heartEmpty} /></button>
             <p className="restaurant-grid-item-cuisine">{restaurant.cuisine}</p>
             <p className="restaurant-grid-item-info">{restaurant.info}</p>
-            <p className="restaurant-grid-item-rating">Rating: {restaurant.rating}/10</p>
-            <button className="restaurant-grid-item-visit-button" onClick={restaurant.visited ? () => onUnvisit(restaurant.id) : () => onVisit(restaurant.id)}><img src={restaurant.visited ? checkBoxFilled : checkBoxEmpty} /></button>
-            <button className="restaurant-grid-item-delete-button" onClick={() => onRequestDelete(restaurant)}><img src={trashCan} alt="Delete" /></button>
+            <div className="restaurant-grid-item-footer-container">
+                <p className="restaurant-grid-item-rating">Rating: {restaurant.rating}/10</p>
+                <button className="restaurant-grid-item-visit-button" onClick={restaurant.visited ? () => onUnvisit(restaurant.id) : () => onVisit(restaurant.id)}><span>{restaurant.visited ? "Visited" : "Unvisited"}</span><img src={restaurant.visited ? checkBoxFilled : checkBoxEmpty} /></button>
+                <button className="restaurant-grid-item-delete-button" onClick={() => onRequestDelete(restaurant)}><img src={trashCan} alt="Delete" /></button>
+            </div>
         </div>
     )
 

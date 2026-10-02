@@ -1,6 +1,9 @@
 .restaurant-grid-item {
     position: relative;
 
+    display: flex;
+    flex-direction: column;
+
     border-radius: 12px;
     padding: 20px;
 
@@ -15,9 +18,11 @@
 
 .restaurant-grid-item:hover {
     transform: translateY(-4px);
-
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
 }
+
+
+/* Name */
 
 .restaurant-grid-item-name {
     margin: 0 45px 8px 0;
@@ -26,6 +31,9 @@
     font-weight: 600;
 }
 
+
+/* Cuisine */
+
 .restaurant-grid-item-cuisine {
     margin: 0 0 12px;
 
@@ -33,14 +41,30 @@
     color: var(--muted);
 }
 
+
+/* Info */
+
 .restaurant-grid-item-info {
-    margin: 0 0 16px;
+    margin: 0;
 
     font-size: 1rem;
     line-height: 1.5;
-
     color: var(--text);
 }
+
+
+/* Footer */
+
+.restaurant-grid-item-footer-container {
+    display: flex;
+    align-items: center;
+
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+
+/* Rating */
 
 .restaurant-grid-item-rating {
     margin: 0;
@@ -50,20 +74,14 @@
     color: var(--text);
 }
 
-.restaurant-grid-item-selected {
-    border: 2px solid var(--primary);
-}
 
 /* Delete button */
 
 .restaurant-grid-item-delete-button {
-    position: absolute;
-    bottom: 16px;
-    right: 16px;
-
     width: 36px;
     height: 36px;
 
+    margin-left: 8px;
     padding: 8px;
 
     display: flex;
@@ -98,22 +116,30 @@
     display: block;
 }
 
+
 /* Favourite button */
 
 .restaurant-grid-item-favourite-button {
     position: absolute;
     top: 16px;
     right: 16px;
+
     width: 36px;
     height: 36px;
+
     padding: 8px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+
     border: none;
     border-radius: 8px;
+
     background-color: transparent;
+
     cursor: pointer;
+
     transition:
         background-color 0.2s ease,
         transform 0.1s ease;
@@ -130,25 +156,32 @@
 .restaurant-grid-item-favourite-button img {
     width: 20px;
     height: 20px;
+
     display: block;
 }
+
 
 /* Visit button */
 
 .restaurant-grid-item-visit-button {
-    position: absolute;
-    bottom: 16px;
-    right: 60px;
-    width: 36px;
+    margin-left: auto;
+    width: auto;
     height: 36px;
-    padding: 8px;
+
+    padding: 8px 10px;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 6px;
+
     border: none;
     border-radius: 8px;
+
     background-color: transparent;
+
     cursor: pointer;
+
     transition:
         background-color 0.2s ease,
         transform 0.1s ease;
@@ -165,5 +198,19 @@
 .restaurant-grid-item-visit-button img {
     width: 20px;
     height: 20px;
+
     display: block;
+}
+
+.restaurant-grid-item-visit-button span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+
+/* Selected */
+
+.restaurant-grid-item-selected {
+    border: 2px solid var(--primary);
 }
