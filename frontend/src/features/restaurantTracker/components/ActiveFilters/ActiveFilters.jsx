@@ -32,6 +32,36 @@ function ActiveFilters({ filters, setFilters }) {
                     </button>
                 </div>
             )}
+
+            {filters.favourited !== null && (
+                <div className="active-filter">
+                    <span>{filters.favourited ? "Favourited" : "Not favourited"}</span>
+
+                    <button
+                        onClick={() => setFilters(prev => ({
+                            ...prev,
+                            favourited: null
+                        }))}
+                    >
+                        ×
+                    </button>
+                </div>
+            )}
+
+            {filters.visited !== null && (
+                <div className="active-filter">
+                    <span>{filters.visited ? "Visited" : "Not visited"}</span>
+
+                    <button
+                        onClick={() => setFilters(prev => ({
+                            ...prev,
+                            visited: null
+                        }))}
+                    >
+                        ×
+                    </button>
+                </div>
+            )}
         </div>
     )
 }

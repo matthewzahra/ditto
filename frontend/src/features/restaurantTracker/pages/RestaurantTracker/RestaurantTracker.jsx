@@ -68,6 +68,14 @@ function RestaurantTracker() {
                 return false
             }
 
+            if (filters.favourited !== null && restaurant.favourited !== filters.favourited) {
+                return false
+            }
+
+            if (filters.visited !== null && restaurant.visited !== filters.visited) {
+                return false
+            }
+
             return true
         }))
     }, [restaurants, filters])

@@ -184,7 +184,7 @@
     border-color: var(--primary);
 }
 
-.filter-cuisine-select {
+.filter-select {
     width: 12rem;
     height: 40px;
     padding: 0 12px;
@@ -200,6 +200,6 @@
     transition: border-color 0.2s ease;
 }
 
-.filter-cuisine-select:focus {
+.filter-select:focus {
     border-color: var(--primary);
 }

@@ -83,7 +83,7 @@ function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen, re
                     <div className="filter-section">
                         <span className="filter-section-title">Cuisine</span>
                             <select
-                                className="filter-cuisine-select"
+                                className="filter-select"
                                 value={filters.cuisine || ""}
                                 onChange={(event) => {
                                     const value = event.target.value
@@ -100,6 +100,43 @@ function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen, re
                                     </option>
                                 ))}
                             </select>
+                    </div>
+                    <div className="filter-section">
+                        <span className="filter-section-title">Favourite</span>
+                        <select
+                            className="filter-select"
+                            value={filters.favourited === true ? "true" : filters.favourited === false ? "false" : ""}
+                            onChange={(event) => {
+                                const value = event.target.value
+                                setFilters(prev => ({
+                                    ...prev,
+                                    favourited: value === "" ? null : value === "true"
+                                }))
+                            }}
+                        >
+                            <option value="">All</option>
+                            <option value="true">Favourited</option>
+                            <option value="false">Not favourited</option>
+                        </select>
+                    </div>
+
+                    <div className="filter-section">
+                        <span className="filter-section-title">Visited</span>
+                        <select
+                            className="filter-select"
+                            value={filters.visited === true ? "true" : filters.visited === false ? "false" : ""}
+                            onChange={(event) => {
+                                const value = event.target.value
+                                setFilters(prev => ({
+                                    ...prev,
+                                    visited: value === "" ? null : value === "true"
+                                }))
+                            }}
+                        >
+                            <option value="">All</option>
+                            <option value="true">Visited</option>
+                            <option value="false">Not visited</option>
+                        </select>
                     </div>
                     
                 </div>

@@ -4,12 +4,12 @@ import L from "leaflet"
 
 import locationMarkerBlue from "@/assets/locationMarkerBlue.svg"
 import locationMarkerRed from "@/assets/locationMarkerRed.svg"
-import locationMarkerGreen from "@/assets/locationMarkerGreen.svg"
+import locationMarkerDarkBlue from "@/assets/locationMarkerDarkBlue.svg"
 
 import "./RestaurantMapMarker.css"
 
 const normalMarker = new L.icon({
-    iconUrl: locationMarkerGreen,
+    iconUrl: locationMarkerDarkBlue,
     iconSize: [32, 45],
     iconAnchor: [16, 35],
     popupAnchor: [0, -25]
