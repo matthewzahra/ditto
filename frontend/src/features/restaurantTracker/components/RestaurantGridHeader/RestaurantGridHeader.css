@@ -1,8 +1,5 @@
 .restaurant-grid-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+    width: 100%;
     margin-bottom: 12px;
 }
 
@@ -12,12 +9,44 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    width: 100%;
+}
+
+/* Search bar */
+
+.restaurant-search-container {
+    display: flex;
+    align-items: center;
+}
+
+.restaurant-search-input {
+    width: 15rem;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--card-background);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.restaurant-search-input::placeholder {
+    color: var(--muted);
+}
+
+.restaurant-search-input:focus {
+    border-color: var(--primary);
 }
 
 /* Filter */
 
 .filter-container {
-    position: relative;
+    display: flex;
+    align-items: center;
 }
 
 /* Filter and Record Restaurant buttons */
@@ -25,27 +54,18 @@
 .filter-button,
 .record-restaurant-button {
     height: 40px;
-
     padding: 0 16px;
-
     box-sizing: border-box;
-
     border: none;
     border-radius: 8px;
-
     background-color: var(--primary);
     color: var(--text);
-
     font-family: inherit;
     font-size: 14px;
     font-weight: 600;
-
     line-height: 1;
-
     cursor: pointer;
-
     white-space: nowrap;
-
     transition:
         background-color 0.2s ease,
         transform 0.1s ease;
@@ -61,53 +81,54 @@
     transform: scale(0.97);
 }
 
-/* Filter dropdown */
+/* Filter menu */
 
-.filter-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
-
-    margin-top: 8px;
-    padding: 12px;
-
-    width: 180px;
-
+.filter-menu {
+    display: flex;
+    align-items: flex-start;
+    gap: 40px;
+    width: 100%;
+    margin-top: 12px;
+    padding: 20px;
+    box-sizing: border-box;
     background-color: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-
-    z-index: 100;
 }
 
-/* Filter dropdown heading */
+/* Filter sections */
 
-.filter-dropdown p {
-    margin: 0 0 8px;
-
-    font-weight: bold;
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Filter option */
+.filter-section-title {
+    margin-bottom: 2px;
+    color: var(--text);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* Filter options */
+
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
 
 .filter-option {
-    width: 100%;
-
-    padding: 8px;
-
+    padding: 8px 12px;
     border: none;
     border-radius: 6px;
-
     background-color: var(--primary);
     color: var(--text);
-
     font-family: inherit;
     font-size: 14px;
-
+    text-align: left;
     cursor: pointer;
-
     transition:
         background-color 0.2s ease,
         transform 0.1s ease;
@@ -123,4 +144,62 @@
 
 .filter-option.selected {
     background-color: red;
+}
+
+/* Active filters */
+
+.active-filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* Record restaurant */
+
+.record-restaurant-container {
+    margin-left: auto;
+}
+
+.filter-rating-input {
+    width: 8rem;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--card-background);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.filter-rating-input::placeholder {
+    color: var(--muted);
+}
+
+.filter-rating-input:focus {
+    border-color: var(--primary);
+}
+
+.filter-cuisine-select {
+    width: 12rem;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--card-background);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.filter-cuisine-select:focus {
+    border-color: var(--primary);
 }

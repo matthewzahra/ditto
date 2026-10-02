@@ -21,11 +21,12 @@ function RestaurantTracker() {
     const [restaurantRating, setRestaurantRating] = useState("")
     const [restaurantInfo, setRestaurantInfo] = useState("")
     const [filters, setFilters] = useState({
-            minRating: null,
-            cuisine: null,
-            visited: false,
-            unvisited: false
-        })
+        search: "",
+        minRating: null,
+        cuisine: null,
+        visited: null,
+        favourited: null,
+    })
 
     // fetching user restaurants
     useEffect(() => {
@@ -55,6 +56,10 @@ function RestaurantTracker() {
 
     useEffect(() => {
         setFilteredRestaurants(restaurants.filter((restaurant) => {
+            if (filters.search && !restaurant.name.toLowerCase().includes(filters.search.toLowerCase())) {
+                return false
+            }
+
             if (filters.minRating !== null && restaurant.rating < filters.minRating) {
                 return false
             }
