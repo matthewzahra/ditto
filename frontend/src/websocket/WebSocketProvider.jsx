@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState } from "react"
 
-import { useUnreadMessages } from "../context/UnreadMessagesContext"
+import { useUnreadMessages } from "@/context/UnreadMessagesContext"
 
-import WebSocketContext from "../context/WebSocketContext"
+import WebSocketContext from "@/context/WebSocketContext"
 
 function WebSocketProvider({ children }) {
     const [newInboxMessage, setNewInboxMessage] = useState(0)

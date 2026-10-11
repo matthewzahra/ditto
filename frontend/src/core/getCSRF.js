@@ -1,6 +1,4 @@
-import API from "./API"
-
-import apiRequest from "./apiRequest"
+import apiRequest from "@/core/apiRequest"
 
 async function getCSRF() {
   await apiRequest("/csrf/")

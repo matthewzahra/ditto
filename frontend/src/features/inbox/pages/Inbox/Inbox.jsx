@@ -1,0 +1,14 @@
+import "./Inbox.css"
+
+import InboxMessages from "@/features/inbox/components/InboxMessages/InboxMessages"
+
+function Inbox() {
+        return (
+        <div className="inbox-page">
+            <h1>Inbox</h1>
+            <InboxMessages />
+        </div>
+    )
+}
+
+export default Inbox

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from "react"
-import { useAuth } from "./AuthContext"
-import apiRequest from "../core/apiRequest"
+import { useAuth } from "@/context/AuthContext"
+import apiRequest from "@/core/apiRequest"
 
 const UnreadMessagesContext = createContext(null)
 

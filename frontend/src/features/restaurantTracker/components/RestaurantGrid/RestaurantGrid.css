@@ -1,0 +1,23 @@
+.restaurant-grid-container {
+    width: 100%;
+}
+
+.restaurant-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15.625rem, 1fr));
+    gap: 1.5rem;
+
+    width: 100%;
+
+    padding: 1.5rem;
+    box-sizing: border-box;
+
+    border: 0.125rem solid var(--border);
+    border-radius: 0.75rem;
+
+    background-color: var(--surface);
+
+    margin-bottom: 1rem;
+
+    align-items: stretch;
+}

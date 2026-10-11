@@ -20,3 +20,6 @@ class Restaurant(models.Model):
 	rating = models.FloatField(validators=[MinValueValidator(0.0),MaxValueValidator(10.0)])
 
 	info = models.TextField(blank=True,null=True)
+
+	visited = models.BooleanField(default=False)
+	favourited = models.BooleanField(default=False)

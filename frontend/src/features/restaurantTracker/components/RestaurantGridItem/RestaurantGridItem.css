@@ -1,0 +1,216 @@
+.restaurant-grid-item {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 12px;
+    padding: 20px;
+
+    background-color: var(--card-background);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.restaurant-grid-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+
+/* Name */
+
+.restaurant-grid-item-name {
+    margin: 0 45px 8px 0;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+
+/* Cuisine */
+
+.restaurant-grid-item-cuisine {
+    margin: 0 0 12px;
+
+    font-size: 0.95rem;
+    color: var(--muted);
+}
+
+
+/* Info */
+
+.restaurant-grid-item-info {
+    margin: 0;
+
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+
+/* Footer */
+
+.restaurant-grid-item-footer-container {
+    display: flex;
+    align-items: center;
+
+    margin-top: auto;
+    padding-top: 16px;
+}
+
+
+/* Rating */
+
+.restaurant-grid-item-rating {
+    margin: 0;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+
+/* Delete button */
+
+.restaurant-grid-item-delete-button {
+    width: 36px;
+    height: 36px;
+
+    margin-left: 8px;
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: var(--error);
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-delete-button:hover {
+    background-color: var(--error);
+    opacity: 0.75;
+}
+
+.restaurant-grid-item-delete-button:active {
+    transform: scale(0.95);
+}
+
+.restaurant-grid-item-delete-button img {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
+
+
+/* Favourite button */
+
+.restaurant-grid-item-favourite-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+
+    width: 36px;
+    height: 36px;
+
+    padding: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-favourite-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.restaurant-grid-item-favourite-button:active {
+    transform: scale(0.9);
+}
+
+.restaurant-grid-item-favourite-button img {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
+
+
+/* Visit button */
+
+.restaurant-grid-item-visit-button {
+    margin-left: auto;
+    width: auto;
+    height: 36px;
+
+    padding: 8px 10px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: transparent;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.1s ease;
+}
+
+.restaurant-grid-item-visit-button:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.restaurant-grid-item-visit-button:active {
+    transform: scale(0.9);
+}
+
+.restaurant-grid-item-visit-button img {
+    width: 20px;
+    height: 20px;
+
+    display: block;
+}
+
+.restaurant-grid-item-visit-button span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text);
+}
+
+
+/* Selected */
+
+.restaurant-grid-item-selected {
+    border: 2px solid var(--primary);
+}

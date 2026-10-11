@@ -1,36 +1,35 @@
 import { Routes, Route } from "react-router-dom"
 
 // layouts
-import LoggedOutLayout from "./layouts/LoggedOutLayout/LoggedOutLayout"
-import LoggedInLayout from "./layouts/LoggedInLayout/LoggedInLayout"
-import AboutLayout from "./layouts/AboutLayout/AboutLayout"
+import LoggedOutLayout from "@/layouts/LoggedOutLayout/LoggedOutLayout"
+import LoggedInLayout from "@/layouts/LoggedInLayout/LoggedInLayout"
+import AboutLayout from "@/layouts/AboutLayout/AboutLayout"
 
 // logged-out pages
-import Login from "./pages/LoggedOutPages/Login/Login"
-import LoggedOutHome from "./pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
-import Register from "./pages/LoggedOutPages/Register/Register"
-import Verify from "./pages/LoggedOutPages/Verify/Verify"
-import ForgotPassword from "./pages/LoggedOutPages/ForgotPassword/ForgotPassword"
-import UpdatePassword from "./pages/LoggedOutPages/UpdatePassword/UpdatePassword"
+import Login from "@/features/auth/pages/Login/Login"
+import LoggedOutHome from "@/pages/LoggedOutPages/LoggedOutHome/LoggedOutHome"
+import Register from "@/features/auth/pages/Register/Register"
+import Verify from "@/features/auth/pages/Verify/Verify"
+import ForgotPassword from "@/features/auth/pages/ForgotPassword/ForgotPassword"
+import UpdatePassword from "@/features/auth/pages/UpdatePassword/UpdatePassword"
 
 // logged-in pages
-import Home from "./pages/LoggedInPages/Home/Home"
-import Inbox from "./pages/LoggedInPages/Inbox/Inbox"
-import Profile from "./pages/LoggedInPages/Profile/Profile"
-import Quote from "./pages/LoggedInPages/Quote/Quote"
-import EditProfile from "./pages/LoggedInPages/EditProfile/EditProfile"
-import RestaurantTracker from "./pages/LoggedInPages/RestaurantTracker/RestaurantTracker"
-import WorkoutTracker from "./pages/LoggedInPages/WorkoutTracker/WorkoutTracker"
+import Home from "@/pages/LoggedInPages/Home/Home"
+import Inbox from "@/features/inbox/pages/Inbox/Inbox"
+import Profile from "@/features/profile/pages/Profile/Profile"
+import Quote from "@/features/quotes/pages/Quote/Quote"
+import EditProfile from "@/features/profile/pages/EditProfile/EditProfile"
+import RestaurantTracker from "@/features/restaurantTracker/pages/RestaurantTracker/RestaurantTracker"
+import WorkoutTracker from "@/features/workoutTracker/pages/WorkoutTracker/WorkoutTracker"
 
 // shared pages
-import About from "./pages/SharedPages/About/About"
+import About from "@/features/about/pages/About/About"
 
 
-import Tempwebcomp from "./components/tempwebcomp/Tempwebcomp"
+import Tempwebcomp from "@/components/tempwebcomp/Tempwebcomp"
 
 function App() {
   
-
   // Creating routes to each page based on current url
   return (
     <>

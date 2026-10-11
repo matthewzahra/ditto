@@ -1,0 +1,91 @@
+import { useState } from "react"
+import { Navigate, Link } from "react-router-dom"
+
+import { useAuth } from "@/context/AuthContext"
+
+import apiRequest from "@/core/apiRequest"
+
+import "./LoginForm.css"
+
+
+function LoginForm() {
+
+    //fetching current loggedIn status
+    const { loggedIn, setLoggedIn } = useAuth()
+
+    // initialising object for storing form data
+    const [formData, setFormData] = useState({email: "", password: ""})
+    const [loginError, setLoginError] = useState("")
+    const [loading, setLoading] = useState(false)
+
+    // checking current logged-in status
+    if (loggedIn) {
+        return <Navigate to="/home" />
+    }
+
+    // function for updating form data
+    const handleChange = (e) => {
+        const {name, value} = e.target
+
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }))
+        setLoginError("")
+    }
+
+    const handleSubmit = async (e) => {
+        // stops browser from reloading
+        e.preventDefault()
+
+        setLoginError("")
+        setLoading(true)
+
+        try {
+
+            // request login from backend
+            const response = await apiRequest("/api/user_auth/login/", {
+                method: "POST",
+                body: formData
+            })
+            
+            // login response data
+            if (response.ok) {
+                setLoggedIn(true)
+            } else {
+                setLoginError("Server error, try again later")
+            }
+        } catch (err) {
+            if (err.status === 401) {
+                setLoginError("Email password combination not found")
+            } else if (err.status === 400) {
+                setLoginError(err.data?.email?.[0] ?? "Please check your input.")
+            } else {
+                setLoginError("Unable to connect to the server")
+            }
+        } finally {
+            setLoading(false)
+        }
+    }
+    return (
+        <form className="login-form" onSubmit={handleSubmit}>
+
+            {loginError && <p className="login-error">{loginError}</p>}
+
+            <label>Email:
+                <input type="text" name="email" value={formData.email} onChange={handleChange}/>
+            </label>
+            <label>Password:
+                <input type="password" name="password" value={formData.password} onChange={handleChange}/>
+            </label>
+            <button type="submit" disabled={loading}>{loading ? "Logging in" : "Login"}</button>
+
+            <Link to="/forgotpassword">
+                Forgot password?
+            </Link>
+
+        </form>
+    )
+}
+
+export default LoginForm

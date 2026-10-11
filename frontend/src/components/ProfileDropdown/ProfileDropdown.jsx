@@ -1,17 +1,17 @@
-import "./ProfileDropdown.css"
-
 import { useState, useRef, useEffect } from "react"
 
-import { useAuth } from "../../context/AuthContext"
-import { useUnreadMessages } from "../../context/UnreadMessagesContext"
-import { useUserProfile } from "../../context/UserProfileContext"
+import { useAuth } from "@/context/AuthContext"
+import { useUnreadMessages } from "@/context/UnreadMessagesContext"
+import { useUserProfile } from "@/context/UserProfileContext"
 
-import NavItem from "../NavItem/NavItem"
+import NavItem from "@/components/NavItem/NavItem"
 
-import defaultUserPicture from "../../assets/defaultUserPicture.svg"
-import userIcon from "../../assets/userIcon.svg"
-import logoutIcon from "../../assets/logoutIcon.svg"
-import inboxIcon from "../../assets/inboxIcon.svg"
+import defaultUserPicture from "@/assets/defaultUserPicture.svg"
+import userIcon from "@/assets/userIcon.svg"
+import logoutIcon from "@/assets/logoutIcon.svg"
+import inboxIcon from "@/assets/inboxIcon.svg"
+
+import "./ProfileDropdown.css"
 
 function ProfileDropdown() {
     const [profileMenuOpen, setProfileMenuOpen] = useState(false)

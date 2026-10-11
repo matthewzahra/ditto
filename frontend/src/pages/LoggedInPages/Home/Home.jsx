@@ -1,9 +1,9 @@
-import HomeGridItem from "../../../components/HomeGridItem/HomeGridItem"
+import HomeGridItem from "@/components/HomeGridItem/HomeGridItem"
 
-import evenlopePurple from "../../../assets/envelopePurple.svg"
-import dumbell from "../../../assets/dumbell.svg"
-import utensils from "../../../assets/utensils.svg"
-import quote from "../../../assets/quote.svg"
+import evenlopePurple from "@/assets/envelopePurple.svg"
+import dumbell from "@/assets/dumbell.svg"
+import utensils from "@/assets/utensils.svg"
+import quote from "@/assets/quote.svg"
 
 import "./Home.css"
 

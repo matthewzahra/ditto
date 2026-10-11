@@ -1,11 +1,11 @@
 import { createContext, useContext, useState, useEffect } from "react"
 
 // helper functions
-import getCSRF from "../core/getCSRF"
+import getCSRF from "@/core/getCSRF"
 
-import logoutRequest from "../core/logoutRequest"
+import logoutRequest from "@/core/logoutRequest"
 
-import apiRequest from "../core/apiRequest"
+import apiRequest from "@/core/apiRequest"
 
 const AuthContext = createContext()
 
