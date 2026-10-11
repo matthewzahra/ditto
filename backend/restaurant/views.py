@@ -47,6 +47,102 @@ def delete_restaurant(request):
 
 	return api_response(True, status=204)
 
+# favourites a restaurant
+@extend_schema(
+	tags=['restaurant'],
+	request=SingleRestaurantIDSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['POST'])
+def favourite_restaurant(request):
+	data = validate(SingleRestaurantIDSerializer,request.data)
+
+	restaurant = Restaurant.objects.filter(user=request.user, id=data['restaurant_id']).first()
+
+	if restaurant is None:
+		return api_response(
+			False,
+			error='Restaurant not found',
+			status=404
+		)
+
+	restaurant.favourited = True
+	restaurant.save(update_fields=['favourited'])
+
+	return api_response(True)
+
+# unfavourites a restaurant
+@extend_schema(
+	tags=['restaurant'],
+	request=SingleRestaurantIDSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['POST'])
+def unfavourite_restaurant(request):
+	data = validate(SingleRestaurantIDSerializer,request.data)
+
+	restaurant = Restaurant.objects.filter(user=request.user, id=data['restaurant_id']).first()
+
+	if restaurant is None:
+		return api_response(
+			False,
+			error='Restaurant not found',
+			status=404
+		)
+
+	restaurant.favourited = False
+	restaurant.save(update_fields=['favourited'])
+
+	return api_response(True)
+
+# sets a restaurant to visited
+@extend_schema(
+	tags=['restaurant'],
+	request=SingleRestaurantIDSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['POST'])
+def visit_restaurant(request):
+	data = validate(SingleRestaurantIDSerializer,request.data)
+
+	restaurant = Restaurant.objects.filter(user=request.user, id=data['restaurant_id']).first()
+
+	if restaurant is None:
+		return api_response(
+			False,
+			error='Restaurant not found',
+			status=404
+		)
+
+	restaurant.visited = True
+	restaurant.save(update_fields=['visited'])
+
+	return api_response(True)
+
+# sets a restaurant to unvisited
+@extend_schema(
+	tags=['restaurant'],
+	request=SingleRestaurantIDSerializer,
+	responses=ApiResponseSerializer
+)
+@api_view(['POST'])
+def unvisit_restaurant(request):
+	data = validate(SingleRestaurantIDSerializer,request.data)
+
+	restaurant = Restaurant.objects.filter(user=request.user, id=data['restaurant_id']).first()
+
+	if restaurant is None:
+		return api_response(
+			False,
+			error='Restaurant not found',
+			status=404
+		)
+
+	restaurant.visited = False
+	restaurant.save(update_fields=['visited'])
+
+	return api_response(True)
+
 # TODO - implement this endpoint
 def edit_restuarant(request):
 	raise NotImplemented

@@ -21,9 +21,12 @@ function RestaurantTracker() {
     const [restaurantRating, setRestaurantRating] = useState("")
     const [restaurantInfo, setRestaurantInfo] = useState("")
     const [filters, setFilters] = useState({
-            minRating: null,
-            cuisine: null
-        })
+        search: "",
+        minRating: null,
+        cuisine: null,
+        visited: null,
+        favourited: null,
+    })
 
     // fetching user restaurants
     useEffect(() => {
@@ -53,11 +56,23 @@ function RestaurantTracker() {
 
     useEffect(() => {
         setFilteredRestaurants(restaurants.filter((restaurant) => {
+            if (filters.search && !restaurant.name.toLowerCase().includes(filters.search.toLowerCase())) {
+                return false
+            }
+
             if (filters.minRating !== null && restaurant.rating < filters.minRating) {
                 return false
             }
 
             if (filters.cuisine !== null && restaurant.cuisine !== filters.cuisine) {
+                return false
+            }
+
+            if (filters.favourited !== null && restaurant.favourited !== filters.favourited) {
+                return false
+            }
+
+            if (filters.visited !== null && restaurant.visited !== filters.visited) {
                 return false
             }
 
@@ -69,6 +84,70 @@ function RestaurantTracker() {
     function onRequestDelete(restaurant) {
         setRestaurantToDelete(restaurant)
         setConfirmDeleteOpen(true)
+    }
+
+    // function to handle favouriting a restaurant
+    async function onFavourite(id) {
+        const response = await apiRequest(
+            "/api/restaurant/favourite_restaurant/",
+            {
+                method: "POST",
+                body: {
+                    restaurant_id: id
+                }
+            }
+        )
+        if (response.ok) {
+            setRestaurants(prev => prev.map(restaurant => restaurant.id === id ? {...restaurant, favourited: true} : restaurant))
+        }
+    }
+
+    // function to handle unfavouriting a restaurant
+    async function onUnfavourite(id) {
+        const response = await apiRequest(
+            "/api/restaurant/unfavourite_restaurant/",
+            {
+                method: "POST",
+                body: {
+                    restaurant_id: id
+                }
+            }
+        )
+        if (response.ok) {
+            setRestaurants(prev => prev.map(restaurant => restaurant.id === id ? {...restaurant, favourited: false} : restaurant))
+        }
+    }
+
+    // function to handle visiting a restaurant
+    async function onVisit(id) {
+        const response = await apiRequest(
+            "/api/restaurant/visit_restaurant/",
+            {
+                method: "POST",
+                body: {
+                    restaurant_id: id
+                }
+            }
+        )
+        if (response.ok) {
+            setRestaurants(prev => prev.map(restaurant => restaurant.id === id ? {...restaurant, visited: true} : restaurant))
+        }
+    }
+
+    // function to handle unvisiting a restaurant
+    async function onUnvisit(id) {
+        const response = await apiRequest(
+            "/api/restaurant/unvisit_restaurant/",
+            {
+                method: "POST",
+                body: {
+                    restaurant_id: id
+                }
+            }
+        )
+        if (response.ok) {
+            setRestaurants(prev => prev.map(restaurant => restaurant.id === id ? {...restaurant, visited: false} : restaurant))
+        }
     }
 
     // function to handle deleting saved restaurant
@@ -90,7 +169,7 @@ function RestaurantTracker() {
     return (
         <div className="restaurant-tracker-page">
             <RestaurantMap selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filteredRestaurants={filteredRestaurants}/>
-            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurants={restaurants} />
+            <RestaurantGrid selectedRestaurant={selectedRestaurant} setSelectedRestaurant={setSelectedRestaurant} filters={filters} setFilters={setFilters} filteredRestaurants={filteredRestaurants} onRequestDelete={onRequestDelete} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurants={restaurants} onFavourite={onFavourite} onUnfavourite={onUnfavourite} onVisit={onVisit} onUnvisit={onUnvisit} />
             {/* request delete popup, only displayed when deletion is requested */}
             <ConfirmRestaurantDelete restaurantToDelete={restaurantToDelete} confirmDeleteOpen={confirmDeleteOpen} setConfirmDeleteOpen={setConfirmDeleteOpen} onConfirm={() => onDelete(restaurantToDelete.id)} />
             <RecordRestaurant recordRestaurantOpen={recordRestaurantOpen} setRecordRestaurantOpen={setRecordRestaurantOpen} restaurantName={restaurantName} setRestaurantName={setRestaurantName} restaurantAddress={restaurantAddress} setRestaurantAddress={setRestaurantAddress} restaurantCuisine={restaurantCuisine} setRestaurantCuisine={setRestaurantCuisine} restaurantRating={restaurantRating} setRestaurantRating={setRestaurantRating} restaurantInfo={restaurantInfo} setRestaurantInfo={setRestaurantInfo} setRestaurants={setRestaurants} />

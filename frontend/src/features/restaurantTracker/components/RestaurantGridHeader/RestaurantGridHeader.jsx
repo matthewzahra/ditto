@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useMemo } from "react"
 
 import ActiveFilters from "@/features/restaurantTracker/components/ActiveFilters/ActiveFilters"
 
@@ -7,13 +7,20 @@ import "./RestaurantGridHeader.css"
 function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen, restaurants }) {
     const [filterOpen, setFilterOpen] = useState(false)
         
-    const filterRef = useRef(null)
+    const filterButtonRef = useRef(null)
+    const filterMenuRef = useRef(null)
 
-    const cuisines = [...new Set(restaurants.map(restaurant => restaurant.cuisine).filter(Boolean))]
+    const cuisines = useMemo (() => 
+        [...new Set(restaurants.map(restaurant => restaurant.cuisine).filter(Boolean))], 
+    [restaurants])
 
     useEffect(() => {
         function handleClickOutside(event) {
-            if (filterRef.current && !filterRef.current.contains(event.target)) {
+            if (filterButtonRef.current?.contains(event.target)) {
+                return
+            }
+
+            if (filterMenuRef.current && !filterMenuRef.current.contains(event.target)) {
                 setFilterOpen(false)
             }
         }
@@ -27,61 +34,110 @@ function RestaurantGridHeader({ filters, setFilters, setRecordRestaurantOpen, re
 
     return (
         <div className="restaurant-grid-header">
-            <ActiveFilters filters={filters} setFilters={setFilters} />
             <div className="restaurant-grid-header-actions">
-                <div className="filter-container" ref={filterRef}>
-                    <button className="filter-button" onClick={() => setFilterOpen(prev => !prev)}>Filter</button>
-                    {filterOpen && (
-                        <div className="filter-dropdown">
-                            <div className="filter-section">
-                                <span className="filter-section-title">Minimum rating</span>
-
-                                {[10, 9, 8, 7, 6, 5, 4, 3, 2, 1].map((rating) => (
-                                    <button
-                                        key={rating}
-                                        className={`filter-option ${
-                                            filters.minRating === rating ? "selected" : ""
-                                        }`}
-                                        onClick={() => {
-                                            setFilters(prev => ({
-                                                ...prev,
-                                                minRating: prev.minRating === rating ? null : rating
-                                            }))
-                                            setFilterOpen(false)
-                                        }}
-                                    >
-                                        {rating}+ stars
-                                    </button>
-                                ))}
-                            </div>
-
-                            <div className="filter-section">
-                                <span className="filter-section-title">Cuisine</span>
-
-                                {cuisines.map((cuisine) => (
-                                    <button
-                                        key={cuisine}
-                                        className={`filter-option ${
-                                            filters.cuisine === cuisine ? "selected" : ""
-                                        }`}
-                                        onClick={() => {
-                                            setFilters(prev => ({
-                                                ...prev,
-                                                cuisine: prev.cuisine === cuisine ? null : cuisine
-                                            }))
-                                            setFilterOpen(false)
-                                        }}
-                                    >
-                                        {cuisine}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    )}
+                {/* search bar */}
+                <div className="restaurant-search-container">
+                   <input
+                        type="text"
+                        className="restaurant-search-input"
+                        placeholder="Search restaurants..."
+                        value={filters.search}
+                        onChange={(event) => {
+                            setFilters(prev => ({
+                                ...prev,
+                                search: event.target.value
+                            }))
+                        }}
+                    />
                 </div>
+                <div className="filter-container" ref={filterButtonRef}>
+                    <button className="filter-button" onClick={() => setFilterOpen(prev => !prev)}>Filter</button>
+                </div>
+                <ActiveFilters filters={filters} setFilters={setFilters} />
                 <div className="record-restaurant-container">
                     <button className="record-restaurant-button" onClick={() => setRecordRestaurantOpen(true)}>Record Restaurant</button>
                 </div>
+                
+            </div>
+            <div className={`filter-menu ${filterOpen ? "open" : ""}`} ref={filterMenuRef}>
+                <div className="filter-section">
+                    <span className="filter-section-title">Minimum rating</span>
+                    <input
+                        type="number"
+                        min="0"
+                        max="10"
+                        className="filter-rating-input"
+                        value={filters.minRating || ""}
+                        placeholder="e.g. 7"
+                        onChange={(event) => {
+                            const value = event.target.value
+                            setFilters(prev => ({
+                                ...prev,
+                                minRating: value === "" ? null : Number(value)
+                            }))
+                        }}
+                    />
+                </div>
+
+                <div className="filter-section">
+                    <span className="filter-section-title">Cuisine</span>
+                        <select
+                            className="filter-select"
+                            value={filters.cuisine || ""}
+                            onChange={(event) => {
+                                const value = event.target.value
+                                setFilters(prev => ({
+                                    ...prev,
+                                    cuisine: value === "" ? null : value
+                                }))
+                            }}
+                        >
+                            <option value="">All cuisines</option>
+                            {cuisines.map((cuisine) => (
+                                <option key={cuisine} value={cuisine}>
+                                    {cuisine}
+                                </option>
+                            ))}
+                        </select>
+                </div>
+                <div className="filter-section">
+                    <span className="filter-section-title">Favourite</span>
+                    <select
+                        className="filter-select"
+                        value={filters.favourited === true ? "true" : filters.favourited === false ? "false" : ""}
+                        onChange={(event) => {
+                            const value = event.target.value
+                            setFilters(prev => ({
+                                ...prev,
+                                favourited: value === "" ? null : value === "true"
+                            }))
+                        }}
+                    >
+                        <option value="">All</option>
+                        <option value="true">Favourited</option>
+                        <option value="false">Not favourited</option>
+                    </select>
+                </div>
+
+                <div className="filter-section">
+                    <span className="filter-section-title">Visited</span>
+                    <select
+                        className="filter-select"
+                        value={filters.visited === true ? "true" : filters.visited === false ? "false" : ""}
+                        onChange={(event) => {
+                            const value = event.target.value
+                            setFilters(prev => ({
+                                ...prev,
+                                visited: value === "" ? null : value === "true"
+                            }))
+                        }}
+                    >
+                        <option value="">All</option>
+                        <option value="true">Visited</option>
+                        <option value="false">Not visited</option>
+                    </select>
+                </div>
+                
             </div>
         </div>
     )
